@@ -4,7 +4,7 @@ package fridge_manager;
  * Hello world!
  *
  */
-public class App 
+public class FridgeApp 
 {
     public static void main( String[] args )
     {

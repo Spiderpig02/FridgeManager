@@ -8,3 +8,4 @@ Dette er et program som holder styr på hva man har i kjøleskapet.
 Den skal vise hvem som eier produktene i kjøleskapet, når de går ut på dato osv.
 
 
+Prosjektets brukerhistorier kan hentes [her](brukerhistorier.md)

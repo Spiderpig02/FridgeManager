@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1010.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="fridgecontent" layoutX="509.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange; -fx-border-insets: red;" />
+      <Line endX="890.300048828125" layoutX="104.0" layoutY="158.0" startX="-100.0" strokeWidth="15.0" />
+      <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matvare:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Antall:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="517.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Utløpsdato:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="708.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eier:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="fridge_button" layoutX="364.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFridge" prefHeight="34.0" prefWidth="126.0" text="Add to Fridge">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <ListView fx:id="fridgecontent1" layoutX="15.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange; -fx-border-insets: red;" />
+      <Text layoutX="160.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" wrappingWidth="188.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="661.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Freezer" wrappingWidth="188.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="35.0" />
+         </font>
+      </Text>
+      <Button fx:id="freezer_button" layoutX="517.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFridge" prefHeight="34.0" prefWidth="126.0" text="Add to Freezer">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

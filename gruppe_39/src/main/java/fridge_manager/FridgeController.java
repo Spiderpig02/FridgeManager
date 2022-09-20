@@ -15,8 +15,8 @@ public class FridgeController {
     @FXML private TextField textfield_owner;
     @FXML private Button fridge_button;
     @FXML private Button freezer_button;
-    @FXML private ListView fridgecontent;
-    @FXML private ListView freezercontent;
+    @FXML private ListView<Food> fridgecontent;
+    @FXML private ListView<Food> freezercontent;
 
     private FridgeManager fridgemanager;
 
@@ -32,7 +32,10 @@ public class FridgeController {
         Integer quantity = Integer.parseInt(textfield_food.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
-        fridgecontent.getItems().add(new Food(food, quantity, expiration, owner));
+        Food food_to_fridge = new Food(food, quantity, expiration, owner);
+        
+        fridgemanager.getFridgeContents().add(food_to_fridge);
+        fridgecontent.getItems().add(food_to_fridge);
     }    
 
     @FXML
@@ -41,7 +44,12 @@ public class FridgeController {
         Integer quantity = Integer.parseInt(textfield_food.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
-        freezercontent.getItems().add(new Food(food, quantity, expiration, owner));
+        Food food_to_freezer = new Food(food, quantity, expiration, owner);
+
+        fridgemanager.getFreezerContents().add(food_to_freezer);
+        freezercontent.getItems().add(food_to_freezer);
     }    
+
+
 
 }

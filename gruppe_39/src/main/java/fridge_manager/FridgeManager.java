@@ -9,7 +9,7 @@ public class FridgeManager {
     private int freezermaxsize;
     private int fridgemaxsize;
 
-    public void Frigde(int fridgemaxsize,int freezermaxsize) throws IllegalArgumentException{
+    public FridgeManager(int fridgemaxsize,int freezermaxsize) throws IllegalArgumentException{
         if (fridgemaxsize<0){
             throw new IllegalArgumentException("Freezer max size must be over 0");
         }
@@ -35,11 +35,23 @@ public class FridgeManager {
         return fridgemaxsize;
     }
 
-    public void addFreezerContent(Food content){
-        freezercontents.add(content);
+    public void addFreezerContent(Food content)throws IllegalArgumentException{
+        if (freezercontents.size()==freezermaxsize){
+            throw new IllegalArgumentException();
+        }
+        else{
+            freezercontents.add(content);
+        }
+        
     }
 
-    public void addFridgeContent(Food content){
-        frigdecontents.add(content);
+    public void addFridgeContent(Food content) throws IllegalArgumentException{
+        if (frigdecontents.size()==fridgemaxsize){
+            throw new IllegalArgumentException();
+        }
+        else{
+            frigdecontents.add(content);
+        }
+        
     }
 }

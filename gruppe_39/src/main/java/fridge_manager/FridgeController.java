@@ -18,6 +18,14 @@ public class FridgeController {
     @FXML private ListView fridgecontent;
     @FXML private ListView freezercontent;
 
+    private FridgeManager fridgemanager;
+
+    @FXML
+    public void initialize() {
+        this.fridgemanager = new FridgeManager();
+    }
+
+
     @FXML
     private void addToFridge() {
         String food = textfield_food.getText();

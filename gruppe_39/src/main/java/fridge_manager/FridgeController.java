@@ -9,25 +9,31 @@ import javafx.fxml.FXML;
 
 public class FridgeController {
     
-    @FXML private TextField textfield_matvare;
-    @FXML private TextField textfield_antall;
-    @FXML private TextField textfield_utlopsdato;
-    @FXML private TextField textfield_eier;
+    @FXML private TextField textfield_food;
+    @FXML private TextField textfield_quantity;
+    @FXML private TextField textfield_expiration;
+    @FXML private TextField textfield_owner;
     @FXML private Button fridge_button;
     @FXML private Button freezer_button;
     @FXML private ListView fridgecontent;
-
-    private FridgeManager fridgemanager;
+    @FXML private ListView freezercontent;
 
     @FXML
     private void addToFridge() {
-        
+        String food = textfield_food.getText();
+        Integer quantity = Integer.parseInt(textfield_food.getText());
+        String expiration = textfield_expiration.getText();
+        String owner = textfield_owner.getText();
+        fridgecontent.getItems().add(new Food(food, quantity, expiration, owner));
     }    
 
     @FXML
-    public void initialize() {
-        this.fridgemanager = new FridgeManager();
-        
-    }
+    private void addToFreezer() {
+        String food = textfield_food.getText();
+        Integer quantity = Integer.parseInt(textfield_food.getText());
+        String expiration = textfield_expiration.getText();
+        String owner = textfield_owner.getText();
+        freezercontent.getItems().add(new Food(food, quantity, expiration, owner));
+    }    
 
 }

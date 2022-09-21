@@ -4,13 +4,13 @@ public class Food {
     private String name;
     private int quantity;
     private String owner;
-    private String expiringDate;
+    private String expirationDate;
 
-    public Food(String name, int quantity, String owner, String expiringDate) throws IllegalArgumentException{
+    public Food(String name, int quantity, String expirationDate, String owner) throws IllegalArgumentException{
         this.name = name;
+        this.expirationDate = expirationDate;
         this.owner = owner;
-        this.expiringDate = expiringDate;
-        if(quantity < 0){
+        if (quantity < 0){
             throw new IllegalArgumentException("Quantity needs to have a positive value");
         }
         this.quantity = quantity;
@@ -28,13 +28,13 @@ public class Food {
         return this.owner;
     }
 
-    public String getExpiringDate() {
-        return this.expiringDate;
+    public String getexpirationDate() {
+        return this.expirationDate;
     }
 
     @Override
     public String toString() {
-        return "Food [expiringDate=" + expiringDate + ", name=" + name + ", owner=" + owner + ", quantity=" + quantity
+        return "Food [expirationDate=" + expirationDate + ", name=" + name + ", owner=" + owner + ", quantity=" + quantity
                 + "]";
     }
 

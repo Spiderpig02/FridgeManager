@@ -1,7 +1,7 @@
 package fridge_manager.IO;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,29 +10,29 @@ import fridge_manager.FridgeManager;
 
 public class FileHandler implements IFileHandler {
 
+    public static String FileName = "FridgeSave.txt";
+
     public void saveObject(FridgeManager fridge) {
         try {
-            FileOutputStream fileOStream = new FileOutputStream(
-                    new File(FridgeManager.class.getResourceAsStream("IO/Fridg.ser").toString()));
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOStream);
-
-            objectOutputStream.writeObject(fridge);
-
-            objectOutputStream.close();
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FileName));
+            oos.writeObject(fridge);
+            oos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public FridgeManager loaFridgeManager() {
+    public FridgeManager loadFridgeManager() {
+        FridgeManager fridge = null;
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(
-                    new FileInputStream(new File(FridgeManager.class.getResourceAsStream("IO/Fridg.ser").toString())));
-            FridgeManager fridgeManager = (FridgeManager) objectInputStream.readObject();
-            return fridgeManager;
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FileName));
+            fridge = (FridgeManager) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
+        return fridge;
     }
 }

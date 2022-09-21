@@ -22,7 +22,7 @@ public class FridgeController {
 
     @FXML
     public void initialize() {
-        this.fridgemanager = new FridgeManager();
+        // this.fridgemanager = new FridgeManager();
     }
 
 

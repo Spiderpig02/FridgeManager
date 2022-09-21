@@ -6,6 +6,6 @@ public interface IFileHandler {
 
     void saveObject(FridgeManager fridge);
 
-    FridgeManager loaFridgeManager();
+    FridgeManager loadFridgeManager();
 
 }

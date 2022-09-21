@@ -11,7 +11,7 @@
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
-    <dependencies>
+      <dependencies>
 
         <!-- javafx -->
         <dependency>
@@ -65,7 +65,7 @@
             <scope>test</scope>
         </dependency>
 
-    </dependencies>
+      </dependencies>
 
     <build>
         <plugins>

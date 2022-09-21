@@ -25,11 +25,10 @@ public class FridgeController {
         this.fridgemanager = new FridgeManager(10, 10);
     }
 
-
     @FXML
     private void addToFridge() {
         String food = textfield_food.getText();
-        int quantity =  Integer.valueOf(textfield_food.getText());
+        int quantity =  Integer.parseInt(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         Food food_to_fridge = new Food(food, quantity, expiration, owner);
@@ -41,7 +40,7 @@ public class FridgeController {
     @FXML
     private void addToFreezer() {
         String food = textfield_food.getText();
-        int quantity = Integer.valueOf(textfield_food.getText());
+        int quantity = Integer.valueOf(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         Food food_to_freezer = new Food(food, quantity, expiration, owner);
@@ -49,7 +48,5 @@ public class FridgeController {
         fridgemanager.getFreezerContents().add(food_to_freezer);
         freezercontent.getItems().add(food_to_freezer);
     }    
-
-
 
 }

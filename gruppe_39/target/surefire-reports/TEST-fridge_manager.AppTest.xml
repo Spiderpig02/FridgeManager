@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="fridge_manager.AppTest" time="0.036" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fridge_manager.AppTest" time="0.053" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\test-classes;C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\classes;C:\Users\jmnb1\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.class.path" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\test-classes;C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\classes;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16-win.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jmnb1\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jmnb1\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\jmnb1\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\jmnb1\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;"/>
     <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -14,48 +14,48 @@
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="NO"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.3.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\jmnb1\AppData\Local\Temp\surefire1844268971517451098\surefirebooter12662682658940345221.jar C:\Users\jmnb1\AppData\Local\Temp\surefire1844268971517451098 2022-09-15T11-28-21_011-jvmRun1 surefire8420803216317331273tmp surefire_07346979401353674126tmp"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.101-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\jmnb1\AppData\Local\Temp\surefire14996987635830771898\surefirebooter1724008133100851884.jar C:\Users\jmnb1\AppData\Local\Temp\surefire14996987635830771898 2022-09-21T17-45-37_836-jvmRun1 surefire2920783006935062965tmp surefire_012248246124521929486tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\test-classes;C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\classes;C:\Users\jmnb1\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\test-classes;C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39\target\classes;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-controls\16\javafx-controls-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-graphics\16\javafx-graphics-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-base\16\javafx-base-16-win.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16.jar;C:\Users\jmnb1\.m2\repository\org\openjfx\javafx-fxml\16\javafx-fxml-16-win.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\jmnb1\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\jmnb1\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\jmnb1\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.2\junit-jupiter-params-5.7.2.jar;C:\Users\jmnb1\.m2\repository\org\testfx\testfx-core\4.0.16-alpha\testfx-core-4.0.16-alpha.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\jmnb1\.m2\repository\org\assertj\assertj-core\3.13.2\assertj-core-3.13.2.jar;C:\Users\jmnb1\.m2\repository\org\testfx\testfx-junit5\4.0.16-alpha\testfx-junit5-4.0.16-alpha.jar;C:\Users\jmnb1\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\jmnb1"/>
     <property name="user.language" value="no"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.version.date" value="2022-04-19"/>
-    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.3.7-hotspot"/>
+    <property name="java.version.date" value="2022-08-12"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.101-hotspot"/>
     <property name="file.separator" value="\"/>
     <property name="basedir" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\jmnb1\AppData\Local\Temp\surefire1844268971517451098\surefirebooter12662682658940345221.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\jmnb1\AppData\Local\Temp\surefire14996987635830771898\surefirebooter1724008133100851884.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="17.0.3+7"/>
+    <property name="java.runtime.version" value="17.0.4.1+1"/>
     <property name="user.name" value="jmnb1"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="java.vendor.version" value="Temurin-17.0.3+7"/>
+    <property name="java.vendor.version" value="Temurin-17.0.4.1+1"/>
     <property name="localRepository" value="C:\Users\jmnb1\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="C:\Users\jmnb1\AppData\Local\Temp\"/>
-    <property name="java.version" value="17.0.3"/>
+    <property name="java.version" value="17.0.4.1"/>
     <property name="user.dir" value="C:\Users\jmnb1\OneDrive - NTNU\2. År\1. Semester\Informatikk prosjekt I\Gruppeprosjekt\gr2239\gruppe_39"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.3.7-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\jmnb1\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\jmnb1\bin;C:\Program Files\Oculus\Support\oculus-runtime;C:\Program Files\Eclipse Adoptium\jdk-17.0.3.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\apache-maven-3.8.6\bin;C:\Program Files\Git\cmd;C:\Users\jmnb1\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\jmnb1\AppData\Local\Programs\Python\Python310;C:\Users\jmnb1\AppData\Local\Microsoft\WindowsApps;C:\Users\jmnb1\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.101-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Eclipse Adoptium\jdk-17.0.4.101-hotspot\bin;C:\Program Files\OpenJDK\jdk-11.0.16.8-hotspot\bin;C:\Program Files\Oculus\Support\oculus-runtime;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\apache-maven-3.8.6\bin;C:\Program Files\Git\cmd;C:\Program Files\apache-maven-3.8.6-bin (1).zip;C:\Users\jmnb1\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\jmnb1\AppData\Local\Programs\Python\Python310\;C:\Users\jmnb1\AppData\Local\Microsoft\WindowsApps;;C:\Users\jmnb1\AppData\Local\Programs\Microsoft VS Code\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.vendor" value="Eclipse Adoptium"/>
-    <property name="java.vm.version" value="17.0.3+7"/>
+    <property name="java.vm.version" value="17.0.4.1+1"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="fridge_manager.AppTest" time="0.002"/>
+  <testcase name="shouldAnswerWithTrue" classname="fridge_manager.AppTest" time="0.031"/>
 </testsuite>

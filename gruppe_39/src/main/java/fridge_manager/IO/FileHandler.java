@@ -10,8 +10,15 @@ import fridge_manager.FridgeManager;
 
 public class FileHandler implements IFileHandler {
 
+    /**
+     * The file name for the saving and loading
+     */
     public static String FileName = "FridgeSave.txt";
 
+    /**
+     * Method for saving a FidgeManager object to the specified location,
+     * writes the object
+     */
     public void saveObject(FridgeManager fridge) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FileName));
@@ -22,6 +29,10 @@ public class FileHandler implements IFileHandler {
         }
     }
 
+    /**
+     * Loads the saved FridgeManager object from system to app
+     * Returns the saved object if there was any, or a null object in any other case
+     */
     public FridgeManager loadFridgeManager() {
         FridgeManager fridge = null;
         try {

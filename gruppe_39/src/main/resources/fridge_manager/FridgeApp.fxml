@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1010.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridge_manager.FridgeController">
    <children>
-      <ListView fx:id="fridgecontent" layoutX="509.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
+      <ListView fx:id="freezercontent" layoutX="509.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
       <Line endX="890.300048828125" layoutX="104.0" layoutY="158.0" startX="-100.0" strokeWidth="15.0" />
       <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="126.39996337890625">
          <font>
@@ -41,7 +41,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <ListView fx:id="fridgecontent1" layoutX="15.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
+      <ListView fx:id="fridgecontent" layoutX="15.0" layoutY="212.0" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
       <Text layoutX="160.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" wrappingWidth="188.53668212890625">
          <font>
             <Font name="Copperplate Gothic Bold" size="35.0" />

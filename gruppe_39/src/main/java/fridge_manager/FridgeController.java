@@ -20,16 +20,21 @@ public class FridgeController {
 
     private FridgeManager fridgemanager;
 
+    /**
+     * Initializes Controller by creating a new fridgemanager-object
+     */
     @FXML
     public void initialize() {
         this.fridgemanager = new FridgeManager(10, 10);
     }
 
-
+    /**
+     * Creates a new food item from input given by user and adds this to the fridge
+     */
     @FXML
     private void addToFridge() {
         String food = textfield_food.getText();
-        int quantity =  Integer.valueOf(textfield_food.getText());
+        int quantity =  Integer.parseInt(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         Food food_to_fridge = new Food(food, quantity, expiration, owner);
@@ -38,10 +43,13 @@ public class FridgeController {
         fridgecontent.getItems().add(food_to_fridge);
     }    
 
+    /**
+     * Creates a new food item from input given by user and adds this to the freezer
+     */
     @FXML
     private void addToFreezer() {
         String food = textfield_food.getText();
-        int quantity = Integer.valueOf(textfield_food.getText());
+        int quantity = Integer.valueOf(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         Food food_to_freezer = new Food(food, quantity, expiration, owner);
@@ -49,7 +57,5 @@ public class FridgeController {
         fridgemanager.getFreezerContents().add(food_to_freezer);
         freezercontent.getItems().add(food_to_freezer);
     }    
-
-
 
 }

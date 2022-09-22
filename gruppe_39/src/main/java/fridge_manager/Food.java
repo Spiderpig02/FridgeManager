@@ -52,7 +52,7 @@ public class Food {
     /*
      * Method for updating the quantity of a food item
      */
-    public void changQuantity(int newquantity) throws IllegalArgumentException{
+    public void changeQuantity(int newquantity) throws IllegalArgumentException{
         if (newquantity < 0){
             throw new IllegalArgumentException("Quantity needs to have a positive value");
         }

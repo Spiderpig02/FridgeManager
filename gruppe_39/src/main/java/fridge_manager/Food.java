@@ -64,7 +64,6 @@ public class Food {
      */
     @Override
     public String toString() {
-        return "Food [expirationDate=" + expirationDate + ", name=" + name + ", owner=" + owner + ", quantity=" + quantity
-                + "]";
+        return quantity+" "+name+", "+owner+" sin, går ut: "+expirationDate;
     }
 }

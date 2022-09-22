@@ -20,4 +20,14 @@ public class FoodTest {
         assertEquals("Ola",food.getOwner());
         assertEquals("30.01.2022",food.getExpirationDate());
     }
+
+    @Test
+    public void testChangeQuantity(){
+        Food food = new Food("Paprika",4, "30.01.2022","Ola");
+        assertEquals(4, food.getQuantity());
+
+        food.changeQuantity(1500);
+
+        assertEquals(1500, food.getQuantity());
+    }
 }

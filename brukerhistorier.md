@@ -5,7 +5,7 @@ I dette dokumentet samles prosjektets brukerhistorier. Brukerhistorier benyttes 
 Brukerhistorie 1
 =
 Som privatperson ønsker jeg å holde oversikt og orden på varene i kjøleskapet,
-slik at jeg kan holde oversikt over varene i kjøleskapet.
+slik at jeg vet hva jeg har og unngår matsvinn.
 
 Brukeren har behov for å holde oversikt over innholdet i kjøleskapet. Dette er nødvendig slik at matvarer med kort utløpsfrist kan benyttes før varen går ut på dato. Det er også hensiktsmessig med en oversikt over den hvem som eier matvaren, og den gjenværende mengde av varen.
 

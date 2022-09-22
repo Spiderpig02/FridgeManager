@@ -49,13 +49,21 @@ public class Food {
     public String getExpirationDate() {
         return this.expirationDate;
     }
-
+    /*
+     * Method for updating the quantity of a food item
+     */
+    public void changeQuantity(int newquantity) throws IllegalArgumentException{
+        if (newquantity < 0){
+            throw new IllegalArgumentException("Quantity needs to have a positive value");
+        }
+        quantity=newquantity;
+    }
+    
     /**
      * returning the toString method
      */
     @Override
     public String toString() {
-        return "Food [expirationDate=" + expirationDate + ", name=" + name + ", owner=" + owner + ", quantity=" + quantity
-                + "]";
+        return quantity+" "+name+", "+owner+" sin, går ut: "+expirationDate;
     }
 }

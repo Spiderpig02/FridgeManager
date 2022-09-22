@@ -1,12 +1,1 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2239/gr2239)
-
-
-
-Fridge Manager
-=
-Dette er et program som holder styr på hva man har i kjøleskapet.
-
-Den skal holde styr på produktene i kjøleskapet, samt tilhørende informasjon slik som utløpsdato og eier. Den skal kunne vise en bruker hvilke produkter som snart går ut på dato, slik at denne skal spises opp før den blir dårlig. Det skal også være mulig å både legge til og fjerne produkter fra kjøleskapet.
-
-
-Prosjektets brukerhistorier kan hentes [her](brukerhistorier.md)
+Dette prosjektet inneholder Java-kode og tester til disse. Alt dette ligger inne i mappen "gruppe39/src2. Selve koden ligger under "gruppe39/src/main/java/fridge_manager", mens testene ligger under "gruppe39/src/test". Prosjektet inneholder også en FXML-fil med appens brukergrensesnitt. Denne ligger under "gruppe_39/src/main/resources/fridge_manager". Eventuelle bilder som er blitt brukt ligger under "gruppe_39/src/main/resources/pictures". 

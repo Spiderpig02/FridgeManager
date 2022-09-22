@@ -5,12 +5,12 @@ import fridge_manager.FridgeManager;
 public interface IFileHandler {
 
     /**
-     * Saves a FrigdeManager object to disk
+     * Saves a FrigdeManager object to disc
      */
     void saveObject(FridgeManager fridge);
 
     /**
-     * Loads the saved FridgeManager object from disk
+     * Loads the saved FridgeManager object from disc
      */
     FridgeManager loadFridgeManager();
 

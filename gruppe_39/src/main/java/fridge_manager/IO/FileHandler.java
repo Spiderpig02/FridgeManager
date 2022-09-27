@@ -18,15 +18,15 @@ public class FileHandler implements IFileHandler {
     /**
      * Method for saving a FridgeManager object to the specified location
      */
-    public void saveObject(FridgeManager fridge) {
+    public void saveObject(FridgeManager fridgemanager) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FileName));
-            oos.writeObject(fridge);
+            oos.writeObject(fridgemanager);
             oos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }   
 
     /**
      * Loads the saved FridgeManager object from system to app

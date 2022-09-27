@@ -17,20 +17,20 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
-      <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" onKeyPressed="#enableButton" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" onKeyPressed="#enableButton" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" onKeyPressed="#enableButton" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="517.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" onKeyPressed="#enableButton" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="708.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />

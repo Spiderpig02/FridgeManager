@@ -24,7 +24,6 @@ public class FridgeController {
     @FXML private ListView<Food> freezercontent;
     
     
-
     private FridgeManager fridgemanager;
     private Food to_be_removed;
     private FileHandler filehandler;
@@ -35,13 +34,23 @@ public class FridgeController {
      * Initializes Controller by creating a new fridgemanager-object
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         this.fridgemanager = new FridgeManager(10, 10);
         this.filehandler = new FileHandler();
 
+        fridge_button.setDisable(true);
+        freezer_button.setDisable(true);
         removetext.setVisible(false);
         removebutton.setVisible(false);
         removebutton.setDisable(true);
+    }
+
+    @FXML
+    private void enableButton() {
+        if (!textfield_food.getText().equals("") && !textfield_quantity.getText().equals("") && !textfield_expiration.getText().equals("") && !textfield_owner.getText().equals("")) {
+            fridge_button.setDisable(false);
+            freezer_button.setDisable(false);
+        } 
     }
 
     /**
@@ -84,18 +93,29 @@ public class FridgeController {
         // filehandler.saveObject(this);
     }    
 
+    /**
+     * Registers which Food-item has been clicked on in Fridge
+     * @param mouseevent
+     */
     @FXML
     private void handleMouseClickFridge(MouseEvent mouseevent) {
         this.to_be_removed = fridgecontent.getSelectionModel().getSelectedItem();
         infridge = true;
     }
 
+    /**
+     * Registers which Food-item has been clicked on in Freezer
+     * @param mouseevent
+     */
     @FXML
     private void handleMouseClickFreezer(MouseEvent mouseevent) {
         this.to_be_removed = freezercontent.getSelectionModel().getSelectedItem();
         infreezer = true;
     }
 
+    /**
+     * removes the item selected by the user (clicked on) from either the fridge or the freezer
+     */
     @FXML
     private void handleRemove() {
         if (infridge == true) {

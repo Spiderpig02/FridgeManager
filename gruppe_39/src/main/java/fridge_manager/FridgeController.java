@@ -19,8 +19,7 @@ public class FridgeController {
     @FXML private Text removetext;
     @FXML private Button fridge_button;
     @FXML private Button freezer_button;
-    @FXML private Button button_removefridge;
-    @FXML private Button button_removefreezer;
+    @FXML private Button removebutton;
     @FXML private ListView<Food> fridgecontent;
     @FXML private ListView<Food> freezercontent;
     
@@ -29,6 +28,8 @@ public class FridgeController {
     private FridgeManager fridgemanager;
     private Food to_be_removed;
     private FileHandler filehandler;
+    private Boolean infridge;
+    private Boolean infreezer;
 
     /**
      * Initializes Controller by creating a new fridgemanager-object
@@ -39,11 +40,8 @@ public class FridgeController {
         this.filehandler = new FileHandler();
 
         removetext.setVisible(false);
-        button_removefridge.setVisible(false);
-        button_removefreezer.setVisible(false);
-
-        button_removefridge.setDisable(true);
-        button_removefreezer.setDisable(true);
+        removebutton.setVisible(false);
+        removebutton.setDisable(true);
     }
 
     /**
@@ -52,9 +50,8 @@ public class FridgeController {
     @FXML
     private void addToFridge() {
         removetext.setVisible(true);
-        button_removefridge.setVisible(true);
-        button_removefreezer.setVisible(true);
-        button_removefridge.setDisable(false);
+        removebutton.setVisible(true);
+        removebutton.setDisable(false);
 
         String food = textfield_food.getText();
         int quantity =  Integer.parseInt(textfield_quantity.getText());
@@ -64,7 +61,7 @@ public class FridgeController {
         
         fridgemanager.getFridgeContents().add(food_to_fridge);
         fridgecontent.getItems().add(food_to_fridge);
-        filehandler.saveObject(this);
+        // filehandler.saveObject(this);
     }    
 
     /**
@@ -73,9 +70,8 @@ public class FridgeController {
     @FXML
     private void addToFreezer() {
         removetext.setVisible(true);
-        button_removefridge.setVisible(true);
-        button_removefreezer.setVisible(true);
-        button_removefreezer.setDisable(false);
+        removebutton.setVisible(true);
+        removebutton.setDisable(false);
 
         String food = textfield_food.getText();
         int quantity = Integer.valueOf(textfield_quantity.getText());
@@ -85,37 +81,36 @@ public class FridgeController {
 
         fridgemanager.getFreezerContents().add(food_to_freezer);
         freezercontent.getItems().add(food_to_freezer);
-        filehandler.saveObject(this);
+        // filehandler.saveObject(this);
     }    
 
     @FXML
     private void handleMouseClickFridge(MouseEvent mouseevent) {
         this.to_be_removed = fridgecontent.getSelectionModel().getSelectedItem();
+        infridge = true;
     }
 
     @FXML
     private void handleMouseClickFreezer(MouseEvent mouseevent) {
         this.to_be_removed = freezercontent.getSelectionModel().getSelectedItem();
+        infreezer = true;
     }
 
     @FXML
-    private void handleRemoveFromFridge() {
-        fridgecontent.getItems().remove(to_be_removed);
-        this.to_be_removed = null;
-        if (fridgecontent.getItems().size() == 0) {
-            button_removefridge.setDisable(true);
+    private void handleRemove() {
+        if (infridge == true) {
+            fridgecontent.getItems().remove(to_be_removed);
+            infridge = false;
         }
-        filehandler.saveObject(this);
-    }
-
-    @FXML
-    private void handleRemoveFromFreezer() {
-        freezercontent.getItems().remove(to_be_removed);
-        this.to_be_removed = null;
-        if (freezercontent.getItems().size() == 0) {
-            button_removefreezer.setDisable(true);
+        else if (infreezer == true) {
+            freezercontent.getItems().remove(to_be_removed);
+            infreezer = false;
         }
-        filehandler.saveObject(this);
+        this.to_be_removed = null;
+        if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
+            removebutton.setDisable(true);
+        }
+        // filehandler.saveObject(this);
     }
 
 }

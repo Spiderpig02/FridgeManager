@@ -51,6 +51,10 @@ public class FridgeController {
             fridge_button.setDisable(false);
             freezer_button.setDisable(false);
         } 
+        else {
+            fridge_button.setDisable(true);
+            freezer_button.setDisable(true);
+        }
     }
 
     /**
@@ -70,6 +74,11 @@ public class FridgeController {
         
         fridgemanager.getFridgeContents().add(food_to_fridge);
         fridgecontent.getItems().add(food_to_fridge);
+
+        textfield_food.clear();
+        textfield_quantity.clear();
+        textfield_expiration.clear();
+        textfield_owner.clear();
         // filehandler.saveObject(this);
     }    
 
@@ -90,6 +99,11 @@ public class FridgeController {
 
         fridgemanager.getFreezerContents().add(food_to_freezer);
         freezercontent.getItems().add(food_to_freezer);
+        
+        textfield_food.clear();
+        textfield_quantity.clear();
+        textfield_expiration.clear();
+        textfield_owner.clear();
         // filehandler.saveObject(this);
     }    
 

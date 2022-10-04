@@ -35,6 +35,19 @@ public class Food {
     public int getQuantity() {
         return this.quantity;
     }
+
+    /**
+     * Sets quantity
+     * Throws IllegalArgumentException if value of quantity is negative.
+     */
+    public void setQuantity(int new_quantity) {
+        if (new_quantity >= 0) {
+            this.quantity = new_quantity;
+        }
+        else {
+            throw new IllegalArgumentException("Cannot set amount of food to a negative number!");
+        }
+    }
     
     /**
      * return owner

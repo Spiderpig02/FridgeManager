@@ -18,20 +18,20 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onKeyReleased="#enableAddButtons" onKeyTyped="#enableAddButtons" prefHeight="33.0" prefWidth="165.0" />
-      <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" onKeyPressed="#enableAddButtons" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onKeyReleased="#enableAddButtons" onKeyTyped="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" onKeyPressed="#enableAddButtons" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="517.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" onKeyPressed="#enableAddButtons" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="708.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Italic" size="18.0" />
@@ -79,8 +79,8 @@
             <Font name="Copperplate Gothic Bold" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_food_remove" layoutX="160.0" layoutY="841.0" onKeyPressed="#enableAddButtons" prefHeight="34.0" prefWidth="166.0" />
-      <TextField fx:id="textfield_quantity_remove" layoutX="342.0" layoutY="841.0" onKeyPressed="#enableAddButtons" prefHeight="34.0" prefWidth="166.0" />
+      <TextField fx:id="textfield_food_remove" layoutX="160.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
+      <TextField fx:id="textfield_quantity_remove" layoutX="342.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
       <Text fx:id="quantitytext" layoutX="342.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="174.7366943359375">
          <font>
             <Font name="Copperplate Gothic Bold" size="15.0" />
@@ -96,5 +96,10 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Text fx:id="errortext" fill="RED" layoutX="401.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="CENTER" wrappingWidth="273.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

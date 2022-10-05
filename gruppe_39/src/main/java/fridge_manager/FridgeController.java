@@ -1,6 +1,6 @@
 package fridge_manager;
 
-//FXML-imports
+//imports
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
@@ -25,6 +25,7 @@ public class FridgeController {
     @FXML private Text foodtext;
     @FXML private Text quantitytext;
     @FXML private Text remove_from_text;
+    @FXML private Text errortext;
     @FXML private Button fridge_button;
     @FXML private Button freezer_button;
     @FXML private Button removebutton;
@@ -40,6 +41,7 @@ public class FridgeController {
     private Boolean infreezer;
     private String[] options = {"fridge", "freezer"};
     private String choice;
+    
 
     /**
      * Initializes Controller by creating a new fridgemanager-object
@@ -95,7 +97,9 @@ public class FridgeController {
     @FXML
     private void addToFridge() {
         ShowRemovalMenu();
-        fridgemanager.addFridgeContent(CreateFoodFromInput());
+        if (CreateFoodFromInput() != null) {
+            fridgemanager.addFridgeContent(CreateFoodFromInput());
+        }
         UpdateContent();
 
         //Clears textfields after each input
@@ -111,7 +115,9 @@ public class FridgeController {
     @FXML
     private void addToFreezer() {
         ShowRemovalMenu();
-        fridgemanager.addFreezerContent(CreateFoodFromInput());
+        if (CreateFoodFromInput() != null) {
+            fridgemanager.addFreezerContent(CreateFoodFromInput());
+        }
         UpdateContent();
 
         //Clears textfields after each input
@@ -160,9 +166,17 @@ public class FridgeController {
         int quantity = Integer.valueOf(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
-        Food return_food = new Food(food, quantity, expiration, owner);
-        return return_food;
+        System.out.println("Expiration er: " + expiration);
+        if (ValidateInput(food, quantity, expiration, owner) == true) {
+            Food return_food = new Food(food, quantity, expiration, owner);
+            return return_food;
+        }
+        else {
+            ShowErrorMessage("Invalid input!");
+            return null;
+        }
     }
+
 
     /**
      * Registers which Food-item has been clicked on in Fridge
@@ -223,10 +237,9 @@ public class FridgeController {
      */
     @FXML
     private void handleRemoveSpecificAmount() {
-        if (RemovalInputApproved() == true) {
-            String foodname = textfield_food_remove.getText();
-            Integer quantity = Integer.parseInt(textfield_quantity_remove.getText());
-
+        String foodname = textfield_food_remove.getText();
+        Integer quantity = Integer.parseInt(textfield_quantity_remove.getText());
+        if (ValidateRemovalInput(foodname, quantity) == true) {
             if (choice == "fridge") {
                 for (Food food : fridgemanager.getFridgeContents()) {
                     if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
@@ -262,7 +275,7 @@ public class FridgeController {
             UpdateContent();
         }
         else {
-            ShowErrorMessage();
+            ShowErrorMessage("Invalid input!");
         } 
     }
 
@@ -281,7 +294,6 @@ public class FridgeController {
                 fridgecontent.getItems().add(food);
             }
         }
-
         freezercontent.getItems().clear();
         for (Food food : fridgemanager.getFreezerContents()) {
             if (food.getQuantity() == 0) {
@@ -296,15 +308,68 @@ public class FridgeController {
     /**
      * Displays error message
      */
-    private void ShowErrorMessage() {
-        System.out.println("ERROR!");
+    @FXML
+    private void ShowErrorMessage(String message) {
+        errortext.setText(message);
     }
 
     /**
-     * 
+     * Hides/removes error message when users selects a textfield
+     */
+    @FXML
+    private void HideErrorMessage() {
+        errortext.setText("");
+    }
+
+    /**
+     * @param food
+     * @param quantity
+     * @param expiration
+     * @param owner
      * @return true if input is approved, false if not
      */
-    private Boolean RemovalInputApproved() {
-        return true;
+    private Boolean ValidateInput(String food, int quantity, String expiration, String owner) {
+        Boolean approved = true;
+        for (Character letter : food.toCharArray()) {
+            if (Character.isDigit(letter) == true) {
+                approved = false;
+            }
+        }
+        if (quantity < 0) {
+            approved = false;
+        }
+        try {
+            String[] exp = expiration.split("\\.");
+            if (exp.length != 3) {
+                approved = false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            approved = false;
+        }
+        for (Character letter : owner.toCharArray()) {
+            if (Character.isDigit(letter) == true) {
+                approved = false;
+            }
+        }
+        return approved;
+    }
+
+    /**
+     * @param food
+     * @param quantity
+     * @return true if input is approved, false if not
+     */
+    private Boolean ValidateRemovalInput(String food, int quantity) {
+        Boolean approved = true;
+        for (Character letter : food.toCharArray()) {
+            if (Character.isDigit(letter) == true) {
+                approved = false;
+            }
+        }
+        if (quantity < 0 ) {
+            approved = false;
+        }
+        return approved;
     }
 }

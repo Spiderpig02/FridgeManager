@@ -166,7 +166,6 @@ public class FridgeController {
         int quantity = Integer.valueOf(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
-        System.out.println("Expiration er: " + expiration);
         if (ValidateInput(food, quantity, expiration, owner) == true) {
             Food return_food = new Food(food, quantity, expiration, owner);
             return return_food;
@@ -248,7 +247,7 @@ public class FridgeController {
                             quantity -= food.getQuantity();
                             break;
                             
-                        }
+                        } 
                         else if (quantity > food.getQuantity()) {
                             quantity -= food.getQuantity();
                             food.setQuantity(0);                            

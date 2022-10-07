@@ -50,11 +50,12 @@ public class FridgeController {
     private void initialize() {
         this.fridgemanager = new FridgeManager(10, 10);
         this.filehandler = new FileHandler();
-
-        //Setting FXML-elements to correct state upon startup
         startup();
     }
-
+    
+    /**
+     * Setting FXML-elements to correct state upon startup
+     */
     @FXML
     private void startup() {
         fridge_button.setDisable(true);
@@ -102,7 +103,6 @@ public class FridgeController {
         }
         UpdateContent();
 
-        //Clears textfields after each input
         ClearInput();
         fridge_button.setDisable(true);
         freezer_button.setDisable(true);

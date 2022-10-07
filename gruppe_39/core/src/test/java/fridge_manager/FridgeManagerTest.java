@@ -1,111 +1,127 @@
 package fridge_manager;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 /**
  * Unit test Fridgemanager.
  */
 public class FridgeManagerTest {
     
+    FridgeManager fridge;
+    FridgeManager freezer;
+
+    Food banan;
+    Food eple;
+    Food tomat;
+    Food mugg;
+    
+    /**
+    * Initilize Frigemanager and Food variables
+    */
+    @BeforeEach
+    void init() {
+        fridge=new FridgeManager(3,3);
+        freezer=new FridgeManager(3,3);
+
+        banan=new Food("Banan", 8, "10.02.2022", "Halvor");
+        eple=new Food("Eple", 1, "15.02.2022", "Halvor");
+        tomat=new Food("Tomat", 8, "12.02.2022", "Halvor");
+        mugg=new Food("Mugg", 100, "30.02.2050", "Naturen");
+    }
+
+    
     /**
     * Simple constructortest
     */
     @Test
     public void testConstructor(){
-        FridgeManager fridge=new FridgeManager(5,7);
-        assertEquals(7, fridge.getFreezerMaxsize());
-        assertEquals(5, fridge.getFridgeMaxsize());
+
+        //Checking the size of the Freezer and Fridge
+        assertEquals(3, fridge.getFreezerMaxsize());
+        assertEquals(3, fridge.getFridgeMaxsize());
+
+        
+        //Triggering the IllegalArgumentException. Size need to be a positive number
+        assertThrows(IllegalArgumentException.class, () -> {
+            FridgeManager fridgeNeg =new FridgeManager(-2,7);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            FridgeManager freezerNeg =new FridgeManager(7,-2);
+        });
+
     }
+
 
     /**
     * Testing that addfridge content works, and that it returns a copy of the list and not the real list
     */
     @Test
-    public void testFridgeContents(){ 
-        FridgeManager fridge=new FridgeManager(5,7);
-        Food banan=new Food("Banan", 8, "Halvor", "10.02.2022");
-        Food eple=new Food("Eple", 1, "Halvor", "15.02.2022");
-        Food tomat=new Food("Tomat", 8, "Halvor", "12.02.2022");
-        Food mugg=new Food("Mugg", 100, "Naturen", "10.02.2050");
-        
-        List<Food> fridgecontent=new ArrayList<>();
-
-        fridgecontent.add(banan);
-        fridgecontent.add(eple);
-        fridgecontent.add(mugg);
+    public void testAddFridgeContents(){
 
         fridge.addFridgeContent(banan);
         fridge.addFridgeContent(eple);
-        fridge.addFridgeContent(mugg);
-
+      
+        List<Food> fridgecontent=new ArrayList<>();
+        fridgecontent.add(banan);
+        fridgecontent.add(eple);
+        
+        //Check if the list fridgecontent equals the content in the Fridge
         assertEquals(fridgecontent, fridge.getFridgeContents());
 
-        List<Food> liste=fridge.getFridgeContents();
-        
-        liste.add(tomat);
-        assertFalse(liste.equals(fridge.getFridgeContents()));
+
+
+        fridge.addFridgeContent(tomat);
+
+        //Check if the list fridgecontent is different from the content in the Fridge
+        assertFalse(fridgecontent.equals(fridge.getFridgeContents()));
+
+
+
+        //Triggering the IllegalArgumentException. Too many object are added to the Fridge
+        assertThrows(IllegalArgumentException.class, () -> {
+            fridge.addFridgeContent(mugg);
+        });
     }
+
     /**
     * Testing that addfreezercontent works, and that it returns a copy of the list and not the real list
     */
     @Test
-    public void testFreezerContents(){ 
-        FridgeManager fridge=new FridgeManager(5,7);
-        
-        Food brusboks=new Food("Brusboks", 1, "Halvor", "20.09.2022");
-        Food batteri=new Food("Batteri", 10, "Halvor", "10.10.2036");
-        Food tomat=new Food("Tomat", 8, "Halvor", "12.02.2022");
+    public void testAddFreezerContents(){ 
 
+        freezer.addFreezerContent(banan);
+        freezer.addFreezerContent(eple);
+        
         List<Food> freezercontent=new ArrayList<>();
+        freezercontent.add(banan);
+        freezercontent.add(eple);
 
-        freezercontent.add(brusboks);
-        freezercontent.add(batteri);
+        //Check if the list freezercontent equals the content in the Freezer
+        assertEquals(freezercontent, freezer.getFreezerContents());
 
-        fridge.addFreezerContent(brusboks);
-        fridge.addFreezerContent(batteri);
 
-        assertEquals(freezercontent, fridge.getFreezerContents());
 
-        List<Food> liste=fridge.getFridgeContents();
-        
-        liste.add(tomat);
-        assertFalse(liste.equals(fridge.getFridgeContents()));
-    }
+        freezer.addFreezerContent(tomat);
 
-    /**
-    * Test for removeFreezercontent
-    */
-    @Test
-    public void testRemoveFreezerContents(){ 
-        FridgeManager fridge=new FridgeManager(5,7);
-        
-        Food brusboks=new Food("Brusboks", 1, "Halvor", "20.09.2022");
-        Food batteri=new Food("Batteri", 10, "Halvor", "10.10.2036");
-        Food tomat=new Food("Tomat", 8, "Halvor", "12.02.2022");
-
-        List<Food> freezercontent=new ArrayList<>();
-
-        freezercontent.add(brusboks);
-        freezercontent.add(batteri);
-
-        fridge.addFreezerContent(brusboks);
-        fridge.addFreezerContent(batteri);
-        
-        fridge.addFreezerContent(tomat);
-        fridge.removeFreezerContent(tomat);
+        //Check if the list fridgecontent is different from the content in the Fridge
+        assertFalse(freezercontent.equals(freezer.getFreezerContents()));
         
 
-        assertTrue(fridge.getFreezerContents().equals(freezercontent));
+
+        //Triggering the IllegalArgumentException. Too many object are added to the Freezer
+        assertThrows(IllegalArgumentException.class, () -> {
+            freezer.addFreezerContent(mugg);
+        });
     }
 
     /**
@@ -113,23 +129,40 @@ public class FridgeManagerTest {
     */
     @Test
     public void testRemoveFridgeContents(){ 
-        FridgeManager fridge=new FridgeManager(5,7);
         
-        Food brusboks=new Food("Brusboks", 1, "Halvor", "20.09.2022");
-        Food batteri=new Food("Batteri", 10, "Halvor", "10.10.2036");
-        Food tomat=new Food("Tomat", 8, "Halvor", "12.02.2022");
+        fridge.addFridgeContent(banan);
+        fridge.addFridgeContent(eple);
+        fridge.removeFridgeContent(eple);
 
         List<Food> fridgecontent=new ArrayList<>();
+        fridgecontent.add(banan);
+        fridgecontent.add(eple);
 
-        fridgecontent.add(brusboks);
-        fridgecontent.add(batteri);
+        //Check if the list fridgecontent is different from the content in the Fridge
+        assertFalse(fridge.getFridgeContents().equals(fridgecontent));
 
-        fridge.addFridgeContent(brusboks);
-        fridge.addFridgeContent(batteri);
+        //Trying to delete an object that is not in the fridge
+        fridge.removeFridgeContent(mugg);
+    }
+
+    /**
+    * Test for removeFreezercontent
+    */
+    @Test
+    public void testRemoveFreezerContents(){
         
-        fridge.addFridgeContent(tomat);
-        fridge.removeFridgeContent(tomat);
+        freezer.addFreezerContent(banan);
+        freezer.addFreezerContent(eple);
+        freezer.removeFreezerContent(eple);
 
-        assertTrue(fridge.getFridgeContents().equals(fridgecontent));
+        List<Food> freezercontent=new ArrayList<>();
+        freezercontent.add(banan);
+        freezercontent.add(eple);      
+
+        //Check if the list freezercontent is different from the content in the Freezer
+        assertFalse(freezer.getFreezerContents().equals(freezercontent));
+
+        //Trying to delete an object that is not in the freezer
+        freezer.removeFreezerContent(mugg);
     }
 }

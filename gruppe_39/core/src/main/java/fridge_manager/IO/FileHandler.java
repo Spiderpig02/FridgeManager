@@ -1,10 +1,12 @@
 package fridge_manager.IO;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fridge_manager.FridgeManager;
 
@@ -13,36 +15,43 @@ public class FileHandler implements IFileHandler {
     /**
      * The file name for saving and loading
      */
-    public static String FileName = "FridgeSave.txt";
+    private String fileName;
+    private ObjectMapper objectMapper;
+
+    /**
+     * Method for initializing the the object
+     */
+    public FileHandler() {
+        fileName = "FridgeSave.txt";
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new FridgeManagerModule());
+    }
 
     /**
      * Method for saving a FridgeManager object to the specified location
      */
     public void saveObject(FridgeManager fridgemanager) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FileName));
-            oos.writeObject(fridgemanager);
-            oos.close();
-        } catch (Exception e) {
+            Writer writer = new FileWriter(fileName);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, fridgemanager);
+        } catch (IOException e) {
+            System.out.println("Saving to file faild");
             e.printStackTrace();
         }
-    }   
+    }
 
     /**
      * Loads the saved FridgeManager object from system to app
      * Returns the saved object if it exists, null otherwise
      */
     public FridgeManager loadFridgeManager() {
-        FridgeManager fridge = null;
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FileName));
-            fridge = (FridgeManager) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
+            Reader reader = new FileReader(fileName);
+            return objectMapper.readValue(reader, FridgeManager.class);
+        } catch (IOException e) {
+            System.out.println("The file did not load");
             e.printStackTrace();
         }
-        return fridge;
+        return null;
     }
 }

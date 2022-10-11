@@ -63,7 +63,7 @@ public class FridgeController {
         
         fridgemanager.getFridgeContents().add(food_to_fridge);
         fridgecontent.getItems().add(food_to_fridge);
-        // filehandler.saveObject(this);
+        filehandler.saveObject(fridgemanager);
     }    
 
     /**
@@ -83,7 +83,7 @@ public class FridgeController {
 
         fridgemanager.getFreezerContents().add(food_to_freezer);
         freezercontent.getItems().add(food_to_freezer);
-        // filehandler.saveObject(this);
+        filehandler.saveObject(fridgemanager);
     }    
 
     @FXML
@@ -112,7 +112,7 @@ public class FridgeController {
         if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
             removebutton.setDisable(true);
         }
-        // filehandler.saveObject(this);
+        filehandler.saveObject(fridgemanager);
     }
 
 }

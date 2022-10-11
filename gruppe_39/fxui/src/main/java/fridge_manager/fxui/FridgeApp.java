@@ -25,4 +25,3 @@ public class FridgeApp extends Application {
         launch();
     }
 }
-

@@ -1,4 +1,4 @@
-package fridge_manager;
+package fridge_manager.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+
+import fridge_manager.core.Food;
+import fridge_manager.core.FridgeManager;
 
 /**
  * Unit test Fridgemanager.

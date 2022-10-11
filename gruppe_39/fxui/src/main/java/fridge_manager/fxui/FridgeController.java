@@ -1,4 +1,4 @@
-package fridge_manager;
+package fridge_manager.fxui;
 
 //FXML-imports
 import javafx.scene.control.Button;
@@ -6,7 +6,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import fridge_manager.IO.FileHandler;
+import fridge_manager.core.Food;
+import fridge_manager.core.FridgeManager;
+import fridge_manager.json.FileHandler;
 import javafx.fxml.FXML;
 
 

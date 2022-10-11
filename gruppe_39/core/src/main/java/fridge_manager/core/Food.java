@@ -1,4 +1,4 @@
-package fridge_manager;
+package fridge_manager.core;
 
 /**
     * Class that represent food objects

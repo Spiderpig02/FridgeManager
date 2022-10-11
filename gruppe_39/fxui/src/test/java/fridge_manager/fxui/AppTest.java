@@ -1,4 +1,4 @@
-package fridge_manager;
+package fridge_manager.fxui;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

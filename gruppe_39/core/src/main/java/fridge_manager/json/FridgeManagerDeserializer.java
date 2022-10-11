@@ -1,4 +1,4 @@
-package fridge_manager.IO;
+package fridge_manager.json;
 
 import java.io.IOException;
 
@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 
-import fridge_manager.Food;
-import fridge_manager.FridgeManager;
+import fridge_manager.core.Food;
+import fridge_manager.core.FridgeManager;
 
 /*
  * FridgeManagerDeserializer class handles the deserializing of json to a fridgeManager object

@@ -1,4 +1,4 @@
-package fridge_manager;
+package fridge_manager.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;

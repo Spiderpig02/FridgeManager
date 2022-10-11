@@ -1,6 +1,6 @@
-package fridge_manager.IO;
+package fridge_manager.json;
 
-import fridge_manager.FridgeManager;
+import fridge_manager.core.FridgeManager;
 
 public interface IFileHandler {
 

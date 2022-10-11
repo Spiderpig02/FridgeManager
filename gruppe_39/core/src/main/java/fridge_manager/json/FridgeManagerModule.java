@@ -1,10 +1,10 @@
-package fridge_manager.IO;
+package fridge_manager.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import fridge_manager.Food;
-import fridge_manager.FridgeManager;
+import fridge_manager.core.Food;
+import fridge_manager.core.FridgeManager;
 
 /**
  * A jacson module for configuring json serialization and deserializing of

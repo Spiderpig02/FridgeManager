@@ -1,4 +1,4 @@
-package fridge_manager.IO;
+package fridge_manager.json;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,7 +8,7 @@ import java.io.Writer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fridge_manager.FridgeManager;
+import fridge_manager.core.FridgeManager;
 
 public class FileHandler implements IFileHandler {
 

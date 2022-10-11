@@ -66,17 +66,6 @@
                     </argLine>
                 </configuration>
 	        </plugin>
-
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
-                <!-- Default configuration for running -->
-                <!-- Usage: mvn javafx:run -->
-                <configuration>
-                    <mainClass>fridge_manager.FridgeApp</mainClass>
-                </configuration>
-            </plugin>
             <!-- Configure jacoco code coverage -->
                 <plugin>
                     <groupId>org.jacoco</groupId>

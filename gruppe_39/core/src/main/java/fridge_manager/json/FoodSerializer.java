@@ -1,4 +1,4 @@
-package fridge_manager.IO;
+package fridge_manager.json;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import fridge_manager.Food;
+import fridge_manager.core.Food;
 
 /**
  * FoodSerializer class handles the serializing of the Food object

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FoodDeserializer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">fridge_manager.json</a> &gt; <span class="el_source">FoodDeserializer.java</span></div><h1>FoodDeserializer.java</h1><pre class="source lang-java linenums">package fridge_manager.json;
+
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.TreeNode;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.databind.node.ValueNode;
+
+import fridge_manager.core.Food;
+
+/**
+ * FoodDeserializier handles the task of deserializing json text to a Food class
+ */
+<span class="nc" id="L20">public class FoodDeserializer extends JsonDeserializer&lt;Food&gt; {</span>
+
+    /*
+     * format: { &quot;Name&quot;: &quot;String&quot;, &quot;Quantity&quot;: int, &quot;Owner&quot;: &quot;String&quot;,
+     * &quot;ExpirationDate&quot;: &quot;String&quot; }
+     */
+    /**
+     * This methode handles the main task of getting json text inn and returning a
+     * Food object if there was any, or null else
+     */
+    @Override
+    public Food deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JacksonException {
+<span class="nc" id="L32">        TreeNode treeNode = parser.getCodec().readTree(parser);</span>
+<span class="nc" id="L33">        return deserializer((JsonNode) treeNode);</span>
+    }
+
+    /**
+     * A helping methode that alows us to deserialize jsonNode objects and returns
+     * Food object if sucsessfull, else null
+     */
+    public Food deserializer(JsonNode jsonNode) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (jsonNode instanceof ObjectNode) {</span>
+<span class="nc" id="L42">            String name = null;</span>
+<span class="nc" id="L43">            int quantity = 0;</span>
+<span class="nc" id="L44">            String owner = null;</span>
+<span class="nc" id="L45">            String expirationDate = null;</span>
+<span class="nc" id="L46">            JsonNode nameNode = jsonNode.get(&quot;Name&quot;);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (nameNode instanceof TextNode) {</span>
+<span class="nc" id="L48">                name = nameNode.asText();</span>
+            }
+<span class="nc" id="L50">            JsonNode quantityNode = jsonNode.get(&quot;Quantity&quot;);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (quantityNode instanceof ValueNode) {</span>
+<span class="nc" id="L52">                quantity = quantityNode.asInt();</span>
+            }
+<span class="nc" id="L54">            JsonNode OwnerNode = jsonNode.get(&quot;Owner&quot;);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (OwnerNode instanceof TextNode) {</span>
+<span class="nc" id="L56">                owner = OwnerNode.asText();</span>
+            }
+<span class="nc" id="L58">            JsonNode ExpirationDateNode = jsonNode.get(&quot;ExpirationDate&quot;);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (ExpirationDateNode instanceof TextNode) {</span>
+<span class="nc" id="L60">                expirationDate = ExpirationDateNode.asText();</span>
+            }
+
+<span class="nc" id="L63">            return new Food(name, quantity, expirationDate, owner);</span>
+
+        }
+<span class="nc" id="L66">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

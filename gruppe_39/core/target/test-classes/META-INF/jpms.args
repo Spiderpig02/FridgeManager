@@ -1,0 +1,4 @@
+--patch-module
+fridge_manager.core=_
+--add-reads
+fridge_manager.core=ALL-UNNAMED

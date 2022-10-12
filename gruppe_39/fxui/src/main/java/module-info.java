@@ -1,4 +1,4 @@
-module fridge_manager.fxui {
+module fridge_manager.ui {
     requires com.fasterxml.jackson.databind;
 
     requires java.net.http;

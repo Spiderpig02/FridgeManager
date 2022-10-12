@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+core,fridge_manager.core,Food,0,55,0,4,0,17,0,9,0,7
+core,fridge_manager.core,FridgeManager,0,111,0,12,0,30,0,15,0,9
+core,fridge_manager.json,FileHandler,59,0,0,0,18,0,3,0,3,0
+core,fridge_manager.json,FoodDeserializer,74,0,10,0,22,0,8,0,3,0
+core,fridge_manager.json,FridgeManagerModule,44,0,0,0,7,0,2,0,2,0
+core,fridge_manager.json,FoodSerializer,28,0,0,0,8,0,2,0,2,0
+core,fridge_manager.json,FridgeManagerSerializer,58,0,4,0,16,0,4,0,2,0
+core,fridge_manager.json,FridgeManagerDeserializer,121,0,20,0,30,0,13,0,3,0

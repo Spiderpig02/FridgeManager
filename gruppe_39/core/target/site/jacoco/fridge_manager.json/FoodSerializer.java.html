@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FoodSerializer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">fridge_manager.json</a> &gt; <span class="el_source">FoodSerializer.java</span></div><h1>FoodSerializer.java</h1><pre class="source lang-java linenums">package fridge_manager.json;
+
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
+import fridge_manager.core.Food;
+
+/**
+ * FoodSerializer class handles the serializing of the Food object
+ */
+<span class="nc" id="L14">public class FoodSerializer extends JsonSerializer&lt;Food&gt; {</span>
+
+    /*
+     * format: { &quot;Name&quot;: &quot;String&quot;, &quot;Quantity&quot;: int, &quot;Owner&quot;: &quot;String&quot;,
+     * &quot;ExpirationDate&quot;: &quot;String&quot; }
+     */
+    /**
+     * The method for converting Food objects to a jason format, with the expected
+     * outcome above this coment
+     */
+    @Override
+    public void serialize(Food food, JsonGenerator jGenerator, SerializerProvider sProvider) throws IOException {
+
+<span class="nc" id="L27">        jGenerator.writeStartObject();</span>
+
+<span class="nc" id="L29">        jGenerator.writeStringField(&quot;Name&quot;, food.getName());</span>
+<span class="nc" id="L30">        jGenerator.writeNumberField(&quot;Quantity&quot;, food.getQuantity());</span>
+<span class="nc" id="L31">        jGenerator.writeStringField(&quot;Owner&quot;, food.getOwner());</span>
+<span class="nc" id="L32">        jGenerator.writeStringField(&quot;ExpirationDate&quot;, food.getExpirationDate());</span>
+
+<span class="nc" id="L34">        jGenerator.writeEndObject();</span>
+
+<span class="nc" id="L36">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,4 @@
+--patch-module
+fridge_manager.ui=_
+--add-reads
+fridge_manager.ui=ALL-UNNAMED

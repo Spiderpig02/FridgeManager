@@ -67,6 +67,8 @@
 
       </dependencies>
 
+      
+
     <build>
         <plugins>
             <plugin>
@@ -83,7 +85,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>fridge_manager.fxui/fridge_manager.fxui.FridgeApp</mainClass>
+                    <mainClass>fridge_manager.ui/fridge_manager.ui.FridgeApp</mainClass>
                 </configuration>
             </plugin>
             <!-- Configure jacoco code coverage -->

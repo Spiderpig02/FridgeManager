@@ -10,6 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -45,6 +46,8 @@
         </dependency>
       </dependencies>
     </dependencyManagement>
+
+    
     <build>
         <pluginManagement>
             <plugins>

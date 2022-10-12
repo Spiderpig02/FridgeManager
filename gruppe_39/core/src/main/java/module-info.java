@@ -3,5 +3,4 @@ module fridge_manager.core {
 
     exports fridge_manager.core;
     exports fridge_manager.json;
-    opens fridge_manager.core;
 }

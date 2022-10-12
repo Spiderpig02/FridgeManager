@@ -1,0 +1,10 @@
+/workspace/gr2239/gruppe_39/core/src/main/java/module-info.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FridgeManagerModule.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FoodSerializer.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FileHandler.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/core/FridgeManager.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FridgeManagerSerializer.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FridgeManagerDeserializer.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/IFileHandler.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/json/FoodDeserializer.java
+/workspace/gr2239/gruppe_39/core/src/main/java/fridge_manager/core/Food.java

@@ -1,14 +1,13 @@
 module fridge_manager.fxui {
-    requires fridge_manager.core;
-    requires javafx.controls;
-    requires javafx.base;
-    requires transitive javafx.graphics;
-    requires javafx.fxml;
-
-    requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
 
-    opens fridge_manager.fxui to javafx.graphics, javafx.fxml;
+    requires java.net.http;
 
-    exports fridge_manager.fxui;
+    requires javafx.base;
+    requires javafx.controls;
+    requires javafx.fxml;
+
+    requires fridge_manager.core;
+
+    opens fridge_manager.ui to javafx.graphics, javafx.fxml;
 }

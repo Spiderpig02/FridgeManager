@@ -1,4 +1,4 @@
-module fridge_manager.fxui {
+module fridge_manager.ui {
     requires fridge_manager.core;
 
     requires javafx.base;
@@ -9,7 +9,7 @@ module fridge_manager.fxui {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
 
-    opens fridge_manager.fxui to javafx.graphics, javafx.fxml;
-    exports fridge_manager.fxui;
+    opens fridge_manager.ui to javafx.graphics, javafx.fxml;
+    exports fridge_manager.ui;
 
 }

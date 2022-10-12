@@ -1,4 +1,4 @@
-package fridge_manager.fxui;
+package fridge_manager.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

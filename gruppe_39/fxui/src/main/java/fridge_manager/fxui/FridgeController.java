@@ -1,4 +1,4 @@
-package fridge_manager.ui;
+package fridge_manager.fxui;
 
 //FXML-imports
 import javafx.scene.control.Button;

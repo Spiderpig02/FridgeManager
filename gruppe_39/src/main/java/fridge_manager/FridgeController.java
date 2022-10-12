@@ -42,14 +42,19 @@ public class FridgeController {
     private String[] options = {"fridge", "freezer"};
     private String choice;
     
-
     /**
      * Initializes Controller by creating a new fridgemanager-object
      */
-    @FXML
-    private void initialize() {
+    public FridgeController() {
         this.fridgemanager = new FridgeManager(10, 10);
         this.filehandler = new FileHandler();
+    }
+    
+    /**
+     * Starts program by initializing UI
+     */
+    @FXML
+    private void initialize() {
         startup();
     }
     
@@ -202,26 +207,30 @@ public class FridgeController {
      */
     @FXML
     private void handleRemove() {
-        if (infridge != null && infreezer != null) {
+        if (infridge != null) {
             if (infridge == true) {
                 fridgemanager.removeFridgeContent(to_be_removed);
                 infridge = false;
             }
-            else if (infreezer == true) {
+        }
+        if (infreezer != null) {
+            if (infreezer == true) {
                 fridgemanager.removeFreezerContent(to_be_removed);
                 infreezer = false;
             }
-            UpdateContent();
-
-            this.to_be_removed = null;
-            if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
-                removebutton.setDisable(true);
-            }
+        }
             
-            // filehandler.saveObject(this);
+        UpdateContent();
+
+        this.to_be_removed = null;
+        if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
+            removebutton.setDisable(true);
         }
         
+        // filehandler.saveObject(this);
+        
     }
+    
 
     /**
      * Registers what the user has selected in the dropdown-menu

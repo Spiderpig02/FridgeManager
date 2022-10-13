@@ -74,6 +74,10 @@ public class FridgeController {
     private void initialize() {
         startup();
         UpdateContent();
+        if(fridgemanager.getFridgeContents().size() > 0|| fridgemanager.getFreezerContents().size() > 0) {
+            ShowRemovalMenu();
+        }
+
     }
     
     /**

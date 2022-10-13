@@ -1,6 +1,16 @@
 {
   "FridgeMaxSize" : 10,
-  "FridgeConters" : [ ],
+  "FridgeConters" : [ {
+    "Name" : "Fisk",
+    "Quantity" : 5,
+    "Owner" : "Bear",
+    "ExpirationDate" : "12.12.2022"
+  } ],
   "FreezerMaxSize" : 10,
-  "FreezerContents" : [ ]
+  "FreezerContents" : [ {
+    "Name" : "Maritime reker",
+    "Quantity" : 6,
+    "Owner" : "Bear",
+    "ExpirationDate" : "12.11.2023"
+  } ]
 }

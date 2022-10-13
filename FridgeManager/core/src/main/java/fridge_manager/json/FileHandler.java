@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,8 +32,7 @@ public class FileHandler implements IFileHandler {
      * Method for saving a FridgeManager object to the specified location
      */
     public void saveObject(FridgeManager fridgemanager) {
-        try {
-            Writer writer = new FileWriter(fileName);
+        try (Writer writer = new FileWriter(fileName, StandardCharsets.UTF_8)){
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, fridgemanager);
         } catch (IOException e) {
             System.out.println("Saving to file faild");
@@ -45,11 +45,10 @@ public class FileHandler implements IFileHandler {
      * Returns the saved object if it exists, null otherwise
      */
     public FridgeManager loadFridgeManager() {
-        try {
-            Reader reader = new FileReader(fileName);
+        try(Reader reader = new FileReader(fileName, StandardCharsets.UTF_8)){
             return objectMapper.readValue(reader, FridgeManager.class);
         } catch (IOException e) {
-            System.out.println("The file did not load");
+            System.out.println("The file did not load, missing file?");
             e.printStackTrace();
         }
         return null;

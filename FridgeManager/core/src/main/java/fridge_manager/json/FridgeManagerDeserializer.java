@@ -44,14 +44,14 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
      * FridgeManager object if sucsessfull else null
      */
     private FridgeManager deserialize(JsonNode treeNode) {
-        if (treeNode instanceof ObjectNode objectNode) {
+        if (treeNode instanceof ObjectNode) {
             FridgeManager fridgeManager = null;
             JsonNode FridgeMaxSizeNode = treeNode.get("FridgeMaxSize");
             JsonNode FreezerMaxSizeNode = treeNode.get("FreezerMaxSize");
-            if (!(FridgeMaxSizeNode instanceof ValueNode)) {
+            if (!(FridgeMaxSizeNode instanceof ValueNode) && !(FreezerMaxSizeNode instanceof ValueNode)) {
                 return null;
             }
-            if (FreezerMaxSizeNode instanceof ValueNode && FridgeMaxSizeNode instanceof ValueNode) {
+            else{
                 fridgeManager = new FridgeManager(FridgeMaxSizeNode.asInt(), FreezerMaxSizeNode.asInt());
             }
 

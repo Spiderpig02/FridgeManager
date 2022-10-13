@@ -49,8 +49,22 @@ public class FridgeController {
      * Initializes Controller by creating a new fridgemanager-object
      */
     public FridgeController() {
-        this.fridgemanager = new FridgeManager(10, 10);
         this.filehandler = new FileHandler();
+        loadOrCreateFridgeManager();
+    }
+
+    /**
+     * Gets called on the start of program to determen if there was a prior save or not
+     * If its the first time the program launches, the methode returns a new FridgeManager
+     * Else the methode loads in the allredy saved FridgeManager 
+     */
+    private void loadOrCreateFridgeManager() {
+        FridgeManager tempFridge = filehandler.loadFridgeManager();
+        if (tempFridge == null) {
+            this.fridgemanager = new FridgeManager(10, 10);
+        } else {
+            this.fridgemanager = tempFridge;
+        }
     }
     
     /**
@@ -59,6 +73,11 @@ public class FridgeController {
     @FXML
     private void initialize() {
         startup();
+        UpdateContent();
+        if(fridgemanager.getFridgeContents().size() > 0|| fridgemanager.getFreezerContents().size() > 0) {
+            ShowRemovalMenu();
+        }
+
     }
     
     /**
@@ -171,7 +190,7 @@ public class FridgeController {
     @FXML
     private Food CreateFoodFromInput() {
         String food = textfield_food.getText();
-        int quantity = Integer.valueOf(textfield_quantity.getText());
+        int quantity = Integer.parseInt(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         if (ValidateInput(food, quantity, expiration, owner) == true) {
@@ -184,13 +203,18 @@ public class FridgeController {
         }
     }
 
-
+    /**
+     * Handle a mouse click on an fridge element
+     */
     @FXML
     private void handleMouseClickFridge(MouseEvent mouseevent) {
         to_be_removed = fridgecontent.getSelectionModel().getSelectedItem();
         infridge = true;
     }
 
+    /**
+     * Handle a mouse click on an freezer element
+     */
     @FXML
     private void handleMouseClickFreezer(MouseEvent mouseevent) {
         to_be_removed = freezercontent.getSelectionModel().getSelectedItem();
@@ -371,5 +395,12 @@ public class FridgeController {
             approved = false;
         }
         return approved;
+    }
+
+    /**
+     * Getter fridgemanager
+     */
+    public FridgeManager getFridgeManager() {
+        return this.fridgemanager;
     }
 }

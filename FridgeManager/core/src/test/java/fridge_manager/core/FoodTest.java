@@ -65,6 +65,20 @@ public class FoodTest {
 
     }
 
+    @Test
+    public void testSetQuantity(){
+        paprika.setQuantity(1500);
+
+        //Checking if the quantity is changed
+        assertEquals(1500, paprika.getQuantity());
+
+        //Testing IllegalArgumentException for negative input
+        assertThrows(IllegalArgumentException.class, () -> {
+            paprika.setQuantity(-2);
+        });
+    }
+
+
     /**
     * Testing toString method
     */

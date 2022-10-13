@@ -73,6 +73,7 @@ public class FridgeController {
     @FXML
     private void initialize() {
         startup();
+        UpdateContent();
     }
     
     /**

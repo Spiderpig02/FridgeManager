@@ -3,7 +3,8 @@ image:
 
 tasks:
   - init: sdk use java 16.0.1.hs-adpt
-    command: cd gruppe_39; mvn compile
+    command: cd FridgeManager;mvn install;mvn javafx:run -f fxui/pom.xml
+
 
 ports:
   # used by virtual desktop and vnc, supports JavaFX

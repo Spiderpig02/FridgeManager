@@ -4,11 +4,11 @@
 <u>Mål for sprinten:</u> Få på plass grunnleggende funksjonalitet gjennom å lage et enkelt brukergrensesnitt og tilhørende kjernelogikk. Brukeren skal ha mulighet til å legge til matvarer i enten et kjøleskap eller en fryser, representert av ListView-elementer. 
 
 <u>Oppgaver tilknyttet sprinten:</u>  
-* Lage enkelt brukergrensesnitt (estimat = 30 min)
-* Lage en enkel Controller (1 hour)
-* Lage en basic model, altså klasser med kjernelogikk (1 hour)
-* Lage en enkel klasse for lesing fra og skriving til fil (30 min)
-* Skrive tester som dekker en rimelig stor del av prosjektet (1 hour 30 minutes)
+* Lage enkelt brukergrensesnitt (estimat = 2 time)
+* Lage en enkel Controller (2 time)
+* Lage en basic model, altså klasser med kjernelogikk (3 timer)
+* Lage en enkel klasse for lesing fra og skriving til fil (4 timer)
+* Skrive tester som dekker en rimelig stor del av prosjektet (6 timer)
 
 <u><font size="3">**Hva har vi gjort?**</font></u>  
 Vi har ferdigstilt appens grunnleggende funksjonalitet, ved at man kan skrive inn en matvare med tilhørende antall, utløpsdato og eier og legge 

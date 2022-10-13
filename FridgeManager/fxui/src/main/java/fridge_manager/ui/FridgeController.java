@@ -49,8 +49,22 @@ public class FridgeController {
      * Initializes Controller by creating a new fridgemanager-object
      */
     public FridgeController() {
-        this.fridgemanager = new FridgeManager(10, 10);
         this.filehandler = new FileHandler();
+        loadOrCreateFridgeManager();
+    }
+
+    /**
+     * Gets called on the start of program to determen if there was a prior save or not
+     * If its the first time the program launches, the methode returns a new FridgeManager
+     * Else the methode loads in the allredy saved FridgeManager 
+     */
+    private void loadOrCreateFridgeManager() {
+        FridgeManager tempFridge = filehandler.loadFridgeManager();
+        if (tempFridge == null) {
+            this.fridgemanager = new FridgeManager(10, 10);
+        } else {
+            this.fridgemanager = tempFridge;
+        }
     }
     
     /**

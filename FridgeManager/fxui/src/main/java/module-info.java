@@ -1,5 +1,5 @@
 module fridge_manager.ui {
-    requires fridge_manager.core;
+    requires transitive fridge_manager.core;
 
     requires javafx.base;
     requires javafx.controls;
@@ -12,4 +12,5 @@ module fridge_manager.ui {
     opens fridge_manager.ui to javafx.graphics, javafx.fxml;
     exports fridge_manager.ui;
 
+    requires java.net.http;
 }

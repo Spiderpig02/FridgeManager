@@ -4,7 +4,7 @@
 <u>Mål for sprinten:</u> Modularisere prosjektet - dele opp i ulike moduler for å skille mellom kjernelogikk (core) og brukergrensesnitt (fxui). Utvide programmet ved å legge til funksjonalitet som gir brukeren mulighet til å fjerne matvarer, både spesifikke instanser og et visst antall av en spesifisert matvare. Legge til validering av input og forbedre stabiliteten til grafiske elementer som knapper og tekstfelt. Innføre bruk av JSON til fillagring. 
 
 <u>Oppgaver tilknyttet sprinten:</u>  
-* Modularisere prosjektet (estimat = 10 timer) 
+* Modularisere prosjektet (estimat = 10 timer)
 * Implementere funksjonalitet for å fjerne matvarer fra fridge eller freezer (2 timer)
 * Bytte til fillagring vha. JSON (12 timer)
 * Gjøre brukergrensnitt mer robust og inituivt (3 timer)
@@ -12,6 +12,8 @@
 * Gjøre testene mer oversiktlige og lesbare (1 time)
 * Legge til validering av input fra bruker (1 & 1/2 time)
 * Gjøre kontroller mer oversiktlig og lesbar (2 timer)
+* Skrive tester til kontroller (10 timer)
+* Skrive tester til lesing og skriving fra fil (7 timer)
 
 <u>**Hva har vi gjort?**</u>  
 Vi har utvidet appen med ytterligere funksjonalitet, da spesielt har vi gitt brukeren mulighet til å fjerne matvarer fra kjøleskapet. Dette kan gjøres ved å trykke på en bestemt matvare i enten fridge eller freezer, og deretter trykke på den øverste av de to "Remove Item"-knappene nederst på skjermen. 

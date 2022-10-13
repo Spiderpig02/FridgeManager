@@ -49,7 +49,7 @@ public class FileHandler implements IFileHandler {
             Reader reader = new FileReader(fileName);
             return objectMapper.readValue(reader, FridgeManager.class);
         } catch (IOException e) {
-            System.out.println("The file did not load");
+            System.out.println("The file did not load, missing file?");
             e.printStackTrace();
         }
         return null;

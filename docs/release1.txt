@@ -1,5 +1,0 @@
-Release-notes for release 1:
-Vi har ferdigstilt appens grunnleggende funksjonalitet, ved at man kan skrive inn en matvare med tilhørende antall, utløpsdato og eier og legge 
-denne inn i enten et kjøleskap eller en fryser. 
-
-Har laget basic view i FXML, model bestående av klassene "Food.java" og "FridgeManager.java", samt Controller og App-fil for å knytte programmet sammen.

@@ -1,13 +1,18 @@
 package fridge_manager.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Iterator;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fridge_manager.core.Food;
@@ -63,11 +68,64 @@ public class FridgeModuloTest {
         fridgemanager.addFreezerContent(paprika);
         fridgemanager.addFridgeContent(banan);
 
+        //Verifing that fridgeManagerWithTwoItems is equal to content written into JSON
         try {
             assertEquals(fridgeManagerWithTwoItems,
             mapper.writeValueAsString(fridgemanager));
 
         } catch (JsonProcessingException e) {
+            fail();
+        }
+    }
+
+    /*
+    * Help function. Verifing food element
+    */
+    public void checkItem(Food food, String name, int quantity, String expirationDate, String owner){
+        assertEquals(name, food.getName());
+        assertEquals(quantity, food.getQuantity());
+        assertEquals(expirationDate, food.getExpirationDate());
+        assertEquals(owner, food.getOwner());
+    }
+
+    /*
+    * Testing the Deserializer for Fridgecontent
+    */
+    @Test
+    public void testDeserializersFridge() throws JsonProcessingException{
+        try {
+            //Creating list with fridgecontents from fridgeManagerWithTwoItems
+            FridgeManager fridgemanager = mapper.readValue(fridgeManagerWithTwoItems,FridgeManager.class);
+            List<Food> frigdecontents = fridgemanager.getFridgeContents();
+
+            //Checking that Banan is the only content in fridgecontents
+            Iterator<Food> it = frigdecontents.iterator();
+            assertTrue(it.hasNext());
+            checkItem(it.next(),"Banan", 8, "10.02.2022", "Halvor");
+            assertFalse(it.hasNext());
+
+        } catch (JsonMappingException e) {
+            fail();
+        }
+    }
+
+    /*
+    * Testing the Deserializer for Freezercontent
+    */
+    @Test
+    public void testDeserializersFreezer() throws JsonProcessingException{
+        try {
+            //Creating list with freezercontents from fridgeManagerWithTwoItems
+            FridgeManager fridgemanager = mapper.readValue(fridgeManagerWithTwoItems,FridgeManager.class);
+            List<Food> freezercontents = fridgemanager.getFreezerContents();
+
+            //Checking that Banan is the only content in freezercontents
+            Iterator<Food> it = freezercontents.iterator();
+            assertTrue(it.hasNext());
+            checkItem(it.next(),"Paprika",4, "30.01.2022","Ola");
+            assertFalse(it.hasNext());
+
+        } catch (JsonMappingException e) {
             fail();
         }
     }

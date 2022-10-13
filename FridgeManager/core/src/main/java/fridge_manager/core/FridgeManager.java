@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Class that contains food and handles adding and removing
  */
-public class FridgeManager implements Serializable {
+public class FridgeManager {
     private List<Food> frigdecontents = new ArrayList<Food>();
     private List<Food> freezercontents = new ArrayList<Food>();
     private int freezermaxsize;

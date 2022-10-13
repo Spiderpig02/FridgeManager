@@ -186,7 +186,7 @@ public class FridgeController {
     @FXML
     private Food CreateFoodFromInput() {
         String food = textfield_food.getText();
-        int quantity = Integer.valueOf(textfield_quantity.getText());
+        int quantity = Integer.parseInt(textfield_quantity.getText());
         String expiration = textfield_expiration.getText();
         String owner = textfield_owner.getText();
         if (ValidateInput(food, quantity, expiration, owner) == true) {

@@ -74,6 +74,10 @@ public class FridgeController {
     private void initialize() {
         startup();
         UpdateContent();
+        if(fridgemanager.getFridgeContents().size() > 0|| fridgemanager.getFreezerContents().size() > 0) {
+            ShowRemovalMenu();
+        }
+
     }
     
     /**
@@ -199,13 +203,18 @@ public class FridgeController {
         }
     }
 
-
+    /**
+     * Handle a mouse click on an fridge element
+     */
     @FXML
     private void handleMouseClickFridge(MouseEvent mouseevent) {
         to_be_removed = fridgecontent.getSelectionModel().getSelectedItem();
         infridge = true;
     }
 
+    /**
+     * Handle a mouse click on an freezer element
+     */
     @FXML
     private void handleMouseClickFreezer(MouseEvent mouseevent) {
         to_be_removed = freezercontent.getSelectionModel().getSelectedItem();
@@ -386,5 +395,12 @@ public class FridgeController {
             approved = false;
         }
         return approved;
+    }
+
+    /**
+     * Getter fridgemanager
+     */
+    public FridgeManager getFridgeManager() {
+        return this.fridgemanager;
     }
 }

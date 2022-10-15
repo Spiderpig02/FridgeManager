@@ -297,6 +297,7 @@ public class FridgeController {
                 }
             }
             UpdateContent();
+            filehandler.saveObject(this.fridgemanager);
         }
         else {
             ShowErrorMessage("Invalid input!");

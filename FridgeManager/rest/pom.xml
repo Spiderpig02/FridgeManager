@@ -9,6 +9,11 @@
 
     <artifactId>rest</artifactId>
 
+    <properties>
+        <slf4jVersion>2.0.0-alpha5</slf4jVersion>
+        <jerseyVersion>3.0.3</jerseyVersion>
+    </properties>
+
       <dependencies>
         <dependency>
             <groupId>FridgeManager</groupId>
@@ -32,6 +37,26 @@
             <artifactId>junit-jupiter-params</artifactId>
             
         </dependency>
+
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- Logging med slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
+
 
       </dependencies>
 

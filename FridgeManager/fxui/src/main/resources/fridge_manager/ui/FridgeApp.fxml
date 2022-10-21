@@ -9,32 +9,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="1010.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridge_manager.ui.FridgeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1010.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridge_manager.ui.FridgeController">
    <children>
-      <ListView fx:id="freezercontent" layoutX="509.0" layoutY="212.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
+      <ListView fx:id="freezercontent" layoutX="508.0" layoutY="212.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="352.0" prefWidth="487.0" style="-fx-border-color: orange;" />
       <Line endX="890.300048828125" layoutX="104.0" layoutY="158.0" startX="-100.0" strokeWidth="15.0" />
       <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="126.39996337890625">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Regular" size="18.0" />
          </font>
       </Text>
       <TextField fx:id="textfield_food" layoutX="133.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onKeyReleased="#enableAddButtons" onKeyTyped="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <TextField fx:id="textfield_quantity" layoutX="325.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="126.39996337890625">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Regular" size="18.0" />
          </font>
       </Text>
       <TextField fx:id="textfield_expiration" layoutX="517.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="517.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Regular" size="18.0" />
          </font>
       </Text>
       <TextField fx:id="textfield_owner" layoutX="709.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="708.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner:" wrappingWidth="126.39996337890625">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="System Regular" size="18.0" />
          </font>
       </Text>
       <Button fx:id="fridge_button" layoutX="364.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFridge" prefHeight="34.0" prefWidth="126.0" text="Add to Fridge">
@@ -42,15 +42,15 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <ListView fx:id="fridgecontent" layoutX="15.0" layoutY="212.0" onMouseClicked="#handleMouseClickFridge" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange; -fx-background-insets: orange;" />
-      <Text layoutX="160.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" wrappingWidth="188.53668212890625">
+      <ListView fx:id="fridgecontent" layoutX="15.0" layoutY="212.0" onMouseClicked="#handleMouseClickFridge" prefHeight="352.0" prefWidth="487.0" style="-fx-border-color: orange; -fx-background-insets: orange;" />
+      <Text layoutX="204.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" wrappingWidth="188.53668212890625">
          <font>
-            <Font name="Copperplate Gothic Bold" size="35.0" />
+            <Font size="35.0" />
          </font>
       </Text>
-      <Text layoutX="661.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Freezer" wrappingWidth="188.53668212890625">
+      <Text layoutX="684.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Freezer" wrappingWidth="188.53668212890625">
          <font>
-            <Font name="Copperplate Gothic Bold" size="35.0" />
+            <Font size="35.0" />
          </font>
       </Text>
       <Button fx:id="freezer_button" layoutX="517.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFreezer" prefHeight="34.0" prefWidth="126.0" text="Add to Freezer">
@@ -58,47 +58,47 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="removetext" layoutX="347.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" text="select an item to remove it" wrappingWidth="315.53668212890625">
+      <Text fx:id="removetext" layoutX="382.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select an item to remove it" wrappingWidth="248.53668212890625">
          <font>
-            <Font name="Copperplate Gothic Bold" size="20.0" />
+            <Font name="System Regular" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="removebutton" layoutX="422.0" layoutY="724.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="34.0" prefWidth="165.0" text="Remove Item">
+      <Button fx:id="removebutton" layoutX="423.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="34.0" prefWidth="165.0" style="-fx-background-color: #00205b;" text="Remove Item" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="removeSpecificAmount" layoutX="347.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="remove specific amount " wrappingWidth="315.53668212890625">
+      <Text fx:id="removeSpecificAmount" layoutX="348.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove specific amount" wrappingWidth="315.53668212890625">
          <font>
-            <Font name="Copperplate Gothic Bold" size="20.0" />
+            <Font name="System Regular" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="DropDownMenu" layoutX="524.0" layoutY="841.0" prefHeight="34.0" prefWidth="143.0" />
-      <Text fx:id="remove_from_text" layoutX="526.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove From:" wrappingWidth="174.7366943359375">
+      <ChoiceBox fx:id="DropDownMenu" layoutX="525.0" layoutY="721.0" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #00205b;" styleClass="fridge_manager.ui.style.css" stylesheets="@style.css" />
+      <Text fx:id="remove_from_text" layoutX="527.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove From:" wrappingWidth="174.7366943359375">
          <font>
-            <Font name="Copperplate Gothic Bold" size="15.0" />
+            <Font name="System Regular" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_food_remove" layoutX="160.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
-      <TextField fx:id="textfield_quantity_remove" layoutX="342.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
-      <Text fx:id="quantitytext" layoutX="342.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="174.7366943359375">
+      <TextField fx:id="textfield_food_remove" layoutX="161.0" layoutY="721.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
+      <TextField fx:id="textfield_quantity_remove" layoutX="343.0" layoutY="721.0" onKeyPressed="#enableAddButtons" onMouseClicked="#HideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
+      <Text fx:id="quantitytext" layoutX="343.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="174.7366943359375">
          <font>
-            <Font name="Copperplate Gothic Bold" size="15.0" />
+            <Font name="System Regular" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="foodtext" layoutX="160.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="174.7366943359375">
+      <Text fx:id="foodtext" layoutX="161.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="174.7366943359375">
          <font>
-            <Font name="Copperplate Gothic Bold" size="15.0" />
+            <Font name="System Regular" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="removebutton2" layoutX="684.0" layoutY="841.0" mnemonicParsing="false" onAction="#handleRemoveSpecificAmount" prefHeight="34.0" prefWidth="165.0" text="Remove Item">
+      <Button fx:id="removebutton2" layoutX="685.0" layoutY="721.0" mnemonicParsing="false" onAction="#handleRemoveSpecificAmount" prefHeight="34.0" prefWidth="165.0" style="-fx-background-color: #00205b;" text="Remove Item" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="errortext" fill="RED" layoutX="401.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="CENTER" wrappingWidth="273.53668212890625">
+      <Text fx:id="errortext" fill="RED" layoutX="368.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="CENTER" wrappingWidth="273.53668212890625">
          <font>
-            <Font name="Copperplate Gothic Bold" size="25.0" />
+            <Font name="System Regular" size="25.0" />
          </font>
       </Text>
    </children>

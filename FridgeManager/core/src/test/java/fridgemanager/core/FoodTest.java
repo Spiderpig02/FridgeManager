@@ -1,10 +1,12 @@
-package fridge_manager.core;
+package fridgemanager.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import fridgemanager.core.Food;
 
 /** Unit test Food. */
 public class FoodTest {

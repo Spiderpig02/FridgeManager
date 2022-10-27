@@ -1,4 +1,4 @@
-package fridge_manager.ui;
+package fridgemanager.ui;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -7,7 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/** JavaFX App */
+/**
+ * JavaFX App.
+*/
 public class FridgeApp extends Application {
 
   @Override

@@ -1,4 +1,4 @@
-package fridge_manager.json;
+package fridgemanager.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,8 +8,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fridge_manager.core.Food;
-import fridge_manager.core.FridgeManager;
+
+import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
+import fridgemanager.json.FridgeManagerModule;
+
 import java.util.Iterator;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;

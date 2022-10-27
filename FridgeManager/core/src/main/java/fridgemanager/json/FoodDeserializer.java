@@ -1,4 +1,4 @@
-package fridge_manager.json;
+package fridgemanager.json;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -9,20 +9,22 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
-import fridge_manager.core.Food;
+import fridgemanager.core.Food;
 import java.io.IOException;
 
-/** FoodDeserializier handles the task of deserializing json text to a Food class */
+/**
+ * FoodDeserializier handles the task of deserializing json text to a Food class.
+*/
 public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /*
    * format: { "Name": "String", "Quantity": int, "Owner": "String",
    * "ExpirationDate": "String" }
-   */
+  */
   /**
-   * This methode handles the main task of getting json text inn and returning a Food object if
-   * there was any, or null else
-   */
+   * Get json text inn and returning a Food object.
+   * If object not found, return null.
+  */
   @Override
   public Food deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JacksonException {
@@ -31,9 +33,9 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
   }
 
   /**
-   * A helping methode that alows us to deserialize jsonNode objects and returns Food object if
-   * sucsessfull, else null
-   */
+   * Deserialize jsonNode objects and returns Food object if sucsessfull,
+   * else null.
+  */
   public Food deserializer(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       String name = null;
@@ -48,13 +50,13 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (quantityNode instanceof ValueNode) {
         quantity = quantityNode.asInt();
       }
-      JsonNode OwnerNode = jsonNode.get("Owner");
-      if (OwnerNode instanceof TextNode) {
-        owner = OwnerNode.asText();
+      JsonNode ownerNode = jsonNode.get("Owner");
+      if (ownerNode instanceof TextNode) {
+        owner = ownerNode.asText();
       }
-      JsonNode ExpirationDateNode = jsonNode.get("ExpirationDate");
-      if (ExpirationDateNode instanceof TextNode) {
-        expirationDate = ExpirationDateNode.asText();
+      JsonNode expirationDateNode = jsonNode.get("ExpirationDate");
+      if (expirationDateNode instanceof TextNode) {
+        expirationDate = expirationDateNode.asText();
       }
 
       return new Food(name, quantity, expirationDate, owner);

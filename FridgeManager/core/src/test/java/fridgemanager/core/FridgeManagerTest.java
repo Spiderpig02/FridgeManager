@@ -1,4 +1,4 @@
-package fridge_manager.core;
+package fridgemanager.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
 
 /** Unit test Fridgemanager. */
 public class FridgeManagerTest {

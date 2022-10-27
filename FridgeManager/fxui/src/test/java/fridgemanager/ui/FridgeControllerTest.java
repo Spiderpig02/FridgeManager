@@ -1,11 +1,9 @@
-package fridge_manager.ui;
+package fridgemanager.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import fridge_manager.core.Food;
-import fridge_manager.core.FridgeManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-/** Unit test for simple App. */
+import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
+
+/**
+ * Unit test for simple App.
+*/
 public class FridgeControllerTest extends ApplicationTest {
 
   private FridgeController controller;
@@ -23,7 +26,9 @@ public class FridgeControllerTest extends ApplicationTest {
 
   Food eple;
 
-  /** Initialize the JavaFX App used for testing */
+  /**
+   * Initialize the JavaFX App used for testing.
+  */
   public void start(final Stage stage) throws Exception {
     final FXMLLoader loader = new FXMLLoader(getClass().getResource("FridgeApp.fxml"));
     final Parent root = loader.load();
@@ -33,25 +38,31 @@ public class FridgeControllerTest extends ApplicationTest {
     stage.show();
   }
 
-  /** Initialize a food element */
+  /**
+   * Initialize a food element.
+  */
   @BeforeEach
   public void init() {
     eple = new Food("Eple", 1, "15.02.2022", "Halvor");
   }
 
-  /** Test the controller and the content */
+  /**
+   * Test the controller and the content.
+  */
   @Test
-  public void testController_fridgeManager() {
+  public void testControllerFridgeManager() {
     assertNotNull(this.controller);
     assertNotNull(this.fridgemanager);
   }
 
-  /** Test adding food to the fridge */
+  /**
+   * Test adding food to the fridge.
+  */
   @Test
   public void testAddToFridge() {
 
     addEple();
-    clickOn("#fridge_button");
+    clickOn("#fridgeButton");
 
     // Verifing added element
     Food lastItem =
@@ -63,7 +74,7 @@ public class FridgeControllerTest extends ApplicationTest {
   @Test
   public void testAddToFreezer() {
     addEple();
-    clickOn("#freezer_button");
+    clickOn("#freezerButton");
 
     // Verifing added element
     Food lastItem =
@@ -115,9 +126,9 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /** Add Eple to fridge or freezer */
   public void addEple() {
-    clickOn("#textfield_food").write("Eple");
-    clickOn("#textfield_quantity").write("1");
-    clickOn("#textfield_expiration").write("15.02.2022");
-    clickOn("#textfield_owner").write("Halvor");
+    clickOn("#textfieldFood").write("Eple");
+    clickOn("#textfieldQuantity").write("1");
+    clickOn("#textfieldExpiration").write("15.02.2022");
+    clickOn("#textfieldOwner").write("Halvor");
   }
 }

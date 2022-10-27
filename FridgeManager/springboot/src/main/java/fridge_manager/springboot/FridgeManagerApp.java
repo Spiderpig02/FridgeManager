@@ -1,4 +1,4 @@
-package springboot.src.main.java.fridgemanager.springboot.restserver;
+package fridge_manager.springboot;
 
 import com.fasterxml.jackson.databind.Module;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class FridgeManagerApp {
 
-  @Bean
   public Module objectMapperModule() {
     return FileHandler.createJacksonModule();
   }

@@ -1,4 +1,4 @@
-package springboot.src.main.java.fridgemanager.springboot.restserver;
+package fridge_manager.springboot;
 
 public class FridgeManagerController {
     

@@ -28,12 +28,19 @@ public class FileHandler implements IFileHandler {
     private ObjectMapper objectMapper;
 
     /**
-     * Method for initializing the the object
+     * Method for initializing the the object with specified path
      */
-    public FileHandler() {
-        fileName = "FridgeSave.txt";
+    public FileHandler(String fileName) {
+        this.fileName = fileName;
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new FridgeManagerModule());
+    }
+
+    /**
+     * Method for initializing the object without specified path
+     */
+    public FileHandler() {
+        this("FridgeSave.txt");
     }
 
     /**

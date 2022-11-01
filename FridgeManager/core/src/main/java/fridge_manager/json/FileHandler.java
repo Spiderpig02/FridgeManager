@@ -35,17 +35,17 @@ public class FileHandler implements IFileHandler {
         try (Writer writer = new FileWriter(fileName, StandardCharsets.UTF_8)){
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, fridgemanager);
         } catch (IOException e) {
-            System.out.println("Saving to file faild");
+            System.out.println("Saving to file failed");
             e.printStackTrace();
         }
     }
 
     /**
-     * Loads the saved FridgeManager object from system to app
+     * Loads the saved FridgeManager object from system to app.
      * Returns the saved object if it exists, null otherwise
      */
     public FridgeManager loadFridgeManager() {
-        try(Reader reader = new FileReader(fileName, StandardCharsets.UTF_8)){
+        try (Reader reader = new FileReader(fileName, StandardCharsets.UTF_8)){
             return objectMapper.readValue(reader, FridgeManager.class);
         } catch (IOException e) {
             System.out.println("The file did not load, missing file?");

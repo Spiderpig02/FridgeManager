@@ -16,21 +16,21 @@ import fridge_manager.core.Food;
 import fridge_manager.core.FridgeManager;
 
 /*
- * FridgeManagerDeserializer class handles the deserializing of json to a fridgeManager object
+ * FridgeManagerDeserializer class handles the deserializing of json to a FridgeManager object
  */
 public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
 
     private FoodDeserializer foodDeserializer = new FoodDeserializer();
 
     /*
-     * format: { "FridgeMaxSize": "Int", "FridgeConters": [Food,...,...,...],
+     * format: { "FridgeMaxSize": "Int", "FridgeContents": [Food,...,...,...],
      * "FreezerMaxSize":
      * "Int",
      * "FreezerContents": [Food,...,...,...] }
      */
     /*
-     * The methode takes inn json text and returns a FridgeManager object if
-     * sucsessfull, else null
+     * The method takes in json text and returns a FridgeManager object if
+     * successful, null otherwise s
      */
     @Override
     public FridgeManager deserialize(JsonParser parser, DeserializationContext ctxt)
@@ -40,8 +40,8 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
     }
 
     /*
-     * This is a private helping methode for spliting up the complexety. Returns
-     * FridgeManager object if sucsessfull else null
+     * This is a private helping method for splitting up the complexiy. Returns
+     * FridgeManager object if successful, null otherwise
      */
     private FridgeManager deserialize(JsonNode treeNode) {
         if (treeNode instanceof ObjectNode) {
@@ -55,14 +55,14 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
                 fridgeManager = new FridgeManager(FridgeMaxSizeNode.asInt(), FreezerMaxSizeNode.asInt());
             }
 
-            JsonNode FridgeContersNode = treeNode.get("FridgeConters");
+            JsonNode FridgeContentsNode = treeNode.get("FridgeContents");
             JsonNode FreezerContentsNode = treeNode.get("FreezerContents");
 
-            boolean hasFridgeConters = FridgeContersNode instanceof ArrayNode;
+            boolean hasFridgeContents = FridgeContentsNode instanceof ArrayNode;
             boolean hasFreezerContents = FreezerContentsNode instanceof ArrayNode;
 
-            if (hasFridgeConters) {
-                for (JsonNode elementNode : ((ArrayNode) FridgeContersNode)) {
+            if (hasFridgeContents) {
+                for (JsonNode elementNode : ((ArrayNode) FridgeContentsNode)) {
                     Food food = foodDeserializer.deserializer(elementNode);
                     if (food != null) {
                         fridgeManager.addFridgeContent(food);

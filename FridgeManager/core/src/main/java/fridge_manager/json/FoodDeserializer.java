@@ -24,7 +24,7 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
      * "ExpirationDate": "String" }
      */
     /**
-     * This methode handles the main task of getting json text inn and returning a
+     * This method handles the main task of getting json text inn and returning a
      * Food object if there was any, or null else
      */
     @Override

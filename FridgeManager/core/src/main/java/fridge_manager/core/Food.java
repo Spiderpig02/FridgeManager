@@ -8,7 +8,8 @@ public class Food {
     private int quantity;
     private String owner;
     private String expirationDate;
-    
+    private String unit;
+
     /**
     * The constructor for the Food class
     */
@@ -72,11 +73,20 @@ public class Food {
         quantity=newquantity;
     }
     
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     /**
      * returning the toString method
      */
     @Override
     public String toString() {
-        return quantity+" "+name+", "+owner+" sin, går ut: "+expirationDate;
+        return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate;
     }
+
+
+
+
+
 }

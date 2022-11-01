@@ -16,7 +16,7 @@ import fridge_manager.core.FridgeManager;
 public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
     /*
-     * format: { "FridgeMaxSize": "Int", "FridgeConters": [Food,...,...,...],
+     * format: { "FridgeMaxSize": "Int", "FridgeContents": [Food,...,...,...],
      * "FreezerMaxSize":
      * "Int",
      * "FreezerContents": [Food,...,...,...] }
@@ -33,7 +33,7 @@ public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
         jGenerator.writeNumberField("FridgeMaxSize", fManager.getFridgeMaxsize());
 
-        jGenerator.writeArrayFieldStart("FridgeConters");
+        jGenerator.writeArrayFieldStart("FridgeContents");
         for (Food element : fManager.getFridgeContents()) {
             jGenerator.writeObject(element);
         }

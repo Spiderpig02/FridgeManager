@@ -188,5 +188,6 @@
     <modules>
         <module>core</module>
         <module>fxui</module>
+        <module>springboot</module>
     </modules>
 </project>

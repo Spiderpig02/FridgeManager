@@ -3,6 +3,7 @@ package fridge_manager.ui;
 //imports
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,6 +15,12 @@ import javafx.scene.text.Text;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import fridge_manager.core.Food;
 import fridge_manager.core.FridgeManager;
@@ -41,12 +48,12 @@ public class FridgeController {
     @FXML private Button removebutton2;
     @FXML private ListView<Food> fridgecontent;
     @FXML private ListView<Food> freezercontent;
-    @FXML private ImageView trashcan_fridge1;
-    @FXML private ImageView trashcan_freezer1;
+    @FXML private ImageView trashcan_fridge;
+    @FXML private ImageView trashcan_freezer;
     @FXML private ChoiceBox<String> DropDownMenu_add;
     @FXML private ChoiceBox<String> DropDownMenu_quantity;
     @FXML private ChoiceBox<String> DropDownMenu_remove;
-    
+    @FXML private DatePicker datePicker_expiration;
     
     private FridgeManager fridgemanager;
     private Food to_be_removed;
@@ -58,6 +65,7 @@ public class FridgeController {
     private String addchoice;
     private String unitchoice;
     private String choice;
+    private LocalDate expiration;
     
     /**
      * Initializes Controller by creating a new fridgemanager-object
@@ -68,9 +76,9 @@ public class FridgeController {
     }
 
     /**
-     * Gets called on the start of program to determen if there was a prior save or not
-     * If its the first time the program launches, the methode returns a new FridgeManager
-     * Else the methode loads in the allredy saved FridgeManager 
+     * Gets called on the start of program to determine if there was a prior save or not
+     * If its the first time the program launches, the method returns a new FridgeManager-instance
+     * If not the method loads the already saved FridgeManager-instance
      */
     private void loadOrCreateFridgeManager() {
         FridgeManager tempFridge = filehandler.loadFridgeManager();
@@ -100,8 +108,8 @@ public class FridgeController {
     @FXML
     private void startup() {
         removetext.setVisible(false);
-        trashcan_fridge1.setVisible(false);
-        trashcan_freezer1.setVisible(false);
+        trashcan_fridge.setVisible(false);
+        trashcan_freezer.setVisible(false);
 
         removeSpecificAmount.setVisible(false);
         foodtext.setVisible(false);
@@ -123,38 +131,50 @@ public class FridgeController {
 
     @FXML
     private void openTrashCanFridge() {
-        // Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
-        // System.out.println(image.toString());
+        Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
+        System.out.println(image.toString());
         
-        // trashcan_fridge1.setImage(image);
-        // trashcan_fridge1.setVisible(true);
+        trashcan_fridge.setImage(image);
+        trashcan_fridge.setVisible(true);
     }
 
     @FXML
     private void openTrashCanFreezer() {
-        // Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
-        // System.out.println(image.toString());
-        // trashcan_freezer1.setImage(image);
-        // trashcan_freezer1.setVisible(true);
+        Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
+        System.out.println(image.toString());
+        
+        trashcan_freezer.setImage(image);
+        trashcan_freezer.setVisible(true);
     }
     
+    /**
+     * Registers if the users wants to add an item to the fridge or the freezer
+     * @param mouseclick-event
+     */
     public void getAddChoice(ActionEvent event) {
         this.addchoice = DropDownMenu_add.getValue();
     }
 
+    /**
+     * Registers what unit the user wants associated with a food-item when adding it to the fridge or the freezer
+     * @param mouseclick-event
+     */
     public void getUnitChoice(ActionEvent event) {
         this.unitchoice = DropDownMenu_quantity.getValue();
     }
 
     /**
-     * Registers what the user has selected in the dropdown-menu
+     * Registers if the user wants to remove an item from the fridge or the freezer
      * @param ActionEvent event (mouse click)
      */
     public void getRemovalChoice(ActionEvent event) {
         this.choice = DropDownMenu_remove.getValue();
     }
 
-
+    /**
+     * Adds food-item to fridge or freezer when user presses the ENTER-key
+     * @param key-event
+     */
     @FXML
     private void addOnEnter(KeyEvent event) {
         switch (event.getCode()) {
@@ -166,17 +186,30 @@ public class FridgeController {
         }
     }
 
+    /**
+     * Adds food-item to fridge or freezer depending on input 
+     */
     @FXML
     private void addFood() {
         ShowRemovalMenu();
         if (CreateFoodFromInput() != null) {
             if (addchoice == "fridge")  {
-                fridgemanager.addFridgeContent(CreateFoodFromInput());
+                try {
+                    fridgemanager.addFridgeContent(CreateFoodFromInput());
+                }
+                catch (IllegalArgumentException Ie) {
+                    ShowErrorMessage("Fridge is full!");
+                }
             }
             else if (addchoice == "freezer") {
-                fridgemanager.addFreezerContent(CreateFoodFromInput());
+                try {
+                    fridgemanager.addFreezerContent(CreateFoodFromInput());
+                }
+                catch (IllegalArgumentException Ie) {
+                    ShowErrorMessage("Freezer is full!");
+                }
             }
-            ClearInput();
+            // ClearInput();
         }
         UpdateContent();
         filehandler.saveObject(this.fridgemanager);
@@ -234,8 +267,8 @@ public class FridgeController {
     @FXML
     private void ShowRemovalMenu() {
         removetext.setVisible(true);
-        trashcan_fridge1.setVisible(true);
-        trashcan_freezer1.setVisible(true);
+        trashcan_fridge.setVisible(true);
+        trashcan_freezer.setVisible(true);
 
         removeSpecificAmount.setVisible(true);
         foodtext.setVisible(true);
@@ -247,11 +280,14 @@ public class FridgeController {
         removebutton2.setVisible(true);
     }
 
+    /**
+     * Hides all FXML-elements associated with removal of items from fridge or freezer
+     */
     @FXML
     private void HideRemovalMenu() {
         removetext.setVisible(false);
-        trashcan_fridge1.setVisible(false);
-        trashcan_freezer1.setVisible(false);
+        trashcan_fridge.setVisible(false);
+        trashcan_freezer.setVisible(false);
 
         removeSpecificAmount.setVisible(false);
         foodtext.setVisible(false);
@@ -271,7 +307,8 @@ public class FridgeController {
         try {
             String food = textfield_food.getText();
             int quantity = Integer.parseInt(textfield_quantity.getText());
-            String expiration = textfield_expiration.getText();
+            // String expiration = textfield_expiration.getText();
+            LocalDate expiration = this.expiration;
             String owner = textfield_owner.getText();
             if (ValidateInput(food, quantity, expiration, owner) == true) {
                 Food return_food = new Food(food, quantity, expiration, owner);
@@ -288,8 +325,43 @@ public class FridgeController {
         }
     }
 
+    @FXML
+    private void handleDatePick() {
+        LocalDate date = datePicker_expiration.getValue();
+        this.expiration = date;
+        System.out.println(date.toString());
+    }
+
+    public static boolean isValidFormat(String format, String value, Locale locale) {
+        LocalDateTime ldt = null;
+        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
+    
+        try {
+            ldt = LocalDateTime.parse(value, fomatter);
+            String result = ldt.format(fomatter);
+            return result.equals(value);
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate ld = LocalDate.parse(value, fomatter);
+                String result = ld.format(fomatter);
+                return result.equals(value);
+            } catch (DateTimeParseException exp) {
+                try {
+                    LocalTime lt = LocalTime.parse(value, fomatter);
+                    String result = lt.format(fomatter);
+                    return result.equals(value);
+                } catch (DateTimeParseException e2) {
+                    // Debugging purposes
+                    //e2.printStackTrace();
+                }
+            }
+        }
+    
+        return false;
+    }
+
     /**
-     * Handle a mouse click on an fridge element
+     * Registers which food-item the user has selected in the fridge
      */
     @FXML
     private void handleMouseClickFridge(MouseEvent mouseevent) {
@@ -325,10 +397,10 @@ public class FridgeController {
 
         this.to_be_removed = null;
         if (fridgecontent.getItems().size() == 0) {
-            trashcan_fridge1.setVisible(false);
+            trashcan_fridge.setVisible(false);
         }
         if (freezercontent.getItems().size() == 0) {
-            trashcan_freezer1.setVisible(false);
+            trashcan_freezer.setVisible(false);
         }
         if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
             HideRemovalMenu();
@@ -345,54 +417,52 @@ public class FridgeController {
     private void handleRemoveSpecificAmount() {
         try {
             String foodname = textfield_food_remove.getText();
-        Integer quantity = Integer.parseInt(textfield_quantity_remove.getText());
-        if (ValidateRemovalInput(foodname, quantity) == true) {
-            if (choice == "fridge") {
-                for (Food food : fridgemanager.getFridgeContents()) {
-                    if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
-                        if (food.getQuantity() >= quantity) {
-                            food.setQuantity(food.getQuantity() - quantity);
-                            quantity -= food.getQuantity();
-                            break;
-                            
-                        } 
-                        else if (quantity > food.getQuantity()) {
-                            quantity -= food.getQuantity();
-                            food.setQuantity(0);                            
-                        } 
-                    }  
+            Integer quantity = Integer.parseInt(textfield_quantity_remove.getText());
+            if (ValidateRemovalInput(foodname, quantity) == true) {
+                if (choice == "fridge") {
+                    for (Food food : fridgemanager.getFridgeContents()) {
+                        if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
+                            if (food.getQuantity() >= quantity) {
+                                food.setQuantity(food.getQuantity() - quantity);
+                                quantity -= food.getQuantity();
+                                break;
+                                
+                            } 
+                            else if (quantity > food.getQuantity()) {
+                                quantity -= food.getQuantity();
+                                food.setQuantity(0);                            
+                            } 
+                        }  
+                    }
                 }
-            }
-            else if (choice == "freezer") {
-                for (Food food : fridgemanager.getFreezerContents()) {
-                    if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
-                        if (food.getQuantity() >= quantity) {
-                            food.setQuantity(food.getQuantity() - quantity);
-                            quantity -= food.getQuantity();
-                            break;
-                            
-                        }
-                        else if (quantity > food.getQuantity()) {
-                            quantity -= food.getQuantity();
-                            food.setQuantity(0);                            
-                        } 
-                    }  
+                else if (choice == "freezer") {
+                    for (Food food : fridgemanager.getFreezerContents()) {
+                        if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
+                            if (food.getQuantity() >= quantity) {
+                                food.setQuantity(food.getQuantity() - quantity);
+                                quantity -= food.getQuantity();
+                                break;
+                                
+                            }
+                            else if (quantity > food.getQuantity()) {
+                                quantity -= food.getQuantity();
+                                food.setQuantity(0);                            
+                            } 
+                        }  
+                    }
                 }
-            }
-            UpdateContent();
-            filehandler.saveObject(this.fridgemanager);
+                UpdateContent();
+                filehandler.saveObject(this.fridgemanager);
+                textfield_food_remove.clear();
+                textfield_quantity_remove.clear();
             }
             else {
                 ShowErrorMessage("Invalid input!");
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
             ShowErrorMessage("Invalid Input!");
-        }
-        
-        textfield_food_remove.clear();
-        textfield_quantity_remove.clear();
+        }   
     }
 
     /**
@@ -404,7 +474,7 @@ public class FridgeController {
         
         for (Food food : fridgemanager.getFridgeContents()) {
             if (food.getQuantity() == 0) {
-                fridgemanager.getFridgeContents().remove(food);
+                fridgemanager.removeFridgeContent(food);
             }
             else {
                 fridgecontent.getItems().add(food);
@@ -413,7 +483,7 @@ public class FridgeController {
         freezercontent.getItems().clear();
         for (Food food : fridgemanager.getFreezerContents()) {
             if (food.getQuantity() == 0) {
-                fridgemanager.getFreezerContents().remove(food);
+                fridgemanager.removeFreezerContent(food);
             }
             else {
                 freezercontent.getItems().add(food);
@@ -444,7 +514,7 @@ public class FridgeController {
      * @param owner
      * @return true if input is approved, false if not
      */
-    private Boolean ValidateInput(String food, int quantity, String expiration, String owner) {
+    private Boolean ValidateInput(String food, int quantity, LocalDate expiration, String owner) {
         Boolean approved = true;
         try {
             if (addchoice == null || food == null || quantity < 1 || unitchoice == null || expiration == null || owner == null) {
@@ -456,10 +526,10 @@ public class FridgeController {
                 }
             }
 
-            String[] exp = expiration.split("\\.");
-            if (exp.length != 3 || exp[0].length() != 2 || exp[1].length() != 2 || exp[2].length() != 4) {
+            if (isValidFormat("yyyy-MM-dd", expiration.toString(), Locale.ENGLISH) == false) {
                 approved = false;
-            } 
+            }
+
             for (Character letter : owner.toCharArray()) {
                 if (Character.isDigit(letter) == true) {
                     approved = false;
@@ -492,8 +562,8 @@ public class FridgeController {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
             ShowErrorMessage("Ugyldig input!");
+            approved = false;
         }
         return approved;
         

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1006.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridge_manager.ui.FridgeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1006.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridge_manager.ui.FridgeController">
    <children>
       <ListView fx:id="freezercontent" layoutX="509.0" layoutY="162.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="352.0" prefWidth="478.0" style="-fx-border-color: #00205b; -fx-border-width: 3;" />
       <Line endX="890.300048828125" layoutX="108.0" layoutY="110.0" startX="-100.0" strokeWidth="15.0" />
@@ -27,7 +28,6 @@
             <Font name="System Regular" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfield_expiration" layoutX="611.0" layoutY="48.0" onKeyPressed="#addOnEnter" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="612.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Regular" size="18.0" />
@@ -55,7 +55,7 @@
             <Font name="System Regular" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="removeSpecificAmount" layoutX="350.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove specific amount" textAlignment="CENTER" wrappingWidth="315.53668212890625">
+      <Text fx:id="removeSpecificAmount" layoutX="344.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove specific amount" textAlignment="CENTER" wrappingWidth="315.53668212890625">
          <font>
             <Font name="System Regular" size="20.0" />
          </font>
@@ -83,9 +83,9 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="errortext" fill="RED" layoutX="380.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="256.53668212890625">
+      <Text fx:id="errortext" fill="RED" layoutX="374.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="256.53668212890625">
          <font>
-            <Font name="System Regular" size="25.0" />
+            <Font size="30.0" />
          </font>
       </Text>
       <AnchorPane layoutX="50.0" layoutY="48.0" stylesheets="@style.css">
@@ -115,6 +115,6 @@
                </image></ImageView>
          </children>
       </AnchorPane>
-      <Text fontSmoothingType="LCD" layoutX="612.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(dd.mm.yyyy)" wrappingWidth="126.39996337890625" />
+      <DatePicker fx:id="datePicker_expiration" layoutX="612.0" layoutY="48.0" onAction="#handleDatePick" prefHeight="33.0" prefWidth="165.0" />
    </children>
 </AnchorPane>

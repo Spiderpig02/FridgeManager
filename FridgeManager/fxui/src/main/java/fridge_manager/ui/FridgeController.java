@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Locale;
 
 import fridge_manager.core.Food;
@@ -325,6 +327,9 @@ public class FridgeController {
         }
     }
 
+    /**
+     * Retrieve expirationdate 
+     */
     @FXML
     private void handleDatePick() {
         LocalDate date = datePicker_expiration.getValue();
@@ -356,7 +361,6 @@ public class FridgeController {
                 }
             }
         }
-    
         return false;
     }
 

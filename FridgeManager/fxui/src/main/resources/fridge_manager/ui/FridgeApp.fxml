@@ -101,15 +101,15 @@
       <ChoiceBox fx:id="DropDownMenu_quantity" layoutX="508.0" layoutY="48.0" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #00205b;" stylesheets="@choicebox.css" />
       <AnchorPane fx:id="trashcan_fridge1" layoutX="19.0" layoutY="514.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trashcan_fridge" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" onMouseEntered="#openTrashCanFridge" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashcan_fridge" fitHeight="55.0" fitWidth="60.0" layoutX="1.0" layoutY="1.0" onMouseEntered="#openTrashCanFridge" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="trashcan_freezer1" layoutX="928.0" layoutY="514.0" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
+      <AnchorPane fx:id="trashcan_freezer1" layoutX="927.0" layoutY="514.0" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trashcan_freezer" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" onMouseClicked="#handleRemove" onMouseEntered="#openTrashCanFreezer" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashcan_freezer" fitHeight="55.0" fitWidth="60.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleRemove" onMouseEntered="#openTrashCanFreezer" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
                </image></ImageView>

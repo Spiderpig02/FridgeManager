@@ -27,10 +27,5 @@
     "Quantity" : 2,
     "Owner" : "Jensern",
     "ExpirationDate" : "20.08.2009"
-  }, {
-    "Name" : "Rotte",
-    "Quantity" : 2,
-    "Owner" : "Jensern",
-    "ExpirationDate" : "20.08.2009"
   } ]
 }

@@ -58,9 +58,16 @@ public class RemoteFridgeAccess {
         throw new RuntimeException(e);
       }
     }
+    //Her må vi få inn en else kanskje? **TODO
     System.out.println(fridgeManager.toString());
     return fridgeManager;
   }
+  private void addToFridge(){};
+  private void addToFreezer(){};
+  private void removeFreezerContent(){};
+  private void removeFridgeContent(){};
+  private void handleRemoveSpecificAmount(){};
+
   /**
   * only for testing purposes. to be removed.
   */
@@ -70,6 +77,8 @@ public class RemoteFridgeAccess {
     RemoteFridgeAccess access = new RemoteFridgeAccess(uri);
     access.getFridgeManager();
   }
+
+
 
 
 

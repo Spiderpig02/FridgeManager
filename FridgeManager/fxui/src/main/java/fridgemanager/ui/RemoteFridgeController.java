@@ -59,13 +59,12 @@ public class RemoteFridgeController {
   @FXML
   private ChoiceBox<String> dropDownMenu;
 
-  private FridgeManager fridgemanager;
   private Food toBeRemoved;
-  private FileHandler filehandler;
   private Boolean infridge;
   private Boolean infreezer;
   private String[] options = { "fridge", "freezer" };
   private String choice;
+  private RemoteFridgeAccess remoteFridgeAccess;
 
   /**
    * Initializes Controller by creating a new fridgemanager-object.
@@ -73,25 +72,7 @@ public class RemoteFridgeController {
    * @throws URISyntaxException
    */
   public RemoteFridgeController() throws URISyntaxException {
-    this.filehandler = new FileHandler();
-    loadOrCreateFridgeManager();
-    RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
-    access.getFridgeManager();
-  }
-
-  /**
-   * Get called when the program starts.
-   * Determine if there was a prior save or first time the program launches.
-   * Return saved fridgemanager,
-   * if first time a new FridgeManager is created.
-   */
-  private void loadOrCreateFridgeManager() {
-    FridgeManager tempFridge = filehandler.loadFridgeManager();
-    if (tempFridge == null) {
-      this.fridgemanager = new FridgeManager(10, 10);
-    } else {
-      this.fridgemanager = tempFridge;
-    }
+    remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
   }
 
   /**
@@ -101,8 +82,12 @@ public class RemoteFridgeController {
   private void initialize() {
     startup();
     updateContent();
-    if (fridgemanager.getFridgeContents().size() > 0
-        || fridgemanager.getFreezerContents().size() > 0) {
+    // if (fridgemanager.getFridgeContents().size() > 0
+    // || fridgemanager.getFreezerContents().size() > 0) {
+    // showRemovalMenu();
+    // }
+    if (remoteFridgeAccess.getFridgeSize() > 0
+        || remoteFridgeAccess.getFreezerSize() > 0) {
       showRemovalMenu();
     }
   }
@@ -155,14 +140,15 @@ public class RemoteFridgeController {
   private void addToFridge() {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
-      fridgemanager.addFridgeContent(createFoodFromInput());
+      // fridgemanager.addFridgeContent(createFoodFromInput());
+      remoteFridgeAccess.addToFridge(createFoodFromInput());
     }
     updateContent();
 
+    // Clears textfields after each input
     clearInput();
     fridgeButton.setDisable(true);
     freezerButton.setDisable(true);
-    filehandler.saveObject(this.fridgemanager);
   }
 
   /**
@@ -173,7 +159,8 @@ public class RemoteFridgeController {
   private void addToFreezer() {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
-      fridgemanager.addFreezerContent(createFoodFromInput());
+      // fridgemanager.addFreezerContent(createFoodFromInput());
+      remoteFridgeAccess.addToFreezer(createFoodFromInput());
     }
     updateContent();
 
@@ -181,7 +168,6 @@ public class RemoteFridgeController {
     clearInput();
     fridgeButton.setDisable(true);
     freezerButton.setDisable(true);
-    filehandler.saveObject(this.fridgemanager);
   }
 
   /**
@@ -254,13 +240,15 @@ public class RemoteFridgeController {
   private void handleRemove() {
     if (infridge != null) {
       if (infridge == true) {
-        fridgemanager.removeFridgeContent(toBeRemoved);
+        // fridgemanager.removeFridgeContent(toBeRemoved);
+        remoteFridgeAccess.removeFridgeContent(toBeRemoved);
         infridge = false;
       }
     }
     if (infreezer != null) {
       if (infreezer == true) {
-        fridgemanager.removeFreezerContent(toBeRemoved);
+        // fridgemanager.removeFreezerContent(toBeRemoved);
+        remoteFridgeAccess.removeFreezerContent(toBeRemoved);
         infreezer = false;
       }
     }
@@ -271,8 +259,6 @@ public class RemoteFridgeController {
     if (fridgecontent.getItems().size() == 0 && freezercontent.getItems().size() == 0) {
       removebutton.setDisable(true);
     }
-
-    filehandler.saveObject(fridgemanager);
   }
 
   /**
@@ -294,7 +280,7 @@ public class RemoteFridgeController {
     Integer quantity = Integer.parseInt(textfieldQuantityRemove.getText());
     if (validateRemovalInput(foodname, quantity) == true) {
       if (choice == "fridge") {
-        for (Food food : fridgemanager.getFridgeContents()) {
+        for (Food food : remoteFridgeAccess.getFridgeContent()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
               food.setQuantity(food.getQuantity() - quantity);
@@ -308,7 +294,7 @@ public class RemoteFridgeController {
           }
         }
       } else if (choice == "freezer") {
-        for (Food food : fridgemanager.getFreezerContents()) {
+        for (Food food : remoteFridgeAccess.getFreezerContent()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
               food.setQuantity(food.getQuantity() - quantity);
@@ -323,7 +309,6 @@ public class RemoteFridgeController {
         }
       }
       updateContent();
-      filehandler.saveObject(this.fridgemanager);
     } else {
       showErrorMessage("Invalid input!");
     }
@@ -337,17 +322,33 @@ public class RemoteFridgeController {
   private void updateContent() {
     fridgecontent.getItems().clear();
 
-    for (Food food : fridgemanager.getFridgeContents()) {
+    // for (Food food : fridgemanager.getFridgeContents()) {
+    // if (food.getQuantity() == 0) {
+    // fridgemanager.getFridgeContents().remove(food);
+    // } else {
+    // fridgecontent.getItems().add(food);
+    // }
+    // }
+    for (Food food : remoteFridgeAccess.getFridgeContent()) {
       if (food.getQuantity() == 0) {
-        fridgemanager.getFridgeContents().remove(food);
+        remoteFridgeAccess.removeFridgeContent(food);
       } else {
         fridgecontent.getItems().add(food);
       }
     }
+
     freezercontent.getItems().clear();
-    for (Food food : fridgemanager.getFreezerContents()) {
+
+    // for (Food food : fridgemanager.getFreezerContents()) {
+    // if (food.getQuantity() == 0) {
+    // fridgemanager.getFreezerContents().remove(food);
+    // } else {
+    // freezercontent.getItems().add(food);
+    // }
+    // }
+    for (Food food : remoteFridgeAccess.getFreezerContent()) {
       if (food.getQuantity() == 0) {
-        fridgemanager.getFreezerContents().remove(food);
+        remoteFridgeAccess.removeFreezerContent(food);
       } else {
         freezercontent.getItems().add(food);
       }
@@ -422,6 +423,6 @@ public class RemoteFridgeController {
    * Getter fridgemanager.
    */
   public FridgeManager getFridgeManager() {
-    return this.fridgemanager;
+    return remoteFridgeAccess.getFridgeManager();
   }
 }

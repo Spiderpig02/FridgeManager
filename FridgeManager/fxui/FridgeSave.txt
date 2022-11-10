@@ -1,31 +1,11 @@
 {
   "FridgeMaxSize" : 10,
   "FridgeContents" : [ {
-    "Name" : "Potet",
+    "Name" : "Rotte",
     "Quantity" : 2,
-    "Owner" : "Ola",
-    "ExpirationDate" : "10.10.2023"
-  }, {
-    "Name" : "Hest",
-    "Quantity" : 10,
-    "Owner" : "Mæhmed",
-    "ExpirationDate" : "01.07.2017"
+    "Owner" : "Jens",
+    "ExpirationDate" : "2002-12-12"
   } ],
   "FreezerMaxSize" : 10,
-  "FreezerContents" : [ {
-    "Name" : "Torsk",
-    "Quantity" : 5,
-    "Owner" : "Jensern",
-    "ExpirationDate" : "09.10.2023"
-  }, {
-    "Name" : "Cruiseskip",
-    "Quantity" : 100,
-    "Owner" : "Royal Caribbean",
-    "ExpirationDate" : "08.08.2014"
-  }, {
-    "Name" : "Benji",
-    "Quantity" : 3,
-    "Owner" : "Moren til Benji",
-    "ExpirationDate" : "01.11.2022"
-  } ]
+  "FreezerContents" : [ ]
 }

@@ -459,10 +459,10 @@ public class FridgeController {
                 }
             }
 
-            String[] exp = expiration.toString().split("\\.");
-            if (exp.length != 3 || exp[0].length() != 2 || exp[1].length() != 2 || exp[2].length() != 4) {
-                approved = false;
-            } 
+            // String[] exp = expiration.toString().split("-");
+            // if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() <= 2 || exp[2].length() <= 2) {
+            //     approved = false;
+            // } 
             for (Character letter : owner.toCharArray()) {
                 if (Character.isDigit(letter) == true) {
                     approved = false;
@@ -510,7 +510,7 @@ public class FridgeController {
     }
 
     public static void main(String[] args) {
-        FridgeController g = new FridgeController();
-        g.ValidateInput("Daddy", 3, LocalDate.parse("2000-11-12"), "JENSSSSS");
+        FridgeController controller = new FridgeController();
+        controller.ValidateInput("Daddy", 3, LocalDate.parse("2000-11-12"), "JENSSSSS");
     }
 }

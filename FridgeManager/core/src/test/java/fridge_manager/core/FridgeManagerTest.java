@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class FridgeManagerTest {
     void init() {
         fridgemanager=new FridgeManager(3,3);
 
-        banan=new Food("Banan", 8, "10.02.2022", "Halvor");
-        eple=new Food("Eple", 1, "15.02.2022", "Halvor");
-        tomat=new Food("Tomat", 8, "12.02.2022", "Halvor");
-        mugg=new Food("Mugg", 100, "30.02.2050", "Naturen");
+        banan=new Food("Banan", 8, LocalDate.of(2022,02,10), "Halvor");
+        eple=new Food("Eple", 1, LocalDate.of(2022,02,15), "Halvor");
+        tomat=new Food("Tomat", 8, LocalDate.of(2022,02,12), "Halvor");
+        mugg=new Food("Mugg", 100, LocalDate.of(2050,02,28), "Naturen");
     }
 
     

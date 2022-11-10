@@ -29,7 +29,7 @@ public class FoodSerializer extends JsonSerializer<Food> {
         jGenerator.writeStringField("Name", food.getName());
         jGenerator.writeNumberField("Quantity", food.getQuantity());
         jGenerator.writeStringField("Owner", food.getOwner());
-        jGenerator.writeStringField("ExpirationDate", food.getExpirationDate());
+        jGenerator.writeStringField("ExpirationDate", food.getExpirationDate().toString());
 
         jGenerator.writeEndObject();
 

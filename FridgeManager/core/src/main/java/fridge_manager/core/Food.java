@@ -1,5 +1,7 @@
 package fridge_manager.core;
 
+import java.time.LocalDate;
+
 /**
     * Class that represent food objects
     */
@@ -7,13 +9,13 @@ public class Food {
     private String name;
     private int quantity;
     private String owner;
-    private String expirationDate;
+    private LocalDate expirationDate;
     private String unit;
 
     /**
     * The constructor for the Food class
     */
-    public Food(String name, int quantity, String expirationDate, String owner) throws IllegalArgumentException{
+    public Food(String name, int quantity, LocalDate expirationDate, String owner) throws IllegalArgumentException{
         this.name = name;
         this.expirationDate = expirationDate;
         this.owner = owner;
@@ -60,7 +62,7 @@ public class Food {
     /**
      * return expirationDate
      */
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return this.expirationDate;
     }
     /*
@@ -77,12 +79,16 @@ public class Food {
         this.unit = unit;
     }
 
+    public String getUnit(){
+        return this.unit;
+    }
+
     /**
      * returning the toString method
      */
     @Override
     public String toString() {
-        return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate;
+        return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate.toString();
     }
 
 

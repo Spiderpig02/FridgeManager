@@ -1,6 +1,7 @@
 package fridge_manager.json;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -60,10 +61,9 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
                 expirationDate = ExpirationDateNode.asText();
             }
 
-            return new Food(name, quantity, expirationDate, owner);
+            return new Food(name, quantity, LocalDate.parse(expirationDate), owner);
 
         }
         return null;
     }
-
 }

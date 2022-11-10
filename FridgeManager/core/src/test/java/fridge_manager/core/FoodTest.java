@@ -3,11 +3,10 @@ package fridge_manager.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import fridge_manager.core.Food;
 
 /**
  * Unit test Food.
@@ -21,7 +20,8 @@ public class FoodTest {
     */
     @BeforeEach
     void init() {
-        paprika = new Food("Paprika",4, "30.01.2022","Ola");
+        paprika = new Food("Paprika",4, LocalDate.of(2022,1,28),"Ola");
+        paprika.setUnit("stk");
     }
 
     /**
@@ -34,13 +34,13 @@ public class FoodTest {
         assertEquals(4,paprika.getQuantity());
         assertEquals("Paprika",paprika.getName());
         assertEquals("Ola",paprika.getOwner());
-        assertEquals("30.01.2022",paprika.getExpirationDate());
+        assertEquals(LocalDate.of(2022,1,28),paprika.getExpirationDate());
 
 
 
         //Testing IllegalArgumentException for negative input
         assertThrows(IllegalArgumentException.class, () -> {
-            Food laks = new Food("Laks",-4, "31.01.2022","Ola");
+            Food laks = new Food("Laks",-4, LocalDate.of(2022,1,28),"Ola");
         });
 
     }
@@ -84,6 +84,6 @@ public class FoodTest {
     */
     @Test
     public void testToString(){
-        assertEquals(paprika.toString(), paprika.getQuantity()+" "+paprika.getName()+", "+paprika.getOwner()+" sin, går ut: "+paprika.getExpirationDate());
+        assertEquals(paprika.toString(),paprika.getQuantity()+ " " + paprika.getUnit() + " " +paprika.getName()+", "+paprika.getOwner()+" sin, går ut: "+paprika.getExpirationDate().toString());
     }
 }

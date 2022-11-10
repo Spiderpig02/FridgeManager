@@ -70,16 +70,68 @@ public class RemoteFridgeAccess {
     }
   }
 
-  private void addToFridge() {
+  private void addFridgeContent(Food food) {
+    try {
+      String json = objectMapper.writeValueAsString(food);
+      HttpRequest request = HttpRequest.newBuilder(makeUri("/addFridgeContent"))
+          .header(ACCEPT_HEADER, APPLICATION_JSON)
+          .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+          .PUT(BodyPublishers.ofString(json))
+          .build();
+      final HttpResponse<String> response =
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+    } 
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
-  private void addToFreezer() {
+  private void addFreezerContent(Food food) {
+    try {
+      String json = objectMapper.writeValueAsString(food);
+      HttpRequest request = HttpRequest.newBuilder(makeUri("/addFreezerContent"))
+          .header(ACCEPT_HEADER, APPLICATION_JSON)
+          .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+          .PUT(BodyPublishers.ofString(json))
+          .build();
+      final HttpResponse<String> response =
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+    } 
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  private void removeFreezerContent() {
+  private void removeFreezerContent(Food food) {
+    try {
+      String json = objectMapper.writeValueAsString(food);
+      HttpRequest request = HttpRequest.newBuilder(makeUri("/addFreezerContent"))
+          .header(ACCEPT_HEADER, APPLICATION_JSON)
+          .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+          .DELETE()
+          .build();
+      final HttpResponse<String> response =
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+    } 
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  private void removeFridgeContent() {
+  private void removeFridgeContent(Food food) {
+    try {
+      HttpRequest request = HttpRequest.newBuilder(makeUri("/removeFridgeContent"))
+          .header(ACCEPT_HEADER, APPLICATION_JSON)
+          .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+          .DELETE()
+          .build();
+      final HttpResponse<String> response =
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+    } 
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public List<Food> getFreezerContent() {
@@ -171,7 +223,9 @@ public class RemoteFridgeAccess {
     System.out.println("\n\n\n\n");
     RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
     access.getFridgeManager();
-    System.out.println(access.getFreezerContent());
+    access.addFridgeContent(new Food("AAAA",1,"9.11.2022","halvor"));
+    access.removeFridgeContent(new Food("AAAA",1,"9.11.2022","halvor"));
+    System.out.println(access.getFrigdeContent());
     System.err.println("a");
   }
 

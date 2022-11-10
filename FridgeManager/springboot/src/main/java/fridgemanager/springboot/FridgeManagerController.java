@@ -17,7 +17,7 @@ import fridgemanager.core.FridgeManager;
 @RequestMapping(FridgeManagerController.FridgeManagerServicePath)
 public class FridgeManagerController {
 
-    public static final String FridgeManagerServicePath = "springboot/fridgemanager";
+    public static final String FridgeManagerServicePath = "fridgemanager";
 
     @Autowired
     private FridgeManagerService fridgeManagerService;

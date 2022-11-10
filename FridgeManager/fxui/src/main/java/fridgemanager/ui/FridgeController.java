@@ -1,5 +1,8 @@
 package fridgemanager.ui;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
@@ -47,10 +50,13 @@ public class FridgeController {
 
   /**
    * Initializes Controller by creating a new fridgemanager-object.
+   * @throws URISyntaxException
   */
-  public FridgeController() {
+  public FridgeController() throws URISyntaxException {
     this.filehandler = new FileHandler();
     loadOrCreateFridgeManager();
+    RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
+    access.getFridgeManager();
   }
 
   /**

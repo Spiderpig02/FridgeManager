@@ -1,7 +1,10 @@
 package fridgemanager.ui;
 
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fridgemanager.core.FridgeManager;
+import fridgemanager.json.FileHandler;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 public class RemoteFridgeAccess {
   private URI endpointBaseUri;
     
-  private static final String APPLICATION_JSON = "springboot/fridgemanager/getFridgeContent";
+  private static final String APPLICATION_JSON = "application/json";
 
   private static final String APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
   
@@ -36,6 +39,9 @@ public class RemoteFridgeAccess {
   
   public RemoteFridgeAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
+    objectMapper = new ObjectMapper();
+    objectMapper.registerModule(FileHandler.createJacsonModule());
+    objectMapper.configure(Feature.AUTO_CLOSE_SOURCE, true);
   }
 
   /**
@@ -53,6 +59,8 @@ public class RemoteFridgeAccess {
             .newBuilder()
             .build()
             .send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+        System.out.println("Test");
         this.fridgeManager = objectMapper.readValue(response.body(), FridgeManager.class);
       } catch (IOException | InterruptedException e) {
         throw new RuntimeException(e);
@@ -65,33 +73,32 @@ public class RemoteFridgeAccess {
   * only for testing purposes. to be removed.
   */
 
+//   private void putTodoList(FridgeManager fridgemanager) {
+//     try {
+//       String json = objectMapper.writeValueAsString(fridgemanager);
+//       HttpRequest request = HttpRequest.newBuilder(todoListUri(todoList.getName()))
+//           .header(ACCEPT_HEADER, APPLICATION_JSON)
+//           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+//           .PUT(BodyPublishers.ofString(json))
+//           .build();
+//       final HttpResponse<String> response =
+//           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+//       String responseString = response.body();
+//       Boolean added = objectMapper.readValue(responseString, Boolean.class);
+//       if (added != null) {
+//         todoModel.putTodoList(todoList);
+//       }
+//     } catch (IOException | InterruptedException e) {
+//       throw new RuntimeException(e);
+//     }
+//  }
+
   public static void main(String[] args) throws URISyntaxException {
-    URI uri = new URI("localhost:8080");
-    RemoteFridgeAccess access = new RemoteFridgeAccess(uri);
+    RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
     access.getFridgeManager();
   }
 
 
 
-
-
-  //   private void putTodoList(AbstractTodoList todoList) {
-  //     try {
-  //       String json = objectMapper.writeValueAsString(todoList);
-  //       HttpRequest request = HttpRequest.newBuilder(todoListUri(todoList.getName()))
-  //           .header(ACCEPT_HEADER, APPLICATION_JSON)
-  //           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-  //           .PUT(BodyPublishers.ofString(json))
-  //           .build();
-  //       final HttpResponse<String> response =
-  //           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-  //       String responseString = response.body();
-  //       Boolean added = objectMapper.readValue(responseString, Boolean.class);
-  //       if (added != null) {
-  //         todoModel.putTodoList(todoList);
-  //       }
-  //     } catch (IOException | InterruptedException e) {
-  //       throw new RuntimeException(e);
-  //     }
-  //  }
+  
 }

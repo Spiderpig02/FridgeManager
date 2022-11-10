@@ -16,7 +16,7 @@ public class FoodSerializer extends JsonSerializer<Food> {
    * "ExpirationDate": "String" }
   */
   /**
-   * The method for converting Food objects to a jason format,
+   * The method for converting Food objects to a json format,
    * with the expected outcome above this coment.
   */
   @Override
@@ -27,8 +27,9 @@ public class FoodSerializer extends JsonSerializer<Food> {
 
     jgenerator.writeStringField("Name", food.getName());
     jgenerator.writeNumberField("Quantity", food.getQuantity());
+    //HER MÅ UNIT SKRIVES FRA FIL
     jgenerator.writeStringField("Owner", food.getOwner());
-    jgenerator.writeStringField("ExpirationDate", food.getExpirationDate());
+    jgenerator.writeStringField("ExpirationDate", food.getExpirationDate().toString());
 
     jgenerator.writeEndObject();
   }

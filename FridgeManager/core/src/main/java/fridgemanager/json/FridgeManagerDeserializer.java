@@ -21,7 +21,7 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
   private FoodDeserializer foodDeserializer = new FoodDeserializer();
 
   /*
-   * format: { "FridgeMaxSize": "Int", "FridgeConters": [Food,...,...,...],
+   * format: { "FridgeMaxSize": "Int", "FridgeContents": [Food,...,...,...],
    * "FreezerMaxSize":
    * "Int",
    * "FreezerContents": [Food,...,...,...] }

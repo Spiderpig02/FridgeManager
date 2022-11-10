@@ -13,7 +13,7 @@ import java.io.IOException;
 public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
   /*
-   * format: { "FridgeMaxSize": "Int", "FridgeConters": [Food,...,...,...],
+   * format: { "FridgeMaxSize": "Int", "FridgeContents": [Food,...,...,...],
    * "FreezerMaxSize":
    * "Int",
    * "FreezerContents": [Food,...,...,...] }
@@ -31,7 +31,7 @@ public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
     jgenerator.writeNumberField("FridgeMaxSize", fmanager.getFridgeMaxsize());
 
-    jgenerator.writeArrayFieldStart("FridgeConters");
+    jgenerator.writeArrayFieldStart("FridgeContents");
     for (Food element : fmanager.getFridgeContents()) {
       jgenerator.writeObject(element);
     }

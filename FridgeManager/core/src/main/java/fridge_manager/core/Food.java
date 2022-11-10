@@ -1,6 +1,7 @@
 package fridge_manager.core;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
     * Class that represent food objects
@@ -10,7 +11,6 @@ public class Food {
     private int quantity;
     private String owner;
     private LocalDate expirationDate;
-    // private String expirationDate;
     private String unit;
 
     /**
@@ -85,16 +85,16 @@ public class Food {
         this.unit = unit;
     }
 
+    public String getUnit(){
+        return this.unit;
+    }
+
     /**
      * returning the toString method
      */
     @Override
     public String toString() {
-        return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate.toString();
+        return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
     }
-
-
-
-
 
 }

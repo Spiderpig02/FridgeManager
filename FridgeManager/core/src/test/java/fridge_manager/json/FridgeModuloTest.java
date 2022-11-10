@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,8 +41,8 @@ public class FridgeModuloTest {
      */
     @BeforeEach
     void init() {
-        paprika = new Food("Paprika",4, "30.01.2022","Ola");
-        banan = new Food("Banan", 8, "10.02.2022", "Halvor");
+        paprika = new Food("Paprika",4, LocalDate.of(2022,1,28),"Ola");
+        banan = new Food("Banan", 8, LocalDate.of(2022,1,28), "Halvor");
         fridgemanager = new FridgeManager(3, 3);
 
         /*
@@ -54,10 +55,10 @@ public class FridgeModuloTest {
         */
         fridgeManagerWithTwoItems =
         "{\"FridgeMaxSize\":3," + 
-        "\"FridgeConters\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Owner\":\"Halvor\",\"ExpirationDate\":\"10.02.2022\"}]," +
+        "\"FridgeContents\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Owner\":\"Halvor\",\"ExpirationDate\":\"2022-01-28\"}]," +
             
         "\"FreezerMaxSize\":3," + 
-        "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Owner\":\"Ola\",\"ExpirationDate\":\"30.01.2022\"}]}";
+        "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Owner\":\"Ola\",\"ExpirationDate\":\"2022-01-28\"}]}";
     }
 
     /*
@@ -79,16 +80,6 @@ public class FridgeModuloTest {
     }
 
     /*
-    * Help function. Verifing food element
-    */
-    public void checkItem(Food food, String name, int quantity, String expirationDate, String owner){
-        assertEquals(name, food.getName());
-        assertEquals(quantity, food.getQuantity());
-        assertEquals(expirationDate, food.getExpirationDate());
-        assertEquals(owner, food.getOwner());
-    }
-
-    /*
     * Testing the Deserializer for Fridgecontent
     */
     @Test
@@ -101,7 +92,7 @@ public class FridgeModuloTest {
             //Checking that Banan is the only content in fridgecontents
             Iterator<Food> it = frigdecontents.iterator();
             assertTrue(it.hasNext());
-            checkItem(it.next(),"Banan", 8, "10.02.2022", "Halvor");
+            checkItem(it.next(),"Banan", 8, LocalDate.of(2022,1,28), "Halvor");
             assertFalse(it.hasNext());
 
         } catch (JsonMappingException e) {
@@ -122,11 +113,21 @@ public class FridgeModuloTest {
             //Checking that Banan is the only content in freezercontents
             Iterator<Food> it = freezercontents.iterator();
             assertTrue(it.hasNext());
-            checkItem(it.next(),"Paprika",4, "30.01.2022","Ola");
+            checkItem(it.next(),"Paprika",4, LocalDate.of(2022,1,28),"Ola");
             assertFalse(it.hasNext());
 
         } catch (JsonMappingException e) {
             fail();
         }
+    }
+
+    /*
+    * Help function. Verifing food element
+    */
+    public void checkItem(Food food, String name, int quantity, LocalDate expirationDate, String owner){
+        assertEquals(name, food.getName());
+        assertEquals(quantity, food.getQuantity());
+        assertEquals(expirationDate, food.getExpirationDate());
+        assertEquals(owner, food.getOwner());
     }
 }

@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.Locale;
 
 import fridge_manager.core.Food;
@@ -33,12 +32,12 @@ import javafx.fxml.FXML;
 
 public class FridgeController {
     
-    @FXML private TextField textfield_food;
-    @FXML private TextField textfield_quantity;
-    @FXML private TextField textfield_expiration;
-    @FXML private TextField textfield_owner;
-    @FXML private TextField textfield_food_remove;
-    @FXML private TextField textfield_quantity_remove;
+    @FXML private TextField textfieldFood;
+    @FXML private TextField textfieldQuantity;
+    @FXML private TextField textfieldExpiration;
+    @FXML private TextField textfieldOwner;
+    @FXML private TextField textfieldFood_remove;
+    @FXML private TextField textfieldQuantity_remove;
     @FXML private Text removetext;
     @FXML private Text removeSpecificAmount;
     @FXML private Text foodtext;
@@ -55,7 +54,8 @@ public class FridgeController {
     @FXML private ChoiceBox<String> DropDownMenu_add;
     @FXML private ChoiceBox<String> DropDownMenu_quantity;
     @FXML private ChoiceBox<String> DropDownMenu_remove;
-    @FXML private DatePicker datePicker_expiration;
+    @FXML private DatePicker datePickerExpiration;
+    
     
     private FridgeManager fridgemanager;
     private Food to_be_removed;
@@ -69,6 +69,8 @@ public class FridgeController {
     private String choice;
     private LocalDate expiration;
     
+    
+
     /**
      * Initializes Controller by creating a new fridgemanager-object
      */
@@ -103,6 +105,11 @@ public class FridgeController {
         }
 
     }
+
+    private LocalDate getDate() {
+        LocalDate date = datePickerExpiration.getValue();
+        return date;
+    }
     
     /**
      * Setting FXML-elements to correct state upon startup
@@ -117,8 +124,8 @@ public class FridgeController {
         foodtext.setVisible(false);
         quantitytext.setVisible(false);
         remove_from_text.setVisible(false);
-        textfield_food_remove.setVisible(false);
-        textfield_quantity_remove.setVisible(false);
+        textfieldFood_remove.setVisible(false);
+        textfieldQuantity_remove.setVisible(false);
         DropDownMenu_remove.setVisible(false);
         removebutton2.setVisible(false);
 
@@ -257,10 +264,10 @@ public class FridgeController {
      */
     @FXML
     private void ClearInput() {
-        textfield_food.clear();
-        textfield_quantity.clear();
-        textfield_expiration.clear();
-        textfield_owner.clear();
+        textfieldFood.clear();
+        textfieldQuantity.clear();
+        textfieldExpiration.clear();
+        textfieldOwner.clear();
     }
 
     /**
@@ -276,8 +283,8 @@ public class FridgeController {
         foodtext.setVisible(true);
         quantitytext.setVisible(true);
         remove_from_text.setVisible(true);
-        textfield_food_remove.setVisible(true);
-        textfield_quantity_remove.setVisible(true);
+        textfieldFood_remove.setVisible(true);
+        textfieldQuantity_remove.setVisible(true);
         DropDownMenu_remove.setVisible(true);
         removebutton2.setVisible(true);
     }
@@ -295,8 +302,8 @@ public class FridgeController {
         foodtext.setVisible(false);
         quantitytext.setVisible(false);
         remove_from_text.setVisible(false);
-        textfield_food_remove.setVisible(false);
-        textfield_quantity_remove.setVisible(false);
+        textfieldFood_remove.setVisible(false);
+        textfieldQuantity_remove.setVisible(false);
         DropDownMenu_remove.setVisible(false);
         removebutton2.setVisible(false);
     }
@@ -307,11 +314,11 @@ public class FridgeController {
     @FXML
     private Food CreateFoodFromInput() {
         try {
-            String food = textfield_food.getText();
-            int quantity = Integer.parseInt(textfield_quantity.getText());
-            // String expiration = textfield_expiration.getText();
-            LocalDate expiration = this.expiration;
-            String owner = textfield_owner.getText();
+            String food = textfieldFood.getText();
+            int quantity = Integer.parseInt(textfieldQuantity.getText());
+            LocalDate expiration = getDate();
+            String owner = textfieldOwner.getText();
+
             if (ValidateInput(food, quantity, expiration, owner) == true) {
                 Food return_food = new Food(food, quantity, expiration, owner);
                 return_food.setUnit(unitchoice);
@@ -332,37 +339,12 @@ public class FridgeController {
      */
     @FXML
     private void handleDatePick() {
-        LocalDate date = datePicker_expiration.getValue();
+        LocalDate date = datePickerExpiration.getValue();
         this.expiration = date;
         System.out.println(date.toString());
     }
 
-    public static boolean isValidFormat(String format, String value, Locale locale) {
-        LocalDateTime ldt = null;
-        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
-    
-        try {
-            ldt = LocalDateTime.parse(value, fomatter);
-            String result = ldt.format(fomatter);
-            return result.equals(value);
-        } catch (DateTimeParseException e) {
-            try {
-                LocalDate ld = LocalDate.parse(value, fomatter);
-                String result = ld.format(fomatter);
-                return result.equals(value);
-            } catch (DateTimeParseException exp) {
-                try {
-                    LocalTime lt = LocalTime.parse(value, fomatter);
-                    String result = lt.format(fomatter);
-                    return result.equals(value);
-                } catch (DateTimeParseException e2) {
-                    // Debugging purposes
-                    //e2.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
+
 
     /**
      * Registers which food-item the user has selected in the fridge
@@ -420,8 +402,8 @@ public class FridgeController {
     @FXML
     private void handleRemoveSpecificAmount() {
         try {
-            String foodname = textfield_food_remove.getText();
-            Integer quantity = Integer.parseInt(textfield_quantity_remove.getText());
+            String foodname = textfieldFood_remove.getText();
+            Integer quantity = Integer.parseInt(textfieldQuantity_remove.getText());
             if (ValidateRemovalInput(foodname, quantity) == true) {
                 if (choice == "fridge") {
                     for (Food food : fridgemanager.getFridgeContents()) {
@@ -437,36 +419,39 @@ public class FridgeController {
                                 food.setQuantity(0);                            
                             } 
                         }  
+                    }}
+                    else if (choice == "freezer") {
+                        for (Food food : fridgemanager.getFreezerContents()) {
+                            if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
+                                if (food.getQuantity() >= quantity) {
+                                    food.setQuantity(food.getQuantity() - quantity);
+                                    quantity -= food.getQuantity();
+                                    break;
+                                    
+                                }
+                                else if (quantity > food.getQuantity()) {
+                                    quantity -= food.getQuantity();
+                                    food.setQuantity(0);                            
+                                } 
+                            }  
+                        }
                     }
-                }
-                else if (choice == "freezer") {
-                    for (Food food : fridgemanager.getFreezerContents()) {
-                        if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
-                            if (food.getQuantity() >= quantity) {
-                                food.setQuantity(food.getQuantity() - quantity);
-                                quantity -= food.getQuantity();
-                                break;
-                                
-                            }
-                            else if (quantity > food.getQuantity()) {
-                                quantity -= food.getQuantity();
-                                food.setQuantity(0);                            
-                            } 
-                        }  
-                    }
-                }
-                UpdateContent();
-                filehandler.saveObject(this.fridgemanager);
-                textfield_food_remove.clear();
-                textfield_quantity_remove.clear();
+                    UpdateContent();
+                    filehandler.saveObject(this.fridgemanager);
+                    textfieldFood_remove.clear();
+                    textfieldQuantity_remove.clear();
             }
             else {
                 ShowErrorMessage("Invalid input!");
             }
         }
+        
         catch (Exception e) {
             ShowErrorMessage("Invalid Input!");
-        }   
+        }
+    
+    textfieldFood_remove.clear();
+    textfieldQuantity_remove.clear();
     }
 
     /**
@@ -522,26 +507,39 @@ public class FridgeController {
         Boolean approved = true;
         try {
             if (addchoice == null || food == null || quantity < 1 || unitchoice == null || expiration == null || owner == null) {
+                System.out.println("Feiler her 1");
                 approved = false;
             }
             for (Character letter : food.toCharArray()) {
                 if (Character.isDigit(letter) == true) {
+                    System.out.println("Feiler her 2");
                     approved = false;
                 }
             }
-
-            if (isValidFormat("yyyy-MM-dd", expiration.toString(), Locale.ENGLISH) == false) {
-                approved = false;
+            System.out.println("tostring: " + expiration.toString());
+            String[] exp = expiration.toString().split("-");
+            for (String s : exp) {
+                System.out.println(s);
             }
+            System.out.println(exp.length);
+            System.out.println(exp[0].length());
+            System.out.println(exp[1].length());
+            System.out.println(exp[2].length());
 
+            if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() > 2 || exp[2].length() > 2) {
+                System.out.println("Feiler her 3");
+                approved = false;
+            } 
             for (Character letter : owner.toCharArray()) {
                 if (Character.isDigit(letter) == true) {
+                    System.out.println("Feiler her 4");
                     approved = false;
                 }
             }
         }
         catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Feiler her 5");
             approved = false;
         }
         return approved;
@@ -573,6 +571,7 @@ public class FridgeController {
         
     }
 
+
     /**
      * Getter fridgemanager
      */
@@ -580,3 +579,4 @@ public class FridgeController {
         return this.fridgemanager;
     }
 }
+

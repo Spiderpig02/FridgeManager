@@ -91,8 +91,4 @@ public class Food {
         return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate.toString();
     }
 
-
-
-
-
 }

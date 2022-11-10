@@ -3,6 +3,7 @@ package fridge_manager.ui;
 //imports
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,6 +16,11 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import fridge_manager.core.Food;
 import fridge_manager.core.FridgeManager;
@@ -47,6 +53,7 @@ public class FridgeController {
     @FXML private ChoiceBox<String> DropDownMenu_add;
     @FXML private ChoiceBox<String> DropDownMenu_quantity;
     @FXML private ChoiceBox<String> DropDownMenu_remove;
+    @FXML private DatePicker datePickerExpiration;
     
     
     private FridgeManager fridgemanager;
@@ -60,6 +67,8 @@ public class FridgeController {
     private String unitchoice;
     private String choice;
     
+    
+
     /**
      * Initializes Controller by creating a new fridgemanager-object
      */
@@ -93,6 +102,11 @@ public class FridgeController {
             ShowRemovalMenu();
         }
 
+    }
+
+    private LocalDate getDate() {
+        LocalDate date = datePickerExpiration.getValue();
+        return date;
     }
     
     /**
@@ -272,7 +286,7 @@ public class FridgeController {
         try {
             String food = textfieldFood.getText();
             int quantity = Integer.parseInt(textfieldQuantity.getText());
-            LocalDate expiration = LocalDate.parse(textfieldExpiration.getText());
+            LocalDate expiration = getDate();
             String owner = textfieldOwner.getText();
 
             if (ValidateInput(food, quantity, expiration, owner) == true) {
@@ -458,7 +472,9 @@ public class FridgeController {
                     approved = false;
                 }
             }
-
+            if (isValidFormat("MM/dd/yyyy", expiration.toString(), Locale.ENGLISH) == false) {
+                approved = false;
+            }
             // String[] exp = expiration.toString().split("-");
             // if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() <= 2 || exp[2].length() <= 2) {
             //     approved = false;
@@ -502,6 +518,33 @@ public class FridgeController {
         
     }
 
+    public static boolean isValidFormat(String format, String value, Locale locale) {
+        LocalDateTime ldt = null;
+        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
+    
+        try {
+            ldt = LocalDateTime.parse(value, fomatter);
+            String result = ldt.format(fomatter);
+            return result.equals(value);
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate ld = LocalDate.parse(value, fomatter);
+                String result = ld.format(fomatter);
+                return result.equals(value);
+            } catch (DateTimeParseException exp) {
+                try {
+                    LocalTime lt = LocalTime.parse(value, fomatter);
+                    String result = lt.format(fomatter);
+                    return result.equals(value);
+                } catch (DateTimeParseException e2) {
+                    // Debugging purposes
+                    //e2.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Getter fridgemanager
      */
@@ -509,8 +552,3 @@ public class FridgeController {
         return this.fridgemanager;
     }
 
-    public static void main(String[] args) {
-        FridgeController controller = new FridgeController();
-        controller.ValidateInput("Daddy", 3, LocalDate.parse("2000-11-12"), "JENSSSSS");
-    }
-}

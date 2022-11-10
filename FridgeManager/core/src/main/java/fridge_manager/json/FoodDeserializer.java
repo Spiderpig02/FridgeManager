@@ -56,6 +56,7 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
             if (OwnerNode instanceof TextNode) {
                 owner = OwnerNode.asText();
             }
+            //HER MÅ DET LEGGES TIL AT UNIT SKRIVES TIL FIL
             JsonNode ExpirationDateNode = jsonNode.get("ExpirationDate");
             if (ExpirationDateNode instanceof TextNode) {
                 expirationDate = ExpirationDateNode.asText();

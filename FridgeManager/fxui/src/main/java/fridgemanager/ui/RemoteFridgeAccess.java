@@ -70,7 +70,7 @@ public class RemoteFridgeAccess {
     }
   }
 
-  private void addFridgeContent(Food food) {
+  public void addFridgeContent(Food food) {
     try {
       String json = objectMapper.writeValueAsString(food);
       HttpRequest request = HttpRequest.newBuilder(makeUri("/addFridgeContent"))
@@ -87,7 +87,7 @@ public class RemoteFridgeAccess {
 
   }
 
-  private void addFreezerContent(Food food) {
+  public void addFreezerContent(Food food) {
     try {
       String json = objectMapper.writeValueAsString(food);
       HttpRequest request = HttpRequest.newBuilder(makeUri("/addFreezerContent"))
@@ -103,7 +103,7 @@ public class RemoteFridgeAccess {
     }
   }
 
-  private void removeFreezerContent(Food food) {
+  public void removeFreezerContent(Food food) {
     try {
       String json = objectMapper.writeValueAsString(food);
       HttpRequest request = HttpRequest.newBuilder(makeUri("/addFreezerContent"))
@@ -119,7 +119,7 @@ public class RemoteFridgeAccess {
     }
   }
 
-  private void removeFridgeContent(Food food) {
+  public void removeFridgeContent(Food food) {
     try {
       HttpRequest request = HttpRequest.newBuilder(makeUri("/removeFridgeContent"))
           .header(ACCEPT_HEADER, APPLICATION_JSON)

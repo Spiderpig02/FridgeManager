@@ -141,7 +141,7 @@ public class RemoteFridgeController {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
       // fridgemanager.addFridgeContent(createFoodFromInput());
-      remoteFridgeAccess.addToFridge(createFoodFromInput());
+      remoteFridgeAccess.addFridgeContent(createFoodFromInput());
     }
     updateContent();
 
@@ -160,7 +160,7 @@ public class RemoteFridgeController {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
       // fridgemanager.addFreezerContent(createFoodFromInput());
-      remoteFridgeAccess.addToFreezer(createFoodFromInput());
+      remoteFridgeAccess.addFreezerContent(createFoodFromInput());
     }
     updateContent();
 

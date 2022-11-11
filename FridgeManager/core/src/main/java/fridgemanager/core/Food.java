@@ -15,9 +15,10 @@ public class Food {
   /**
    * Constructor. 
   */
-  public Food(String name, int quantity, LocalDate expirationDate, String owner)
+  public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner)
       throws IllegalArgumentException {
     this.name = name;
+    this.unit = unit;
     this.expirationDate = expirationDate;
     this.owner = owner;
     if (quantity < 0) {

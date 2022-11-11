@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /*
-   * format: { "Name": "String", "Quantity": int, "Owner": "String",
+   * format: { "Name": "String","Unit": "String", "Quantity": int, "Owner": "String",
    * "ExpirationDate": "String" }
   */
   /**
@@ -43,15 +43,19 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
+      String unit = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
         name = nameNode.asText();
+      }
+      JsonNode unitNode = jsonNode.get("Unit");
+      if (unitNode instanceof TextNode) {
+        unit = unitNode.asText();
       }
       JsonNode quantityNode = jsonNode.get("Quantity");
       if (quantityNode instanceof ValueNode) {
         quantity = quantityNode.asInt();
       }
-      //HER MÅ UNIT SKRIVES TIL FIL
       JsonNode ownerNode = jsonNode.get("Owner");
       if (ownerNode instanceof TextNode) {
         owner = ownerNode.asText();
@@ -60,9 +64,10 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-
-      return new Food(name, quantity, LocalDate.parse(expirationDate), owner);
+      if (name != null && unit != null && quantity < 1 && expirationDate != null && owner != null) {
+        return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner);
+      }
     }
-    return null;
+    return new Food(null, null, 0, null, null);
   }
 }

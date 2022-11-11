@@ -12,7 +12,7 @@ import java.io.IOException;
 public class FoodSerializer extends JsonSerializer<Food> {
 
   /*
-   * format: { "Name": "String", "Quantity": int, "Owner": "String",
+   * format: { "Name": "String", "Unit": "String", "Quantity": "int", "Owner": "String",
    * "ExpirationDate": "String" }
   */
   /**
@@ -27,7 +27,7 @@ public class FoodSerializer extends JsonSerializer<Food> {
 
     jgenerator.writeStringField("Name", food.getName());
     jgenerator.writeNumberField("Quantity", food.getQuantity());
-    //HER MÅ UNIT SKRIVES FRA FIL
+    jgenerator.writeStringField("Unit", food.getUnit());
     jgenerator.writeStringField("Owner", food.getOwner());
     jgenerator.writeStringField("ExpirationDate", food.getExpirationDate().toString());
 

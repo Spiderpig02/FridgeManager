@@ -27,7 +27,7 @@
             <Font name="System Regular" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfieldExpiration" layoutX="611.0" layoutY="48.0" onKeyPressed="#addOnEnter" onMouseClicked="#HideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfieldExpiration" layoutX="611.0" layoutY="48.0" onKeyPressed="#addOnEnter" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="612.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Regular" size="18.0" />

@@ -96,8 +96,8 @@ public class FridgeController {
   @FXML
   private void startup() {
       removeText.setVisible(false);
-      trashcanFridge1.setVisible(false);
-      trachcanFreezer1.setVisible(false);
+    //   trashcanFridge1.setVisible(false);
+    //   trachcanFreezer1.setVisible(false);
 
       removeSpecificAmount.setVisible(false);
       foodText.setVisible(false);
@@ -266,13 +266,13 @@ public class FridgeController {
   private Food CreateFoodFromInput() {
       try {
           String food = textfieldFood.getText();
+          String unit = unitchoice;
           int quantity = Integer.parseInt(textfieldQuantity.getText());
           LocalDate expiration = LocalDate.parse(textfieldExpiration.getText());
           String owner = textfieldOwner.getText();
 
           if (ValidateInput(food, quantity, expiration, owner) == true) {
-              Food return_food = new Food(food, quantity, expiration, owner);
-              return_food.setUnit(unitchoice);
+              Food return_food = new Food(food, unit, quantity, expiration, owner);
               return return_food;
           }
           else {
@@ -445,7 +445,7 @@ public class FridgeController {
 
       Boolean approved = true;
       try {
-          if (addchoice == null || food == null || quantity < 1 || unitchoice == null || expiration.toString() == null || owner == null) {
+          if (addchoice == null || food == null || quantity < 1 || unitchoice == null || owner == null) {
               approved = false;
           }
           for (Character letter : food.toCharArray()) {

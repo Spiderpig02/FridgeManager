@@ -86,8 +86,8 @@ public class RemoteFridgeController {
     // || fridgemanager.getFreezerContents().size() > 0) {
     // showRemovalMenu();
     // }
-    if (remoteFridgeAccess.getFridgeSize() > 0
-        || remoteFridgeAccess.getFreezerSize() > 0) {
+    if (remoteFridgeAccess.getFridgeMaxsize() > 0
+        || remoteFridgeAccess.getFreezerMaxsize() > 0) {
       showRemovalMenu();
     }
   }
@@ -280,7 +280,7 @@ public class RemoteFridgeController {
     Integer quantity = Integer.parseInt(textfieldQuantityRemove.getText());
     if (validateRemovalInput(foodname, quantity) == true) {
       if (choice == "fridge") {
-        for (Food food : remoteFridgeAccess.getFridgeContent()) {
+        for (Food food : remoteFridgeAccess.getFrigdeContent()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
               food.setQuantity(food.getQuantity() - quantity);
@@ -329,7 +329,7 @@ public class RemoteFridgeController {
     // fridgecontent.getItems().add(food);
     // }
     // }
-    for (Food food : remoteFridgeAccess.getFridgeContent()) {
+    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFridgeContent(food);
       } else {

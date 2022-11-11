@@ -88,4 +88,29 @@ public class FridgeManagerController {
         this.autoSave();
         return tmp;
     }
+
+    @PutMapping(path = "/setFreezerContent")
+    public boolean setFreezerContent(@RequestBody List<Food> list) {
+        boolean tmp = false;
+        try {
+            this.fridgeManagerService.setFreezerContent(list);
+            tmp = true;
+        } catch (Exception e) {
+        }
+        this.autoSave();
+        return tmp;
+    }
+
+    @PutMapping(path = "/setFridgeContent")
+    public boolean setFridgeContent(@RequestBody List<Food> list) {
+        boolean tmp = false;
+        try {
+            this.fridgeManagerService.setFridgeContent(list);
+            tmp = true;
+        } catch (Exception e) {
+        }
+        this.autoSave();
+        return tmp;
+    }
+
 }

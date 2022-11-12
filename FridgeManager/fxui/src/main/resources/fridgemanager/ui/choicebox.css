@@ -1,0 +1,17 @@
+/* Text in all labels */
+.choice-box .label {
+    -fx-text-fill: white;
+}
+.choice-box {
+-fx-backgroundcolor: #ADD8E6;
+-fx-focus-color: midnightblue;
+-fx-faint-focus-color: #ADD8E6;
+-fx-control-inner-background: #ADD8E6;
+-fx-selection-bar: midnightblue;
+}
+.choice-box .menu-item:focused .label{
+-fx-text-fill: white;
+}
+.choice-box .context-menu {
+    -fx-pref-width: 143; /* Your width for the context menu background shown */
+}

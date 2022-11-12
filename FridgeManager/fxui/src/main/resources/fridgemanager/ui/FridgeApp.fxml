@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -27,7 +28,6 @@
             <Font name="System Regular" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textfieldExpiration" layoutX="611.0" layoutY="48.0" onKeyPressed="#addOnEnter" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <Text fontSmoothingType="LCD" layoutX="612.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
          <font>
             <Font name="System Regular" size="18.0" />
@@ -55,7 +55,7 @@
             <Font name="System Regular" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="removeSpecificAmount" layoutX="350.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove specific amount" textAlignment="CENTER" wrappingWidth="315.53668212890625">
+      <Text fx:id="removeSpecificAmount" layoutX="344.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove specific amount" textAlignment="CENTER" wrappingWidth="315.53668212890625">
          <font>
             <Font name="System Regular" size="20.0" />
          </font>
@@ -83,14 +83,14 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="errorText" fill="RED" layoutX="380.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="256.53668212890625">
+      <Text fx:id="errorText" fill="RED" layoutX="374.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="256.53668212890625">
          <font>
-            <Font name="System Regular" size="25.0" />
+            <Font size="30.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="50.0" layoutY="48.0" stylesheets="@style.css">
+      <AnchorPane layoutX="50.0" layoutY="48.0">
          <children>
-            <ChoiceBox fx:id="dropDownMenuAdd" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b; -fx-text-fill: white;" styleClass="fridge_manager.ui.style" stylesheets="@choicebox.css" />
+            <ChoiceBox fx:id="dropDownMenuAdd" onMouseClicked="#ClearInput" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b; -fx-text-fill: white;" styleClass="fridge_manager.ui.style" stylesheets="@choicebox.css" />
          </children>
       </AnchorPane>
       <Text fontSmoothingType="LCD" layoutX="50.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to:" wrappingWidth="126.39996337890625">
@@ -99,22 +99,23 @@
          </font>
       </Text>
       <ChoiceBox fx:id="dropDownMenuQuantity" layoutX="508.0" layoutY="48.0" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #00205b;" stylesheets="@choicebox.css" />
-      <AnchorPane layoutX="19.0" layoutY="514.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
+      <AnchorPane layoutX="19.0" layoutY="513.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trashcanFridge1" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" onMouseEntered="#openTrashCanFridge" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashcanFridge1" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
+                  <Image url="@../../../../../../../../Gruppeprosjekt/FridgeManager/fxui/src/main/resources/pictures_fxui/trashcan-closed.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane layoutX="928.0" layoutY="514.0" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
+      <DatePicker fx:id="datePickerExpiration" layoutX="612.0" layoutY="48.0" onAction="#getDatePick" prefHeight="31.0" prefWidth="165.0" />
+      <AnchorPane layoutX="928.0" layoutY="513.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trashcanFreezer1" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" onMouseClicked="#handleRemove" onMouseEntered="#openTrashCanFreezer" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trachcanFreezer1" fitHeight="55.0" fitWidth="60.0" layoutX="-5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
-               </image></ImageView>
+                  <Image url="@../../../../../../../../Gruppeprosjekt/FridgeManager/fxui/src/main/resources/pictures_fxui/trashcan-closed.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <Text fontSmoothingType="LCD" layoutX="612.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(dd.mm.yyyy)" wrappingWidth="126.39996337890625" />
    </children>
 </AnchorPane>

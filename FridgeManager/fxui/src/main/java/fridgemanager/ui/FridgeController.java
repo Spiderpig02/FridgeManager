@@ -3,6 +3,7 @@ package fridgemanager.ui;
 //imports
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,7 @@ public class FridgeController {
   @FXML private ChoiceBox<String> dropDownMenuAdd;
   @FXML private ChoiceBox<String> dropDownMenuQuantity;
   @FXML private ChoiceBox<String> dropDownMenuRemove;
+  @FXML private DatePicker datePickerExpiration;
   
   
   private FridgeManager fridgemanager;
@@ -54,6 +56,7 @@ public class FridgeController {
   private String addchoice;
   private String unitchoice;
   private String choice;
+  private LocalDate datepick;
   
   /**
    * Initializes Controller by creating a new fridgemanager-object
@@ -117,21 +120,8 @@ public class FridgeController {
       dropDownMenuRemove.setOnAction(this::getRemovalChoice);
   }
 
-  @FXML
-  private void openTrashCanFridge() {
-      // Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
-      // System.out.println(image.toString());
-      
-      // trashcanFridge1.setImage(image);
-      // trashcanFridge1.setVisible(true);
-  }
-
-  @FXML
-  private void openTrashCanFreezer() {
-      // Image image = new Image(getClass().getResourceAsStream("/pictures_fxui/trashcan-closed.jpg"));
-      // System.out.println(image.toString());
-      // trachcanFreezer1.setImage(image);
-      // trachcanFreezer1.setVisible(true);
+  public void getDatePick(ActionEvent event) {
+    this.datepick = datePickerExpiration.getValue();
   }
   
   public void getAddChoice(ActionEvent event) {
@@ -178,41 +168,7 @@ public class FridgeController {
       filehandler.saveObject(this.fridgemanager);
   }
 
-  /**
-   * Creates a new food item from input given by user and adds this to the fridge
-   */
-  // @FXML
-  // private void addToFridge() {
-  //     ShowRemovalMenu();
-  //     if (CreateFoodFromInput() != null) {
-  //         fridgemanager.addfridgeContent(CreateFoodFromInput());
-  //     }
-  //     UpdateContent();
-
-  //     ClearInput();
-  //     fridge_button.setDisable(true);
-  //     freezer_button.setDisable(true);
-  //     filehandler.saveObject(this.fridgemanager);
-  // }    
-
-  /**
-   * Creates a new food item from input given by user and adds this to the freezer
-   */
-  // @FXML
-  // private void addToFreezer() {
-  //     ShowRemovalMenu();
-  //     if (CreateFoodFromInput() != null) {
-  //         fridgemanager.addfreezerContent(CreateFoodFromInput());
-  //     }
-  //     UpdateContent();
-
-  //     //Clears textfields after each input
-  //     ClearInput();
-  //     fridge_button.setDisable(true);
-  //     freezer_button.setDisable(true);
-  //     filehandler.saveObject(this.fridgemanager);
-  // }    
-
+  
   /**
    * Clears input in textfields
    */
@@ -220,7 +176,6 @@ public class FridgeController {
   private void ClearInput() {
       textfieldFood.clear();
       textfieldQuantity.clear();
-      textfieldExpiration.clear();
       textfieldOwner.clear();
   }
 
@@ -264,25 +219,21 @@ public class FridgeController {
    */
   @FXML
   private Food CreateFoodFromInput() {
-      try {
-          String food = textfieldFood.getText();
-          String unit = unitchoice;
-          int quantity = Integer.parseInt(textfieldQuantity.getText());
-          LocalDate expiration = LocalDate.parse(textfieldExpiration.getText());
-          String owner = textfieldOwner.getText();
+        String food = textfieldFood.getText();
+        String unit = unitchoice;
+        int quantity = Integer.parseInt(textfieldQuantity.getText());
+        LocalDate expiration = datepick;
+        String owner = textfieldOwner.getText();
 
-          if (ValidateInput(food, quantity, expiration, owner) == true) {
-              Food return_food = new Food(food, unit, quantity, expiration, owner);
-              return return_food;
-          }
-          else {
-              showErrorMessage("Invalid input!");
-              return null;
-          }
-      } catch (Exception e) {
-          showErrorMessage("Invalid input!");
-          return null;
-      }
+        if (ValidateInput(food, quantity, expiration, owner) == true) {
+            Food return_food = new Food(food, unit, quantity, expiration, owner);
+            return return_food;
+        }
+        else {
+            showErrorMessage("Invalid input!");
+            return null;
+        }
+      
   }
 
   /**
@@ -442,33 +393,36 @@ public class FridgeController {
    * @return true if input is approved, false if not
    */
   private Boolean ValidateInput(String food, int quantity, LocalDate expiration, String owner) {
-
-      Boolean approved = true;
       try {
-          if (addchoice == null || food == null || quantity < 1 || unitchoice == null || owner == null) {
-              approved = false;
+          if (food == null || quantity < 1 || expiration.toString() == null || owner == null) {
+              System.out.println("Feiler her 1");
+              return false;
           }
           for (Character letter : food.toCharArray()) {
               if (Character.isDigit(letter) == true) {
-                  approved = false;
-              }
+                  System.out.println("Feiler her 2");
+                  return false;
+                }
           }
 
-          // String[] exp = expiration.toString().split("-");
-          // if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() <= 2 || exp[2].length() <= 2) {
-          //     approved = false;
-          // } 
+          String[] exp = expiration.toString().split("-");
+          if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() <= 2 || exp[2].length() <= 2) {
+              System.out.println("Feiler her 3");
+              return false;
+          } 
           for (Character letter : owner.toCharArray()) {
               if (Character.isDigit(letter) == true) {
-                  approved = false;
+                System.out.println("Feiler her 4");
+                return false;
+
               }
           }
       }
       catch (Exception e) {
           e.printStackTrace();
-          approved = false;
-      }
-      return approved;
+          return false;
+        }
+      return true;
   }
 
   /**
@@ -477,15 +431,15 @@ public class FridgeController {
    * @return true if input is approved, false if not
    */
   private Boolean ValidateRemovalInput(String food, int quantity) {
-      Boolean approved = true;
       try {
           if (food == null || quantity < 1) {
-              approved = false;
-          }
+            return false;
+        }
   
           for (Character letter : food.toCharArray()) {
               if (Character.isDigit(letter) == true) {
-                  approved = false;
+                return false;
+
               }
           }
       }
@@ -493,7 +447,7 @@ public class FridgeController {
           e.printStackTrace();
           showErrorMessage("Ugyldig input!");
       }
-      return approved;
+      return true;
       
   }
 

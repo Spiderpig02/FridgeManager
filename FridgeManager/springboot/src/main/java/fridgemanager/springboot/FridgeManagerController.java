@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,21 +52,21 @@ public class FridgeManagerController {
         return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
     }
 
-    @DeleteMapping(path = "/removeFridgeContent")
-    public boolean removeFridgeContent(@RequestBody Food food) {
-        boolean removed = this.fridgeManagerService.getFridgeManager().removeFridgeContent(food);
+    @DeleteMapping(path = "/removeFridgeContent/{id}")
+    public boolean removeFridgeContent(@PathVariable("id") String id) {
+        boolean removed = this.fridgeManagerService.getFridgeManager().removeFridgeContent(id);
         this.autoSave();
         return removed;
     }
 
-    @DeleteMapping(path = "/removeFreezerContent")
-    public boolean removeFreezerContent(@RequestBody Food food) {
-        boolean removed = this.fridgeManagerService.getFridgeManager().removeFreezerContent(food);
+    @DeleteMapping(path = "/removeFreezerContent/{id}")
+    public boolean removeFreezerContent(@PathVariable("id") String id) {
+        boolean removed = this.fridgeManagerService.getFridgeManager().removeFreezerContent(id);
         this.autoSave();
         return removed;
     }
 
-    @PutMapping(path = "/addFridgeContent")
+    @PostMapping(path = "/addFridgeContent")
     public boolean addFridgeContent(@RequestBody Food food) {
         boolean tmp = false;
         try {
@@ -77,35 +78,11 @@ public class FridgeManagerController {
         return tmp;
     }
 
-    @PutMapping(path = "/addFreezerContent")
+    @PostMapping(path = "/addFreezerContent")
     public boolean addFreezerContent(@RequestBody Food food) {
         boolean tmp = false;
         try {
             this.fridgeManagerService.getFridgeManager().addFreezerContent(food);
-            tmp = true;
-        } catch (Exception e) {
-        }
-        this.autoSave();
-        return tmp;
-    }
-
-    @PutMapping(path = "/setFreezerContent")
-    public boolean setFreezerContent(@RequestBody List<Food> list) {
-        boolean tmp = false;
-        try {
-            this.fridgeManagerService.setFreezerContent(list);
-            tmp = true;
-        } catch (Exception e) {
-        }
-        this.autoSave();
-        return tmp;
-    }
-
-    @PutMapping(path = "/setFridgeContent")
-    public boolean setFridgeContent(@RequestBody List<Food> list) {
-        boolean tmp = false;
-        try {
-            this.fridgeManagerService.setFridgeContent(list);
             tmp = true;
         } catch (Exception e) {
         }

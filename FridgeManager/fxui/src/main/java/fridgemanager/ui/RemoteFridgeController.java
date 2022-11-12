@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
-import fridgemanager.json.FileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

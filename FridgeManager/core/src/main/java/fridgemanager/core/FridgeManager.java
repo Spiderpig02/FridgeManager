@@ -41,20 +41,6 @@ public class FridgeManager {
   }
 
   /**
-   * Setter for frridgeContents.
-   */
-  public void setFridgeContents(List<Food> list) {
-    this.frigdecontents = list;
-  }
-
-  /**
-   * Setter for freezerContents.
-   */
-  public void setFreezerContents(List<Food> list) {
-    this.freezercontents = list;
-  }
-
-  /**
    * Getter size freezer.
    */
   public int getFreezerMaxsize() {
@@ -104,6 +90,21 @@ public class FridgeManager {
   }
 
   /**
+   * Method for removing fridgecontent based on uuid.
+   * Returns true if something is removed, false if nothing is removed.
+   */
+  public boolean removeFridgeContent(String uuid) {
+
+    for (Food food : frigdecontents) {
+      if (food.id().equals(uuid)) {
+        frigdecontents.remove(food);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Method for removing freezercontent.
    * Returns true if something is removed, false if nothing is removed.
    */
@@ -111,6 +112,21 @@ public class FridgeManager {
     if (freezercontents.contains(remove)) {
       freezercontents.remove(remove);
       return true;
+    }
+    return false;
+  }
+
+  /**
+   * Method for removing fridgecontent based on uuid.
+   * Returns true if something is removed, false if nothing is removed.
+   */
+  public boolean removeFreezerContent(String uuid) {
+
+    for (Food food : freezercontents) {
+      if (food.id().equals(uuid)) {
+        freezercontents.remove(food);
+        return true;
+      }
     }
     return false;
   }

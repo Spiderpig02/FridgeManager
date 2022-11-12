@@ -1,10 +1,7 @@
 package fridgemanager.springboot;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
 
@@ -44,13 +41,4 @@ public class FridgeManagerService {
     public void autoSave() {
         this.filhander.saveObject(this.fridgeManager);
     }
-
-    public void setFridgeContent(List<Food> list) {
-        this.fridgeManager.setFridgeContents(list);
-    }
-
-    public void setFreezerContent(List<Food> list) {
-        this.fridgeManager.setFreezerContents(list);
-    }
-
 }

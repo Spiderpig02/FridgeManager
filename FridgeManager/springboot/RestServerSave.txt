@@ -1,0 +1,6 @@
+{
+  "FridgeMaxSize" : 25,
+  "FridgeConters" : [ ],
+  "FreezerMaxSize" : 25,
+  "FreezerContents" : [ ]
+}

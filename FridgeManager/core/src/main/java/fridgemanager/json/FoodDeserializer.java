@@ -13,18 +13,19 @@ import fridgemanager.core.Food;
 import java.io.IOException;
 
 /**
- * FoodDeserializier handles the task of deserializing json text to a Food class.
-*/
+ * FoodDeserializier handles the task of deserializing json text to a Food
+ * class.
+ */
 public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /*
    * format: { "Name": "String", "Quantity": int, "Owner": "String",
-   * "ExpirationDate": "String" }
-  */
+   * "ExpirationDate": "String", "UUID": "String" }
+   */
   /**
    * Get json text inn and returning a Food object.
    * If object not found, return null.
-  */
+   */
   @Override
   public Food deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JacksonException {
@@ -35,13 +36,14 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
   /**
    * Deserialize jsonNode objects and returns Food object if sucsessfull,
    * else null.
-  */
+   */
   public Food deserializer(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       String name = null;
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
+      String uUID = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
         name = nameNode.asText();
@@ -58,8 +60,12 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
+      JsonNode uUIDNode = jsonNode.get("UUID");
+      if (uUIDNode instanceof TextNode) {
+        uUID = uUIDNode.asText();
+      }
 
-      return new Food(name, quantity, expirationDate, owner);
+      return new Food(name, quantity, expirationDate, owner, uUID);
     }
     return null;
   }

@@ -10,12 +10,10 @@ import fridgemanager.json.FileHandler;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -50,41 +48,40 @@ public class RemoteFridgeAccess {
   private URI makeUri(String add) {
     return endpointBaseUri.resolve(endpointBaseUri + add);
   }
-  private void add(Food food,String function){
+
+  private void add(Food food, String function) {
     try {
       String json = objectMapper.writeValueAsString(food);
       HttpRequest request = HttpRequest.newBuilder(makeUri(function))
           .header(ACCEPT_HEADER, APPLICATION_JSON)
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-          .PUT(BodyPublishers.ofString(json))
+          .POST(BodyPublishers.ofString(json))
           .build();
-      final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-    } 
-    catch (IOException | InterruptedException e) {
+      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+          HttpResponse.BodyHandlers.ofString());
+    } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private void remove(Food food,String function){
+  private void remove(Food food, String function) {
     try {
-      HttpRequest request = HttpRequest.newBuilder(makeUri(function))
+      HttpRequest request = HttpRequest.newBuilder(makeUri(function + "/" + food.id()))
           .header(ACCEPT_HEADER, APPLICATION_JSON)
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
           .header(food.id(), APPLICATION_JSON)
           .DELETE()
           .build();
-      final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-    } 
-    catch (IOException | InterruptedException e) {
+      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+          HttpResponse.BodyHandlers.ofString());
+    } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private List<Food> get(String function){
+  private List<Food> get(String function) {
     HttpRequest request = HttpRequest.newBuilder(makeUri(function))
-    .header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
+        .header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
     try {
       final HttpResponse<String> response = HttpClient
           .newBuilder()
@@ -97,7 +94,7 @@ public class RemoteFridgeAccess {
     }
   }
 
-  private int getint(String function){
+  private int getint(String function) {
     HttpRequest request = HttpRequest.newBuilder(makeUri(function))
         .header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
     try {
@@ -130,19 +127,19 @@ public class RemoteFridgeAccess {
   }
 
   public void addFridgeContent(Food food) {
-    add(food,"/addFridgeContent");
+    add(food, "/addFridgeContent");
   }
 
   public void addFreezerContent(Food food) {
-    add(food,"/addFreezerContent");
+    add(food, "/addFreezerContent");
   }
 
   public void removeFreezerContent(Food food) {
-    remove(food, "/addFreezerContent");
+    remove(food, "/removeFreezerContent");
   }
 
   public void removeFridgeContent(Food food) {
-    remove(food, "/addFridgeContent");
+    remove(food, "/removeFridgeContent");
   }
 
   public List<Food> getFreezerContent() {
@@ -161,16 +158,14 @@ public class RemoteFridgeAccess {
     return getint("/getFreezerMaxsize");
   }
 
-  
-
   public static void main(String[] args) throws URISyntaxException {
     System.out.println("\n\n\n\n");
     RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
     access.getFridgeManager();
-    Food ost=new Food("gost",1,"9.11.2022","halvor");
+    Food ost = new Food("gost", 1, "9.11.2022", "halvor");
     access.addFridgeContent(ost);
     access.removeFridgeContent(ost);
     access.getFridgeManager();
     System.out.println(access.getFrigdeContent());
-  } 
+  }
 }

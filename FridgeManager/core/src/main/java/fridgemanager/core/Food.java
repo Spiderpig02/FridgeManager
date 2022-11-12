@@ -55,6 +55,9 @@ public class Food {
     return this.expirationDate;
   }
 
+  /**
+   * Getter unit.
+  */
   public String getUnit() {
     return unit;
   }
@@ -89,6 +92,7 @@ public class Food {
   */
   @Override
   public String toString() {
-    return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expirationDate.toString();
+    String expDate = expirationDate.toString();
+    return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expDate;
   }
 }

@@ -2,6 +2,8 @@ package fridgemanager.springboot;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,41 +21,49 @@ import fridgemanager.core.FridgeManager;
 public class FridgeManagerController {
 
     public static final String FridgeManagerServicePath = "fridgemanager";
+    private static final Logger logger = LoggerFactory.getLogger(FridgeManagerController.class);
 
     @Autowired
     private FridgeManagerService fridgeManagerService;
 
     @GetMapping
     public FridgeManager getFridgeManager() {
+        logger.debug("getFridgeManager");
         return this.fridgeManagerService.getFridgeManager();
     }
 
     private void autoSave() {
+        logger.debug("autoSaved");
         this.fridgeManagerService.autoSave();
     }
 
     @GetMapping(path = "/getFridgeContent")
     public List<Food> getFridgeContent() {
+        logger.debug("getFridgeContent");
         return this.fridgeManagerService.getFridgeManager().getFridgeContents();
     }
 
     @GetMapping(path = "/getFreezerContent")
     public List<Food> getFreezerContent() {
+        logger.debug("getFreezerContent");
         return this.fridgeManagerService.getFridgeManager().getFreezerContents();
     }
 
     @GetMapping(path = "/getFreezerSize")
     public int getFreezerSize() {
+        logger.debug("getFreezerSize");
         return this.fridgeManagerService.getFridgeManager().getFreezerMaxsize();
     }
 
     @GetMapping(path = "/getFridgeSize")
     public int getFridgeSize() {
+        logger.debug("getFridgeSize");
         return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
     }
 
     @DeleteMapping(path = "/removeFridgeContent/{id}")
     public boolean removeFridgeContent(@PathVariable("id") String id) {
+        logger.debug("removeFridgeContent: " + id);
         boolean removed = this.fridgeManagerService.getFridgeManager().removeFridgeContent(id);
         this.autoSave();
         return removed;
@@ -61,6 +71,7 @@ public class FridgeManagerController {
 
     @DeleteMapping(path = "/removeFreezerContent/{id}")
     public boolean removeFreezerContent(@PathVariable("id") String id) {
+        logger.debug("removeFreezerContent: " + id);
         boolean removed = this.fridgeManagerService.getFridgeManager().removeFreezerContent(id);
         this.autoSave();
         return removed;
@@ -72,6 +83,7 @@ public class FridgeManagerController {
         try {
             this.fridgeManagerService.getFridgeManager().addFridgeContent(food);
             tmp = true;
+            logger.debug(food.toString());
         } catch (Exception e) {
         }
         this.autoSave();
@@ -84,6 +96,7 @@ public class FridgeManagerController {
         try {
             this.fridgeManagerService.getFridgeManager().addFreezerContent(food);
             tmp = true;
+            logger.debug(food.toString());
         } catch (Exception e) {
         }
         this.autoSave();

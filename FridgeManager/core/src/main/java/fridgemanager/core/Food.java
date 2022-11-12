@@ -1,5 +1,7 @@
 package fridgemanager.core;
 
+import java.util.UUID;
+
 /**
  * Food class.
 */
@@ -8,6 +10,7 @@ public class Food {
   private int quantity;
   private String owner;
   private String expirationDate;
+  private String uniqueID;
 
   /**
    * Constructor. 
@@ -21,6 +24,8 @@ public class Food {
       throw new IllegalArgumentException("Quantity needs to have a positive value");
     }
     this.quantity = quantity;
+    
+    this.uniqueID = UUID.randomUUID().toString();
   }
 
   /**
@@ -28,6 +33,13 @@ public class Food {
   */
   public String getName() {
     return this.name;
+  }
+
+  /**
+   * Getter ID.
+  */
+  public String id() {
+    return this.uniqueID;
   }
 
   /**

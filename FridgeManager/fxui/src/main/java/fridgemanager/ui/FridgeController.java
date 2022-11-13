@@ -121,9 +121,12 @@ public class FridgeController {
     dropDownMenuAdd.setOnAction(this::getAddChoice);
     dropDownMenuQuantity.setOnAction(this::getUnitChoice);
     dropDownMenuRemove.setOnAction(this::getRemovalChoice);
+
+    LocalDate today = LocalDate.now();
+    datePickerExpiration.setValue(today);
   }
 
-  public void getDatePick(ActionEvent event) {
+  public void getDatePick() {
     this.datepick = datePickerExpiration.getValue();
   }
   
@@ -147,6 +150,7 @@ public class FridgeController {
   private void addOnEnter(KeyEvent event) {
     switch (event.getCode()) {
       case ENTER:
+        getDatePick();
         addFood();
         break;
       default:
@@ -414,7 +418,6 @@ public class FridgeController {
         }
       }
     } catch (Exception e) {
-      e.printStackTrace();
       return false;
     }
     return true;

@@ -57,7 +57,7 @@ public class RemoteFridgeAccess {
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
           .POST(BodyPublishers.ofString(json))
           .build();
-      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+      HttpClient.newBuilder().build().send(request,
           HttpResponse.BodyHandlers.ofString());
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
@@ -72,8 +72,7 @@ public class RemoteFridgeAccess {
           .header(food.id(), APPLICATION_JSON)
           .DELETE()
           .build();
-      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-          HttpResponse.BodyHandlers.ofString());
+      HttpClient.newBuilder().build().send(request,HttpResponse.BodyHandlers.ofString());
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }

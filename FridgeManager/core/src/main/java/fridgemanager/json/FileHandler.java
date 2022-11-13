@@ -2,6 +2,8 @@ package fridgemanager.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+
+import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 
 /**
  * Wrapper class for JSON serialization and deserialization.
@@ -66,4 +69,15 @@ public class FileHandler implements InterfaceFileHandler {
     }
     return null;
   }
+
+  public static void main(String[] args) {
+    FileHandler filehandler = new FileHandler();
+    FridgeManager fridgemanager = new FridgeManager(3, 3);
+
+    fridgemanager.addFreezerContent(new Food("Eple","stk",3,LocalDate.now(),"Halvor"));
+    filehandler.saveObject(fridgemanager);
+
+    System.out.println(filehandler.loadFridgeManager().getFreezerContents().get(0));
+  }
 }
+

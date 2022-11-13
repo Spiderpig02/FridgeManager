@@ -64,10 +64,8 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-      if (name != null && unit != null && quantity < 1 && expirationDate != null && owner != null) {
-        return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner);
-      }
+      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner);
     }
-    return new Food(null, null, 0, null, null);
+    return null;
   }
 }

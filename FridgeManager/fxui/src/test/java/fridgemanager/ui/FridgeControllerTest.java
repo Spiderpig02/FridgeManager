@@ -52,7 +52,7 @@ public class FridgeControllerTest extends ApplicationTest {
   */
   @BeforeEach
   public void init() {
-    eple=new Food("Eple", "stk",3, LocalDate.now(), "Halvor");
+    eple=new Food("Banan", "stk",3, LocalDate.now(), "Halvor");
   }
   
   /**
@@ -72,7 +72,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
     //Add Eple to the fridge
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Banan",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifing added element
     Food lastItem = fridgemanager.getFridgeContents().get(fridgemanager.getFridgeContents().size()-1);
@@ -88,7 +88,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
     //Add Eple to the fridge
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Banan",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifing added element
     Food lastItem = fridgemanager.getFreezerContents().get(fridgemanager.getFreezerContents().size()-1);
@@ -96,6 +96,24 @@ public class FridgeControllerTest extends ApplicationTest {
 
   }
 
+  /**
+  * Test removing content from fridge
+  */
+  @Test
+  public void testHandleRemoveFridge() {
+    ListView<Food> listview = lookup("#fridgeContent").query();
+    int lastItemInFridgeInteger = listview.getItems().size()-1;
+
+    //Select the last element
+    listview.getSelectionModel().select(lastItemInFridgeInteger);
+    clickOn("#fridgeContent");
+
+    //Remove last element
+    clickOn("#trashcanFridge1");
+
+    //Verify that element is removed
+    assertNotEquals(listview.getItems().size()-1, lastItemInFridgeInteger);
+  }
 
   /**
   * Test removing specific amount from fridge
@@ -107,26 +125,16 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#dropDownMenuAdd").clickOn("fridge");
     addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
-    //Select the last element
-    ListView<Food> listview = lookup("#fridgeContent").query();
-    int lastItemInFreezerInteger = listview.getItems().size()-1;
-    listview.getSelectionModel().select(lastItemInFreezerInteger);
-
-    //Verify the amount before removing specific amount
-    int amountBefore = listview.getSelectionModel().getSelectedItem().getQuantity();
-    assertEquals(amountBefore,eple.getQuantity());
-
     //Remove 2 of 3 Eple
     clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("2");
-    clickOn("#dropDownMenuRemove").clickOn("fridge").
+    clickOn("#dropDownMenuRemove").clickOn("fridge");
     clickOn("#removeButton");
 
     //Verify that it is 1 Eple left
+    ListView<Food> listview = lookup("#fridgeContent").query();
     int epleLeft = listview.getItems().get(listview.getItems().size()-1).getQuantity();
-    assertEquals(epleLeft,1);        
-
-    //Verify that it is 1 pasta left      
+    assertEquals(epleLeft,1);             
   }
 
   /**
@@ -139,26 +147,33 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#dropDownMenuAdd").clickOn("freezer");
     addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
-    //Select the last element
-    ListView<Food> listview = lookup("#freezerContent").query();
-    int lastItemInFreezerInteger = listview.getItems().size()-1;
-    listview.getSelectionModel().select(lastItemInFreezerInteger);
-
-    //Verify the amount before removing specific amount
-    int amountBefore = listview.getSelectionModel().getSelectedItem().getQuantity();
-    assertEquals(amountBefore,eple.getQuantity());
-
     //Remove 2 of 3 Eple
     clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("2");
-    clickOn("#dropDownMenuRemove").clickOn("freezer").
+    clickOn("#dropDownMenuRemove").clickOn("freezer");
     clickOn("#removeButton");
 
     //Verify that it is 1 Eple left
+    ListView<Food> listview = lookup("#freezerContent").query();
     int epleLeft = listview.getItems().get(listview.getItems().size()-1).getQuantity();
-    assertEquals(epleLeft,1);        
+    assertEquals(epleLeft,1);             
+  }
 
-    //Verify that it is 1 pasta left      
+  /**
+  * Remove over the amount in the Fridge
+  */
+  @Test
+  public void testHandleRemoveToMuchAmountFridge() {
+
+    //Add Ostepopp to the fridge. It is placed last
+    clickOn("#dropDownMenuAdd").clickOn("fridge");
+    addFoodItem("Ostepopp",3,"stk",LocalDate.now().toString(),"Halvor");
+    
+    //Remove 4 of 3 ostepopp
+    clickOn("#textFieldFoodRemove").write("Ostepopp");
+    clickOn("#textFieldQuantityRemove").write("4");
+    clickOn("#dropDownMenuRemove").clickOn("fridge").
+    clickOn("#removeButton");
   }
 
 

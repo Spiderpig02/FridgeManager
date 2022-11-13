@@ -323,7 +323,8 @@ public class FridgeController {
               } 
             }  
           }
-        } else if (choice == "freezer") {
+        }
+        if (choice == "freezer") {
           for (Food food : fridgemanager.getFreezerContents()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
@@ -346,9 +347,6 @@ public class FridgeController {
       e.printStackTrace();
       showErrorMessage("Invalid Input!");
     }
-      
-    textFieldFoodRemove.clear();
-    textFieldQuantityRemove.clear();
   }
 
   /**
@@ -356,8 +354,8 @@ public class FridgeController {
   */
   @FXML
   private void updateContent() {
+
     fridgeContent.getItems().clear();
-    
     for (Food food : fridgemanager.getFridgeContents()) {
       if (food.getQuantity() == 0) {
         fridgemanager.getFridgeContents().remove(food);
@@ -365,6 +363,7 @@ public class FridgeController {
         fridgeContent.getItems().add(food);
       }
     }
+    
     freezerContent.getItems().clear();
     for (Food food : fridgemanager.getFreezerContents()) {
       if (food.getQuantity() == 0) {

@@ -183,8 +183,10 @@ public class FridgeController {
   */
   @FXML
   private void clearInput() {
+    dropDownMenuAdd.getSelectionModel().clearSelection();
     textfieldFood.clear();
     textfieldQuantity.clear();
+    dropDownMenuQuantity.getSelectionModel().clearSelection();
     textfieldOwner.clear();
     datePickerExpiration.getEditor().clear();
   }
@@ -242,7 +244,6 @@ public class FridgeController {
       showErrorMessage("Invalid input!");
       return null;
     }
-      
   }
 
   /**

@@ -52,7 +52,7 @@ public class FridgeControllerTest extends ApplicationTest {
   */
   @BeforeEach
   public void init() {
-    eple=new Food("Eple", "stk",3, LocalDate.of(2022,2,15), "Halvor");
+    eple=new Food("Eple", "stk",3, LocalDate.now(), "Halvor");
   }
   
   /**
@@ -63,16 +63,6 @@ public class FridgeControllerTest extends ApplicationTest {
     assertNotNull(this.controller);
     assertNotNull(this.fridgemanager);
   }
-  
-  /**
-  * Test adding food to the fridge.
-  
-  @Test
-  public void testAddToFridge() {
-    //Add Eple to the fridge
-    clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Eple", "stk",3, "02.11.2022", "Halvor");
-  }*/
 
   /**
   * Test adding food to the fridge
@@ -82,7 +72,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
     //Add Eple to the fridge
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Eple",3,"stk","12/12/2022","Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifing added element
     Food lastItem = fridgemanager.getFridgeContents().get(fridgemanager.getFridgeContents().size()-1);
@@ -98,7 +88,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
     //Add Eple to the fridge
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Eple",3,"stk","12/12/2022","Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifing added element
     Food lastItem = fridgemanager.getFreezerContents().get(fridgemanager.getFreezerContents().size()-1);
@@ -106,14 +96,81 @@ public class FridgeControllerTest extends ApplicationTest {
 
   }
 
+
+  /**
+  * Test removing specific amount from fridge
+  */
+  @Test
+  public void testHandleRemoveSpecificAmountFridge() {
+      
+    //Add Eple to the freezer
+    clickOn("#dropDownMenuAdd").clickOn("fridge");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+
+    //Select the last element
+    ListView<Food> listview = lookup("#fridgeContent").query();
+    int lastItemInFreezerInteger = listview.getItems().size()-1;
+    listview.getSelectionModel().select(lastItemInFreezerInteger);
+
+    //Verify the amount before removing specific amount
+    int amountBefore = listview.getSelectionModel().getSelectedItem().getQuantity();
+    assertEquals(amountBefore,eple.getQuantity());
+
+    //Remove 2 of 3 Eple
+    clickOn("#textFieldFoodRemove").write("Eple");
+    clickOn("#textFieldQuantityRemove").write("2");
+    clickOn("#dropDownMenuRemove").clickOn("fridge").
+    clickOn("#removeButton");
+
+    //Verify that it is 1 Eple left
+    int epleLeft = listview.getItems().get(listview.getItems().size()-1).getQuantity();
+    assertEquals(epleLeft,1);        
+
+    //Verify that it is 1 pasta left      
+  }
+
+  /**
+  * Test removing specific amount from freezer
+  */
+  @Test
+  public void testHandleRemoveSpecificAmountFreezer() {
+      
+    //Add Eple to the freezer
+    clickOn("#dropDownMenuAdd").clickOn("freezer");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+
+    //Select the last element
+    ListView<Food> listview = lookup("#freezerContent").query();
+    int lastItemInFreezerInteger = listview.getItems().size()-1;
+    listview.getSelectionModel().select(lastItemInFreezerInteger);
+
+    //Verify the amount before removing specific amount
+    int amountBefore = listview.getSelectionModel().getSelectedItem().getQuantity();
+    assertEquals(amountBefore,eple.getQuantity());
+
+    //Remove 2 of 3 Eple
+    clickOn("#textFieldFoodRemove").write("Eple");
+    clickOn("#textFieldQuantityRemove").write("2");
+    clickOn("#dropDownMenuRemove").clickOn("freezer").
+    clickOn("#removeButton");
+
+    //Verify that it is 1 Eple left
+    int epleLeft = listview.getItems().get(listview.getItems().size()-1).getQuantity();
+    assertEquals(epleLeft,1);        
+
+    //Verify that it is 1 pasta left      
+  }
+
+
   /**
   * Compare if two elements are equal
   */
   public void checkItem(Food food1, Food food2){
-    //assertEquals(food1.getName(), food2.getName());
-    //assertEquals(food1.getQuantity(), food2.getQuantity());
-    //assertEquals(food1.getExpirationDate(), food2.getExpirationDate());
-    //assertEquals(food1.getOwner(), food2.getOwner());
+    assertEquals(food1.getName(), food2.getName());
+    assertEquals(food1.getQuantity(), food2.getQuantity());
+    assertEquals(food1.getUnit(), food2.getUnit());
+    assertEquals(food1.getExpirationDate(), food2.getExpirationDate());
+    assertEquals(food1.getOwner(), food2.getOwner());
   }
 
   /**

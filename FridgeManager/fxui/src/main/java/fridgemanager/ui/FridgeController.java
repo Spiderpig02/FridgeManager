@@ -163,7 +163,7 @@ public class FridgeController {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
       if (addchoice == "fridge")  {
-        fridgemanager.addFreezerContent(createFoodFromInput());
+        fridgemanager.addFridgeContent(createFoodFromInput());
       } else if (addchoice == "freezer") {
         fridgemanager.addFreezerContent(createFoodFromInput());
       }
@@ -403,10 +403,10 @@ public class FridgeController {
       }
   
       String[] exp = expiration.toString().split("-");
-      if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() <= 2 || exp[2].length() <= 2) {
-        System.out.println("Feiler her 3");
-        return false;
-      } 
+          if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() < 1 || exp[2].length() < 1 || exp[1].length() > 2 || exp[2].length() > 2) {
+              System.out.println("Feiler her 3");
+              return false;
+          } 
       for (Character letter : owner.toCharArray()) {
         if (Character.isDigit(letter) == true) {
           System.out.println("Feiler her 4");

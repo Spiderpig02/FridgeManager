@@ -90,7 +90,7 @@
       </Text>
       <AnchorPane layoutX="50.0" layoutY="48.0">
          <children>
-            <ChoiceBox fx:id="dropDownMenuAdd" onMouseClicked="#ClearInput" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b; -fx-text-fill: white;" styleClass="fridge_manager.ui.style" stylesheets="@choicebox.css" />
+            <ChoiceBox fx:id="dropDownMenuAdd" onMouseClicked="#clearInput" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b; -fx-text-fill: white;" styleClass="fridge_manager.ui.style" stylesheets="@choicebox.css" />
          </children>
       </AnchorPane>
       <Text fontSmoothingType="LCD" layoutX="50.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to:" wrappingWidth="126.39996337890625">

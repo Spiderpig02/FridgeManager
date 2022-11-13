@@ -55,9 +55,9 @@ public class FridgeModuloTest {
      */
     fridgeManagerWithTwoItems =
         "{\"FridgeMaxSize\":3,"
-            + "\"FridgeConters\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Owner\":\"Halvor\",\"ExpirationDate\":\"10.02.2022\"}],"
+            + "\"FridgeConters\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Owner\":\"Halvor\",\"ExpirationDate\":\"10.02.2022\",\"UUID\":\""+banan.id()+"\"}],"
             + "\"FreezerMaxSize\":3,"
-            + "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Owner\":\"Ola\",\"ExpirationDate\":\"30.01.2022\"}]}";
+            + "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Owner\":\"Ola\",\"ExpirationDate\":\"30.01.2022\",\"UUID\":\""+paprika.id()+"\"}]}";
   }
 
   /*

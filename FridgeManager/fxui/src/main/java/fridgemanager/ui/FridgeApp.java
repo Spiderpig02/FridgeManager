@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * JavaFX App.
+ * JavaFX App
 */
 public class FridgeApp extends Application {
 

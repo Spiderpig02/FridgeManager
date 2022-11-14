@@ -60,7 +60,7 @@
             <Font name="System Regular" size="20.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="dropDownMenuRemove" layoutX="528.0" layoutY="670.0" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b;" stylesheets="@choicebox.css" />
+      <ChoiceBox fx:id="dropDownMenuRemove" layoutX="528.0" layoutY="670.0" onMouseClicked="#hideErrorMessage" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #00205b;" stylesheets="@choicebox.css" />
       <Text fx:id="removeFromText" layoutX="530.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove From:" wrappingWidth="174.7366943359375">
          <font>
             <Font name="System Regular" size="15.0" />
@@ -78,7 +78,7 @@
             <Font name="System Regular" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="removeButton" layoutX="688.0" layoutY="670.0" mnemonicParsing="false" onAction="#handleRemoveSpecificAmount" prefHeight="31.0" prefWidth="165.0" style="-fx-background-color: #00205b;" text="Remove Item" textFill="WHITE">
+      <Button fx:id="removeButton" layoutX="688.0" layoutY="670.0" mnemonicParsing="false" onAction="#handleRemoveSpecificAmount" onMouseClicked="#hideErrorMessage" prefHeight="31.0" prefWidth="165.0" style="-fx-background-color: #00205b;" text="Remove Item" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -101,18 +101,18 @@
       <ChoiceBox fx:id="dropDownMenuQuantity" layoutX="508.0" layoutY="48.0" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #00205b;" stylesheets="@choicebox.css" />
       <AnchorPane layoutX="19.0" layoutY="513.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trashcanFridge1" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashcanFridge" fitHeight="55.0" fitWidth="60.0" layoutX="4.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Gruppeprosjekt/FridgeManager/fxui/src/main/resources/pictures_fxui/trashcan-closed.jpg" />
+                  <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
       <DatePicker fx:id="datePickerExpiration" layoutX="612.0" layoutY="48.0" onAction="#getDatePick" onKeyPressed="#addOnEnter" onKeyReleased="#getDatePick" prefHeight="31.0" prefWidth="165.0" />
       <AnchorPane layoutX="928.0" layoutY="513.0" onMouseClicked="#handleRemove" prefHeight="58.0" prefWidth="59.0" style="-fx-background-color: #00205b;">
          <children>
-            <ImageView fx:id="trachcanFreezer1" fitHeight="55.0" fitWidth="60.0" layoutX="-5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="trashcanFreezer" fitHeight="55.0" fitWidth="60.0" layoutX="-5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Gruppeprosjekt/FridgeManager/fxui/src/main/resources/pictures_fxui/trashcan-closed.jpg" />
+                  <Image url="@../../pictures_fxui/trashcan-closed.jpg" />
                </image>
             </ImageView>
          </children>

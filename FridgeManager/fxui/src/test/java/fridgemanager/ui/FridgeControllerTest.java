@@ -116,6 +116,25 @@ public class FridgeControllerTest extends ApplicationTest {
   }
 
   /**
+  * Test removing content from freezer
+  */
+  @Test
+  public void testHandleRemoveFreezer() {
+    ListView<Food> listview = lookup("#freezerContent").queryListView();
+    int lastItemInFreezerInteger = listview.getItems().size()-1;
+
+    //Select the last element
+    listview.getSelectionModel().select(lastItemInFreezerInteger);
+    clickOn("#freezerContent");
+
+    //Remove last element
+    clickOn("#trashcanFridge1");
+
+    //Verify that element is removed
+    assertNotEquals(listview.getItems().size()-1, lastItemInFreezerInteger);
+  }
+
+  /**
   * Test removing specific amount from fridge
   */
   @Test
@@ -160,7 +179,7 @@ public class FridgeControllerTest extends ApplicationTest {
   }
 
   /**
-  * Remove over the amount in the Fridge
+  * Remove over the amount in the Fridge.
   */
   @Test
   public void testHandleRemoveToMuchAmountFridge() {
@@ -174,6 +193,67 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#textFieldQuantityRemove").write("4");
     clickOn("#dropDownMenuRemove").clickOn("fridge").
     clickOn("#removeButton");
+  }
+
+  /**
+  * Remove over the amount in the Fridge
+  */
+  @Test
+  public void testHandleRemoveToMuchAmountFreezer() {
+
+    //Add Ostepopp to the fridge. It is placed last
+    clickOn("#dropDownMenuAdd").clickOn("freezer");
+    addFoodItem("Ostepopp",3,"stk",LocalDate.now().toString(),"Halvor");
+    
+    //Remove 4 of 3 ostepopp
+    clickOn("#textFieldFoodRemove").write("Ostepopp");
+    clickOn("#textFieldQuantityRemove").write("4");
+    clickOn("#dropDownMenuRemove").clickOn("freezer").
+    clickOn("#removeButton");
+  }
+
+  /**
+  * Validate input in textfield
+  */
+  @Test
+  public void testValidateInput() {
+
+      //Add Eple to the freezer with negative quantity
+      clickOn("#dropDownMenuAdd").clickOn("freezer");
+      addFoodItem("Eple",-4,"stk",LocalDate.now().toString(),"Halvor");
+
+      //Add Eple to the freezer with name including numbers
+      clickOn("#dropDownMenuAdd").clickOn("freezer");
+      addFoodItem("Ep9e", 3, "stk", LocalDate.now().toString(), "Halvor");
+
+      //Må teste dato også
+
+      //Add Eple to the freezer with owner-name including numbers
+      clickOn("#dropDownMenuAdd").clickOn("freezer");
+      addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halv9r");
+  }
+
+  /**
+  * Validate input in textfield for special amount
+  */
+  @Test
+  public void testValidateRemovalInput() {
+
+      //Add Pære to the freezer
+      clickOn("#dropDownMenuAdd").clickOn("freezer");
+      addFoodItem("Pære", 3, "stk", LocalDate.now().toString(), "Halvor");
+      
+      //Fail to remove object due to wrong food input
+      clickOn("#textFieldFoodRemove").write("Pp24");
+      clickOn("#textFieldQuantityRemove").write("3");
+      clickOn("#dropDownMenuRemove").clickOn("freezer").
+      clickOn("#removeButton");
+
+      //Fail to remove object due to wrong quantity input
+      clickOn("#textFieldFoodRemove").write("Pære");
+      clickOn("#textFieldQuantityRemove").write("-3");
+      clickOn("#dropDownMenuRemove").clickOn("freezer").
+      clickOn("#removeButton");
   }
 
 

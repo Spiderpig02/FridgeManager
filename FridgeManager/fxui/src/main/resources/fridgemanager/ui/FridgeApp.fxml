@@ -14,7 +14,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1006.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridgemanager.ui.FridgeController">
    <children>
-      <ListView fx:id="freezerContent" layoutX="509.0" layoutY="162.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="352.0" prefWidth="478.0" style="-fx-border-color: #00205b; -fx-border-width: 3;" />
       <Line endX="890.300048828125" layoutX="108.0" layoutY="110.0" startX="-100.0" strokeWidth="15.0" />
       <Text fontSmoothingType="LCD" layoutX="218.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="126.39996337890625">
          <font>
@@ -40,6 +39,7 @@
       </Text>
       <TextField fx:id="textfieldOwner" layoutX="803.0" layoutY="48.0" onKeyPressed="#addOnEnter" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
       <ListView fx:id="fridgeContent" layoutX="19.0" layoutY="162.0" onMouseClicked="#handleMouseClickFridge" prefHeight="352.0" prefWidth="478.0" style="-fx-border-color: #00205b; -fx-border-width: 3;" />
+      <ListView fx:id="freezerContent" layoutX="509.0" layoutY="162.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="352.0" prefWidth="478.0" style="-fx-border-color: #00205b; -fx-border-width: 3;" />
       <Text layoutX="165.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" textAlignment="CENTER" wrappingWidth="188.53668212890625">
          <font>
             <Font size="35.0" />

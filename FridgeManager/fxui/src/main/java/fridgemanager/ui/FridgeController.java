@@ -4,7 +4,10 @@ package fridgemanager.ui;
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
+
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Controller for Fridge.
@@ -335,7 +339,6 @@ public class FridgeController {
   @FXML
   private void handleRemoveSpecificAmount() {
     try {
-
       String foodname = textFieldFoodRemove.getText();
       Integer quantity = Integer.parseInt(textFieldQuantityRemove.getText());
       if (validateRemovalInput(foodname, quantity) == true) {
@@ -384,13 +387,13 @@ public class FridgeController {
         showErrorMessage("Invalid input!");
       }
     } 
-    catch (Exception e) {
+    catch (IllegalArgumentException e) {
       showErrorMessage("Invalid Input!");
     }
   }
 
   /**
-   * Refreshes visual content in fridge and freezer by retrieving content from fridgemanager.
+   * Refreshes visual content in fridge and freezer by retrieving content from fridgemanager
   */
   @FXML
   private void updateContent() {
@@ -411,7 +414,19 @@ public class FridgeController {
         freezerContent.getItems().add(food);
       }
     }
+    changeFoodColor();
   }  
+
+  @FXML 
+  private void changeFoodColor() {
+    for (Food food : fridgeContent.getItems()) {
+      LocalDate localtoday = LocalDate.now();
+      long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
+      // if (difference <= 10) {
+        
+      // }
+    }
+  }
 
   /**
    * Displays error-message to user on screen

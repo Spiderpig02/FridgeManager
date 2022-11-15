@@ -8,11 +8,15 @@ import fridgemanager.json.FileHandler;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+
+import javax.security.auth.callback.Callback;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -417,15 +421,26 @@ public class FridgeController {
     changeFoodColor();
   }  
 
-  @FXML 
+  @FXML
   private void changeFoodColor() {
-    for (Food food : fridgeContent.getItems()) {
-      LocalDate localtoday = LocalDate.now();
-      long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
-      // if (difference <= 10) {
-        
-      // }
-    }
+    fridgeContent.setCellFactory(cell -> {
+      return new ListCell<Food>() {
+        @Override
+        protected void updateItem(Food food, boolean empty) {
+          super.updateItem(food, empty);
+          LocalDate localtoday = LocalDate.now();
+          long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
+          System.out.println(difference);
+          if (food != null) {
+            if (difference <= 10) {
+              setStyle("-fx-text-fill: red");
+              setText(food.toString());
+            }
+            
+          }
+        }
+      };
+    });
   }
 
   /**

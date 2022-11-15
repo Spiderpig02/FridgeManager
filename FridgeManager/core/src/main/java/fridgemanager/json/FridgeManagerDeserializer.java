@@ -21,7 +21,7 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
   private FoodDeserializer foodDeserializer = new FoodDeserializer();
 
   /*
-   * format: { "FridgeMaxSize": "Int", "FridgeConters": [Food,...,...,...],
+   * format: { "FridgeMaxSize": "Int", "FridgeContents": [Food,...,...,...],
    * "FreezerMaxSize":
    * "Int",
    * "FreezerContents": [Food,...,...,...] }
@@ -52,7 +52,7 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
         fridgeManager = new FridgeManager(fridgeMaxSizeNode.asInt(), freezerMaxSizeNode.asInt());
       }
 
-      JsonNode fridgeContentsNode = treeNode.get("FridgeConters");
+      JsonNode fridgeContentsNode = treeNode.get("FridgeContents");
       JsonNode freezerContentsNode = treeNode.get("FreezerContents");
 
       boolean hasFridgeContents = fridgeContentsNode instanceof ArrayNode;
@@ -79,3 +79,5 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
     return null;
   }
 }
+
+

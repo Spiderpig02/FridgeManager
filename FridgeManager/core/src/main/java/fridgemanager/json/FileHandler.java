@@ -3,6 +3,7 @@ package fridgemanager.json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 
 /**
  * Wrapper class for JSON serialization and deserialization.
@@ -21,14 +23,14 @@ public class FileHandler implements InterfaceFileHandler {
   private ObjectMapper objectMapper;
 
   /**
-   * Method for initializing the object without specified path
+   * Method for initializing the object without specified path.
    */
   public FileHandler() {
     this("FridgeSave.txt");
   }
 
   /**
-   * Method for initializing the the object with specified path
+   * Method for initializing the the object with specified path.
    */
   public FileHandler(String fileName) {
     this.fileName = fileName;
@@ -37,7 +39,7 @@ public class FileHandler implements InterfaceFileHandler {
   }
 
   /**
-   * Returns a new FridgeManagerModule to help with the springboot server
+   * Returns a new FridgeManagerModule to help with the springboot server.
    */
   public static SimpleModule createJacsonModule() {
     return new FridgeManagerModule();
@@ -55,8 +57,8 @@ public class FileHandler implements InterfaceFileHandler {
   }
 
   /**
-   * Loads the saved FridgeManager object from system to app Returns the saved
-   * object if it exists,
+   * Loads the saved FridgeManager object from system to app.
+   * Returns the saved object if it exists,
    * null otherwise.
    */
   public FridgeManager loadFridgeManager() {
@@ -67,4 +69,15 @@ public class FileHandler implements InterfaceFileHandler {
     }
     return null;
   }
+
+  public static void main(String[] args) {
+    FileHandler filehandler = new FileHandler();
+    FridgeManager fridgemanager = new FridgeManager(3, 3);
+
+    fridgemanager.addFreezerContent(new Food("Eple","stk",3,LocalDate.now(),"Halvor"));
+    filehandler.saveObject(fridgemanager);
+
+    System.out.println(filehandler.loadFridgeManager().getFreezerContents().get(0));
+  }
 }
+

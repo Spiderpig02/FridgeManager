@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 import fridgemanager.core.Food;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * FoodDeserializier handles the task of deserializing json text to a Food class.
@@ -18,12 +19,12 @@ import java.io.IOException;
 public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /*
-   * format: { "Name": "String", "Quantity": int, "Owner": "String",
+   * format: { "Name": "String","Unit": "String", "Quantity": int, "Owner": "String",
    * "ExpirationDate": "String" }
   */
   /**
-   * Get json text inn and returning a Food object.
-   * If object not found, return null.
+   * This method handles the main task of getting json text inn and returning a Food object.
+   * If no Food object exist, return null.
   */
   @Override
   public Food deserialize(JsonParser parser, DeserializationContext ctxt)
@@ -42,9 +43,14 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
+      String unit = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
         name = nameNode.asText();
+      }
+      JsonNode unitNode = jsonNode.get("Unit");
+      if (unitNode instanceof TextNode) {
+        unit = unitNode.asText();
       }
       JsonNode quantityNode = jsonNode.get("Quantity");
       if (quantityNode instanceof ValueNode) {
@@ -58,8 +64,7 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-
-      return new Food(name, quantity, expirationDate, owner);
+      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner);
     }
     return null;
   }

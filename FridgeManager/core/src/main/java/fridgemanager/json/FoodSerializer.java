@@ -12,11 +12,11 @@ import java.io.IOException;
 public class FoodSerializer extends JsonSerializer<Food> {
 
   /*
-   * format: { "Name": "String", "Quantity": int, "Owner": "String",
+   * format: { "Name": "String", "Unit": "String", "Quantity": "int", "Owner": "String",
    * "ExpirationDate": "String" }
   */
   /**
-   * The method for converting Food objects to a jason format,
+   * The method for converting Food objects to a json format,
    * with the expected outcome above this coment.
   */
   @Override
@@ -27,8 +27,9 @@ public class FoodSerializer extends JsonSerializer<Food> {
 
     jgenerator.writeStringField("Name", food.getName());
     jgenerator.writeNumberField("Quantity", food.getQuantity());
+    jgenerator.writeStringField("Unit", food.getUnit());
     jgenerator.writeStringField("Owner", food.getOwner());
-    jgenerator.writeStringField("ExpirationDate", food.getExpirationDate());
+    jgenerator.writeStringField("ExpirationDate", food.getExpirationDate().toString());
 
     jgenerator.writeEndObject();
   }

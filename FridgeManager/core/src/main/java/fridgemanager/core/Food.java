@@ -1,20 +1,30 @@
 package fridgemanager.core;
 
+import java.time.LocalDate;
+
 /**
- * Food class.
+ * Food-class
 */
 public class Food {
   private String name;
   private int quantity;
   private String owner;
-  private String expirationDate;
+  private LocalDate expirationDate;
+  private String unit;
 
   /**
-   * Constructor. 
-  */
-  public Food(String name, int quantity, String expirationDate, String owner)
+   * Creates a new Food-object from input
+   * @param name
+   * @param unit
+   * @param quantity
+   * @param expirationDate
+   * @param owner
+   * @throws IllegalArgumentException if invalid quantity (<0) is given as argument
+   */
+  public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner)
       throws IllegalArgumentException {
     this.name = name;
+    this.unit = unit;
     this.expirationDate = expirationDate;
     this.owner = owner;
     if (quantity < 0) {
@@ -24,36 +34,45 @@ public class Food {
   }
 
   /**
-   * Getter name.
+   * Getter name
   */
   public String getName() {
     return this.name;
   }
 
   /**
-   * Getter quantity.
+   * Getter quantity
   */
   public int getQuantity() {
     return this.quantity;
   }
 
   /**
-   * Getter owner.
+   * Getter owner
   */
   public String getOwner() {
     return this.owner;
   }
 
   /**
-   * Getter expirationDate.
+   * Getter expirationDate
   */
-  public String getExpirationDate() {
+  public LocalDate getExpirationDate() {
     return this.expirationDate;
   }
 
   /**
-   * Setter quantity.
+   * Getter unit
   */
+  public String getUnit() {
+    return unit;
+  }
+
+  /**
+   * Sets new quantity for Food-item
+   * @param newQuantity
+   * @throws IllegalArgumentException if newQuantity < 0 
+   */
   public void setQuantity(int newQuantity) {
     if (newQuantity >= 0) {
       this.quantity = newQuantity;
@@ -63,20 +82,19 @@ public class Food {
   }
 
   /**
-   * Change quantity, given that quantity >= 0.
-  */
-  public void changeQuantity(int newQuantity) throws IllegalArgumentException {
-    if (newQuantity < 0) {
-      throw new IllegalArgumentException("Quantity needs to have a positive value");
-    }
-    quantity = newQuantity;
+   * Sets new unit for Food-item
+   * @param unit
+   */
+  public void setUnit(String unit) {
+    this.unit = unit;
   }
 
   /**
-   * toString method for Food object.
+   * toString method for Food-object which shows all relevant data
   */
   @Override
   public String toString() {
-    return quantity + " " + name + ", " + owner + " sin, går ut: " + expirationDate;
+    String expDate = expirationDate.toString();
+    return quantity + " " + unit + " " + name + ", " + owner + " sin, går ut: " + expDate;
   }
 }

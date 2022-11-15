@@ -216,9 +216,12 @@ public class FridgeController {
   */
   @FXML
   private void clearInput() {
+    dropDownMenuAdd.getSelectionModel().clearSelection();
     textfieldFood.clear();
     textfieldQuantity.clear();
+    dropDownMenuQuantity.getSelectionModel().clearSelection();
     textfieldOwner.clear();
+    datePickerExpiration.getEditor().clear();
   }
 
   /**
@@ -277,7 +280,6 @@ public class FridgeController {
       showErrorMessage("Invalid input!");
       return null;
     }
-      
   }
 
   /**
@@ -389,6 +391,8 @@ public class FridgeController {
         textFieldQuantityRemove.clear();
       } else {
         showErrorMessage("Invalid input!");
+        textFieldFoodRemove.clear();
+        textFieldQuantityRemove.clear();
       }
     } 
     catch (IllegalArgumentException e) {
@@ -401,8 +405,8 @@ public class FridgeController {
   */
   @FXML
   private void updateContent() {
+
     fridgeContent.getItems().clear();
-    
     for (Food food : fridgemanager.getFridgeContents()) {
       if (food.getQuantity() == 0) {
         fridgemanager.getFridgeContents().remove(food);
@@ -410,6 +414,7 @@ public class FridgeController {
         fridgeContent.getItems().add(food);
       }
     }
+    
     freezerContent.getItems().clear();
     for (Food food : fridgemanager.getFreezerContents()) {
       if (food.getQuantity() == 0) {
@@ -480,12 +485,6 @@ public class FridgeController {
           return false;
         }
       }
-  
-      String[] exp = expiration.toString().split("-");
-          if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() < 1 || exp[2].length() < 1 || exp[1].length() > 2 || exp[2].length() > 2) {
-              System.out.println("Feiler her 3");
-              return false;
-          } 
       for (Character letter : owner.toCharArray()) {
         if (Character.isDigit(letter) == true) {
           System.out.println("Feiler her 4");

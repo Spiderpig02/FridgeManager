@@ -178,6 +178,25 @@ public class RemoteFridgeAccess {
     return getint("/getFreezerMaxsize");
   }
 
+  public void setQuantity(int quantity, Food food) {
+    try {
+      String json = objectMapper.writeValueAsString(food);
+      HttpRequest request = HttpRequest.newBuilder(makeUri("/setQuantity/" + String.valueOf(quantity)))
+          .header(ACCEPT_HEADER, APPLICATION_JSON)
+          .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+          .PUT(BodyPublishers.ofString(json))
+          .build();
+
+      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+          HttpResponse.BodyHandlers.ofString());
+      String responseString = response.body();
+      System.out.println("changed(" + food.toString() + ") response: " + responseString);
+
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public static void main(String[] args) throws URISyntaxException {
     RemoteFridgeAccess remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
     System.out.println(remoteFridgeAccess.getFrigdeContent());

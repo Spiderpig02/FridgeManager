@@ -85,10 +85,6 @@ public class RemoteFridgeController {
 
     startup();
     updateContent();
-    // if (fridgemanager.getFridgeContents().size() > 0
-    // || fridgemanager.getFreezerContents().size() > 0) {
-    // showRemovalMenu();
-    // }
     if (remoteFridgeAccess.getFridgeMaxsize() > 0
         || remoteFridgeAccess.getFreezerMaxsize() > 0) {
       showRemovalMenu();
@@ -143,7 +139,6 @@ public class RemoteFridgeController {
   private void addToFridge() {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
-      // fridgemanager.addFridgeContent(createFoodFromInput());
       remoteFridgeAccess.addFridgeContent(createFoodFromInput());
     }
     updateContent();
@@ -162,7 +157,6 @@ public class RemoteFridgeController {
   private void addToFreezer() {
     showRemovalMenu();
     if (createFoodFromInput() != null) {
-      // fridgemanager.addFreezerContent(createFoodFromInput());
       remoteFridgeAccess.addFreezerContent(createFoodFromInput());
     }
     updateContent();
@@ -243,14 +237,12 @@ public class RemoteFridgeController {
   private void handleRemove() {
     if (infridge != null) {
       if (infridge == true) {
-        // fridgemanager.removeFridgeContent(toBeRemoved);
         remoteFridgeAccess.removeFridgeContent(toBeRemoved);
         infridge = false;
       }
     }
     if (infreezer != null) {
       if (infreezer == true) {
-        // fridgemanager.removeFreezerContent(toBeRemoved);
         remoteFridgeAccess.removeFreezerContent(toBeRemoved);
         infreezer = false;
       }
@@ -286,13 +278,13 @@ public class RemoteFridgeController {
         for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
-              food.setQuantity(food.getQuantity() - quantity);
+              remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
               quantity -= food.getQuantity();
               break;
 
             } else if (quantity > food.getQuantity()) {
               quantity -= food.getQuantity();
-              food.setQuantity(0);
+              remoteFridgeAccess.setQuantity(0, food);
             }
           }
         }
@@ -300,13 +292,13 @@ public class RemoteFridgeController {
         for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
-              food.setQuantity(food.getQuantity() - quantity);
+              remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
               quantity -= food.getQuantity();
               break;
 
             } else if (quantity > food.getQuantity()) {
               quantity -= food.getQuantity();
-              food.setQuantity(0);
+              remoteFridgeAccess.setQuantity(0, food);
             }
           }
         }
@@ -325,13 +317,6 @@ public class RemoteFridgeController {
   private void updateContent() {
     fridgecontent.getItems().clear();
 
-    // for (Food food : fridgemanager.getFridgeContents()) {
-    // if (food.getQuantity() == 0) {
-    // fridgemanager.getFridgeContents().remove(food);
-    // } else {
-    // fridgecontent.getItems().add(food);
-    // }
-    // }
     List<Food> tmpFridge = remoteFridgeAccess.getFridgeManager().getFridgeContents();
     for (Food food : tmpFridge) {
       System.out.println(food.toString());
@@ -344,13 +329,6 @@ public class RemoteFridgeController {
 
     freezercontent.getItems().clear();
 
-    // for (Food food : fridgemanager.getFreezerContents()) {
-    // if (food.getQuantity() == 0) {
-    // fridgemanager.getFreezerContents().remove(food);
-    // } else {
-    // freezercontent.getItems().add(food);
-    // }
-    // }
     for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFreezerContent(food);

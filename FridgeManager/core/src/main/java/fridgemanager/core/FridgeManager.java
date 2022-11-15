@@ -130,4 +130,20 @@ public class FridgeManager {
     }
     return false;
   }
+
+  public boolean setQuantity(int quantity, String uuid) {
+    for (Food food : frigdecontents) {
+      if (food.id().equals(uuid)) {
+        food.setQuantity(quantity);
+        return true;
+      }
+    }
+    for (Food food : freezercontents) {
+      if (food.id().equals(uuid)) {
+        food.setQuantity(quantity);
+        return true;
+      }
+    }
+    return false;
+  }
 }

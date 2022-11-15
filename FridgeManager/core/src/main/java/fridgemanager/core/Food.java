@@ -2,6 +2,8 @@ package fridgemanager.core;
 
 import java.time.LocalDate;
 
+import java.util.UUID;
+
 /**
  * Food-class.
 */
@@ -11,6 +13,7 @@ public class Food {
   private String owner;
   private LocalDate expirationDate;
   private String unit;
+  private String uniqueID;
 
   /**
    * Creates a new Food-object from input.
@@ -31,25 +34,51 @@ public class Food {
       throw new IllegalArgumentException("Quantity needs to have a positive value");
     }
     this.quantity = quantity;
+
+    this.uniqueID = UUID.randomUUID().toString();
+  }
+
+  /**
+   * Constructor.
+   */
+  public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner, String uuid)
+      throws IllegalArgumentException {
+    this.name = name;
+    this.unit = unit;
+    this.expirationDate = expirationDate;
+    this.owner = owner;
+    if (quantity < 0) {
+      throw new IllegalArgumentException("Quantity needs to have a positive value");
+    }
+    this.quantity = quantity;
+
+    this.uniqueID = uuid;
   }
 
   /**
    * Getter name.
-  */
+   */
   public String getName() {
     return this.name;
   }
 
   /**
+   * Getter ID.
+   */
+  public String id() {
+    return this.uniqueID;
+  }
+
+  /**
    * Getter quantity.
-  */
+   */
   public int getQuantity() {
     return this.quantity;
   }
 
   /**
    * Getter owner.
-  */
+   */
   public String getOwner() {
     return this.owner;
   }

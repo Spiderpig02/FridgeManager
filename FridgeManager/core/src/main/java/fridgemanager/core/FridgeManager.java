@@ -98,14 +98,59 @@ public class FridgeManager {
   }
 
   /**
-   * Removes a given food-item from the freezer.
-   * @param remove - food to be removed.
-   * @return true if item exists in fridge and was removed succesfully, false if not.
+   * Method for removing fridgecontent based on uuid.
+   * Returns true if something is removed, false if nothing is removed.
+   */
+  public boolean removeFridgeContent(String uuid) {
+
+    for (Food food : frigdecontents) {
+      if (food.id().equals(uuid)) {
+        frigdecontents.remove(food);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Method for removing freezercontent.
+   * Returns true if something is removed, false if nothing is removed.
    */
   public boolean removeFreezerContent(Food remove) {
     if (freezercontents.contains(remove)) {
       freezercontents.remove(remove);
       return true;
+    }
+    return false;
+  }
+
+  /**
+   * Method for removing fridgecontent based on uuid.
+   * Returns true if something is removed, false if nothing is removed.
+   */
+  public boolean removeFreezerContent(String uuid) {
+
+    for (Food food : freezercontents) {
+      if (food.id().equals(uuid)) {
+        freezercontents.remove(food);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean setQuantity(int quantity, String uuid) {
+    for (Food food : frigdecontents) {
+      if (food.id().equals(uuid)) {
+        food.setQuantity(quantity);
+        return true;
+      }
+    }
+    for (Food food : freezercontents) {
+      if (food.id().equals(uuid)) {
+        food.setQuantity(quantity);
+        return true;
+      }
     }
     return false;
   }

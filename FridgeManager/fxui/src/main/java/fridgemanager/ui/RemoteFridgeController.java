@@ -2,14 +2,12 @@ package fridgemanager.ui;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
-import fridgemanager.json.FileHandler;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import javax.security.auth.callback.Callback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,17 +16,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Controller for Fridge.
  */
-public class FridgeController {
-    
+public class RemoteFridgeController {
+
   @FXML
   private TextField textfieldFood;
   @FXML
@@ -67,10 +63,10 @@ public class FridgeController {
   private ChoiceBox<String> dropDownMenuRemove;
   @FXML
   private DatePicker datePickerExpiration;
-  
-  private FridgeManager fridgemanager;
+  @FXML
+  String endpointUri;
+
   private Food toBeRemoved;
-  private FileHandler filehandler;
   private Boolean infridge;
   private Boolean infreezer;
   private String[] options = {"fridge", "freezer"};
@@ -79,30 +75,17 @@ public class FridgeController {
   private String unitchoice;
   private String choice;
   private LocalDate datepick;
-  
+  private RemoteFridgeAccess remoteFridgeAccess;
+
   /**
    * Initializes Controller by creating a new fridgemanager-object.
    * 
    * @throws URISyntaxException
    */
-  public FridgeController() throws URISyntaxException {
-    this.filehandler = new FileHandler();
-    loadOrCreateFridgeManager();
+  public RemoteFridgeController() throws URISyntaxException {
+    remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
   }
 
-  /**
-   * Checks if FridgeManager-object already exists in save. 
-   * Loads existing FridgeManager-object if it exists, creates new instance if not.
-  */
-  private void loadOrCreateFridgeManager() {
-    FridgeManager tempFridge = filehandler.loadFridgeManager();
-    if (tempFridge == null) {
-      this.fridgemanager = new FridgeManager(10, 10);
-    } else {
-      this.fridgemanager = tempFridge;
-    }
-  }
-  
   /**
    * Starts program by initializing UI.
    */
@@ -110,15 +93,11 @@ public class FridgeController {
   private void initialize() {
     startup();
     updateContent();
-
-    int sizeFridge = fridgemanager.getFridgeContents().size();
-    int sizeFreezer = fridgemanager.getFridgeContents().size();
-
-    if (sizeFridge > 0 || sizeFreezer > 0) {
+    if (remoteFridgeAccess.getFridgeMaxsize() > 0 || remoteFridgeAccess.getFreezerMaxsize() > 0) {
       showRemovalMenu();
     }
   }
-  
+
   /**
    * Setting FXML-elements to correct state upon startup.
    */
@@ -177,7 +156,7 @@ public class FridgeController {
     this.choice = dropDownMenuRemove.getValue();
   }
 
-  /**
+    /**
    * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
    * @param keypress
    */
@@ -192,8 +171,8 @@ public class FridgeController {
         break;
     }
   }
-
-  /**
+  
+    /**
    * Adds a food-item to either the fridge or the freezer
    * depending on input given by the user, and saves state of program. 
   */
@@ -203,14 +182,15 @@ public class FridgeController {
       showRemovalMenu();
     if (createFoodFromInput() != null) {
       if (addchoice == "fridge")  {
-        fridgemanager.addFridgeContent(createFoodFromInput());
+        remoteFridgeAccess.addFridgeContent(createFoodFromInput());
+
       } else if (addchoice == "freezer") {
-        fridgemanager.addFreezerContent(createFoodFromInput());
+        remoteFridgeAccess.addFreezerContent(createFoodFromInput());
+
       }
       clearInput();
     }
     updateContent();
-    filehandler.saveObject(this.fridgemanager);
     }
     catch (Exception e) {
       if (addchoice == "fridge") {
@@ -221,10 +201,7 @@ public class FridgeController {
       }
     }
   } 
-  
 
-
-  
   /**
    * Clears input in textfields.
    */
@@ -238,7 +215,7 @@ public class FridgeController {
     datePickerExpiration.getEditor().clear();
   }
 
-  /**
+ /**
    * Shows FXML-elements that make up the removal-menu.
   */
   @FXML
@@ -300,6 +277,7 @@ public class FridgeController {
     infridge = true;
   }
 
+
   /**
    * Registers what food-item the user has selected in the freezer.
    * @param mouse-selection
@@ -310,7 +288,7 @@ public class FridgeController {
     infreezer = true;
   }
 
-  /**
+    /**
    * Removes food-item from either the fridge or freezer depending on 
    * value of variables infridge and infreezer.
    * Updates visibility of FXML-elements depending on amount of items
@@ -320,13 +298,15 @@ public class FridgeController {
   private void handleRemove() {
     if (infridge != null) {
       if (infridge == true) {
-        fridgemanager.removeFridgeContent(toBeRemoved);
+        remoteFridgeAccess.removeFridgeContent(toBeRemoved);
+
         infridge = false;
       }
     }
     if (infreezer != null) {
       if (infreezer == true) {
-        fridgemanager.removeFreezerContent(toBeRemoved);
+        remoteFridgeAccess.removeFreezerContent(toBeRemoved);
+
         infreezer = false;
       }
     }
@@ -335,10 +315,16 @@ public class FridgeController {
     if (fridgeContent.getItems().size() == 0 && freezerContent.getItems().size() == 0) {
       hideRemovalMenu();
     }
-    
-    filehandler.saveObject(fridgemanager);
   }
-  
+
+  // /**
+  //  * Registers what the user has selected in the dropdown-menu.
+  //  *
+  //  * @param event from ActionEvent (mouse click).
+  //  */
+  // public void getChoice(ActionEvent event) {
+  //   this.choice = dropDownMenu.getValue();
+  // }
 
   /**
    * Removes specific amount of food from either fridge or freezer
@@ -351,54 +337,50 @@ public class FridgeController {
       Integer quantity = Integer.parseInt(textFieldQuantityRemove.getText());
       if (validateRemovalInput(foodname, quantity) == true) {
         if (choice == "fridge") {
-          if (fridgemanager.getFridgeContents().size() == 0) {
+          if (remoteFridgeAccess.getFridgeManager().getFridgeContents().size() == 0) {
             throw new IllegalArgumentException();
           }
-
-          for (Food food : fridgemanager.getFridgeContents()) {
+  
+          for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
-                food.setQuantity(food.getQuantity() - quantity);
+                remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
                 quantity -= food.getQuantity();
                 break;
-                  
+  
               } else if (quantity > food.getQuantity()) {
                 quantity -= food.getQuantity();
-                food.setQuantity(0);                            
-              } 
-            }  
+                remoteFridgeAccess.setQuantity(0, food);
+              }
+            }
           }
-        } 
-        else if (choice == "freezer") {
-          if (fridgemanager.getFreezerContents().size() == 0) {
+        } else if (choice == "freezer") {
+          if (remoteFridgeAccess.getFridgeManager().getFreezerContents().size() == 0) {
             throw new IllegalArgumentException();
           }
-
-          for (Food food : fridgemanager.getFreezerContents()) {
+          for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
-                food.setQuantity(food.getQuantity() - quantity);
+                remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
                 quantity -= food.getQuantity();
-                break;    
+                break;
+  
               } else if (quantity > food.getQuantity()) {
                 quantity -= food.getQuantity();
-                food.setQuantity(0);                            
-              } 
-            }  
+                remoteFridgeAccess.setQuantity(0, food);
+              }
+            }
           }
         }
         updateContent();
-        filehandler.saveObject(this.fridgemanager);
         textFieldFoodRemove.clear();
         textFieldQuantityRemove.clear();
       } else {
         showErrorMessage("Invalid input!");
-        textFieldFoodRemove.clear();
-        textFieldQuantityRemove.clear();
       }
-    } 
+    }
     catch (IllegalArgumentException e) {
-      showErrorMessage("Invalid Input!");
+      showErrorMessage("Invalid input!");
     }
   }
 
@@ -408,37 +390,29 @@ public class FridgeController {
   @FXML
   private void updateContent() {
     fridgeContent.getItems().clear();
-
-    for (Food food : fridgemanager.getFridgeContents()) {
+    for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
+      System.out.println(food.toString());
       if (food.getQuantity() == 0) {
-        fridgemanager.getFridgeContents().remove(food);
+        remoteFridgeAccess.removeFridgeContent(food);
       } else {
         fridgeContent.getItems().add(food);
       }
     }
     changeFoodColorFridge();
-    
+
+
     freezerContent.getItems().clear();
-    for (Food food : fridgemanager.getFreezerContents()) {
+    for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
       if (food.getQuantity() == 0) {
-        fridgemanager.getFreezerContents().remove(food);
+        remoteFridgeAccess.removeFreezerContent(food);
       } else {
         freezerContent.getItems().add(food);
       }
     }
     changeFoodColorFreezer();
-  }  
-
-  /**
-   * Displays error-message to user on screen.
-   * @param errormessage
-   */
-  @FXML
-  private void showErrorMessage(String message) {
-    errorText.setText(message);
   }
 
-  /**
+    /**
    * Changes text-color of food items in fridge that 
    * expire in 10 days or less to red. 
    */
@@ -465,7 +439,7 @@ public class FridgeController {
     });
   }
 
-  /**
+    /**
    * Changes text-color of food items in freezer that 
    * expire in 10 days or less to red. 
    */
@@ -489,9 +463,18 @@ public class FridgeController {
     });
   }
 
+ /**
+   * Displays error-message to user on screen.
+   * @param errormessage
+   */
+  @FXML
+  private void showErrorMessage(String message) {
+    errorText.setText(message);
+  }
+
   /**
-   * Hides/removes error message when user selects a textfield.
-  */
+   * Hides/removes error message when users selects a textfield.
+   */
   @FXML
   private void hideErrorMessage() {
     errorText.setText("");
@@ -551,12 +534,4 @@ public class FridgeController {
     }
     return true;
   }
-
-  /**
-   * @return FridgeManager-object.
-   */
-  public FridgeManager getFridgeManager() {
-    return this.fridgemanager;
-  }
 }
-

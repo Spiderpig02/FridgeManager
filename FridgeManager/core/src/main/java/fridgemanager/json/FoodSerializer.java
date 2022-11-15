@@ -13,8 +13,8 @@ public class FoodSerializer extends JsonSerializer<Food> {
 
   /*
    * format: { "Name": "String", "Unit": "String", "Quantity": "int", "Owner": "String",
-   * "ExpirationDate": "String" }
-  */
+   * "ExpirationDate": "String", "UUID": "String" }
+   */
 
   /**
    * Converts Food-object to JSON-text, formatted as specified above.
@@ -33,6 +33,7 @@ public class FoodSerializer extends JsonSerializer<Food> {
     jgenerator.writeStringField("Unit", food.getUnit());
     jgenerator.writeStringField("Owner", food.getOwner());
     jgenerator.writeStringField("ExpirationDate", food.getExpirationDate().toString());
+    jgenerator.writeStringField("UUID", food.id());
 
     jgenerator.writeEndObject();
   }

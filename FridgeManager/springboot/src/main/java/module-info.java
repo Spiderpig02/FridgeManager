@@ -7,9 +7,10 @@ module fridgemanager.springboot {
     requires spring.context;
     requires spring.boot.autoconfigure;
 
+    requires org.slf4j;
+
     requires fridgemanager.core;
 
     opens fridgemanager.springboot to spring.beans, spring.context, spring.web;
-
 
 }

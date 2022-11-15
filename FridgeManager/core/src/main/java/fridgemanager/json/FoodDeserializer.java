@@ -20,8 +20,8 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /*
    * format: { "Name": "String","Unit": "String", "Quantity": int, "Owner": "String",
-   * "ExpirationDate": "String" }
-  */
+   * "ExpirationDate": "String", "UUID": "String" }
+   */
 
   /**
    * Deserializes JSON-text into treeNodes and calls deserializer() to create a Food-object.
@@ -47,6 +47,7 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
+      String uUID = null;
       String unit = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
@@ -68,7 +69,12 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner);
+      JsonNode uUIDNode = jsonNode.get("UUID");
+      if (uUIDNode instanceof TextNode) {
+        uUID = uUIDNode.asText();
+      }
+
+      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner, uUID);
     }
     return null;
   }

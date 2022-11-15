@@ -18,7 +18,7 @@ import fridgemanager.core.FridgeManager;
 
 /**
  * Unit test for simple App.
-*/
+ */
 public class FridgeControllerTest extends ApplicationTest {
 
   private FridgeController controller;
@@ -28,19 +28,21 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /**
    * Initialize the JavaFX App used for testing.
-  */
+   */
   public void start(final Stage stage) throws Exception {
     final FXMLLoader loader = new FXMLLoader(getClass().getResource("FridgeApp.fxml"));
     final Parent root = loader.load();
     this.controller = loader.getController();
     this.fridgemanager = this.controller.getFridgeManager();
     stage.setScene(new Scene(root));
+    stage.setTitle("FridgeManager");
+    stage.centerOnScreen();
     stage.show();
   }
 
   /**
    * Initialize a food element.
-  */
+   */
   @BeforeEach
   public void init() {
     eple = new Food("Eple", 1, "15.02.2022", "Halvor");
@@ -48,7 +50,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /**
    * Test the controller and the content.
-  */
+   */
   @Test
   public void testControllerFridgeManager() {
     assertNotNull(this.controller);
@@ -57,7 +59,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /**
    * Test adding food to the fridge.
-  */
+   */
   @Test
   public void testAddToFridge() {
 
@@ -65,8 +67,7 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#fridgeButton");
 
     // Verifing added element
-    Food lastItem =
-        fridgemanager.getFridgeContents().get(fridgemanager.getFridgeContents().size() - 1);
+    Food lastItem = fridgemanager.getFridgeContents().get(fridgemanager.getFridgeContents().size() - 1);
     checkItem(lastItem, eple);
   }
 
@@ -77,8 +78,7 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#freezerButton");
 
     // Verifing added element
-    Food lastItem =
-        fridgemanager.getFreezerContents().get(fridgemanager.getFreezerContents().size() - 1);
+    Food lastItem = fridgemanager.getFreezerContents().get(fridgemanager.getFreezerContents().size() - 1);
     checkItem(lastItem, eple);
   }
 

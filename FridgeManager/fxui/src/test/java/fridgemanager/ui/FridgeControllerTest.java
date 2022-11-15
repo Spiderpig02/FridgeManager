@@ -100,7 +100,7 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#fridgeContent");
 
     //Remove last element.
-    clickOn("#trashcanFridge1");
+    clickOn("#trashcanFridge");
 
     //Verify that element is removed.
     assertNotEquals(listview.getItems().size()-1, lastItemInFridgeInteger);
@@ -119,7 +119,7 @@ public class FridgeControllerTest extends ApplicationTest {
     clickOn("#freezerContent");
 
     //Remove last element.
-    clickOn("#trashcanFridge1");
+    clickOn("#trashcanFreezer");
 
     //Verify that element is removed.
     assertNotEquals(listview.getItems().size()-1, lastItemInFreezerInteger);
@@ -133,10 +133,10 @@ public class FridgeControllerTest extends ApplicationTest {
       
     //Add Eple to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Popcorn",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Remove 2 of 3 Eple.
-    clickOn("#textFieldFoodRemove").write("Eple");
+    clickOn("#textFieldFoodRemove").write("Popcorn");
     clickOn("#textFieldQuantityRemove").write("2");
     clickOn("#dropDownMenuRemove").clickOn("fridge");
     clickOn("#removeButton");
@@ -155,10 +155,10 @@ public class FridgeControllerTest extends ApplicationTest {
       
     //Add Eple to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Storfe",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Remove 2 of 3 Eple.
-    clickOn("#textFieldFoodRemove").write("Eple");
+    clickOn("#textFieldFoodRemove").write("Storfe");
     clickOn("#textFieldQuantityRemove").write("2");
     clickOn("#dropDownMenuRemove").clickOn("freezer");
     clickOn("#removeButton");

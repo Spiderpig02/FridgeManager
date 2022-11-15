@@ -45,8 +45,6 @@ public class FridgeController {
   @FXML private Button removeButton;
   @FXML private ListView<Food> fridgeContent;
   @FXML private ListView<Food> freezerContent;
-  @FXML private ImageView trashcanFridge;
-  @FXML private ImageView trashcanFreezer;
   @FXML private ChoiceBox<String> dropDownMenuAdd;
   @FXML private ChoiceBox<String> dropDownMenuQuantity;
   @FXML private ChoiceBox<String> dropDownMenuRemove;
@@ -108,9 +106,6 @@ public class FridgeController {
   @FXML
   private void startup() {
     removeText.setVisible(false);
-    trashcanFridge.setVisible(false);
-    trashcanFreezer.setVisible(false);
-
     removeSpecificAmount.setVisible(false);
     foodText.setVisible(false);
     quantityText.setVisible(false);
@@ -230,9 +225,6 @@ public class FridgeController {
   @FXML
   private void showRemovalMenu() {
     removeText.setVisible(true);
-    trashcanFridge.setVisible(true);
-    trashcanFreezer.setVisible(true);
-
     removeSpecificAmount.setVisible(true);
     foodText.setVisible(true);
     quantityText.setVisible(true);
@@ -249,9 +241,6 @@ public class FridgeController {
   @FXML
   private void hideRemovalMenu() {
     removeText.setVisible(false);
-    trashcanFridge.setVisible(false);
-    trashcanFreezer.setVisible(false);
-
     removeSpecificAmount.setVisible(false);
     foodText.setVisible(false);
     quantityText.setVisible(false);
@@ -324,12 +313,6 @@ public class FridgeController {
     }
     updateContent();
     this.toBeRemoved = null;
-    if (fridgeContent.getItems().size() == 0) {
-      trashcanFridge.setVisible(false);
-    }
-    if (freezerContent.getItems().size() == 0) {
-      trashcanFreezer.setVisible(false);
-    }
     if (fridgeContent.getItems().size() == 0 && freezerContent.getItems().size() == 0) {
       hideRemovalMenu();
     }
@@ -428,24 +411,24 @@ public class FridgeController {
 
   @FXML
   private void changeFoodColor() {
-    fridgeContent.setCellFactory(cell -> {
-      return new ListCell<Food>() {
-        @Override
-        protected void updateItem(Food food, boolean empty) {
-          super.updateItem(food, empty);
-          LocalDate localtoday = LocalDate.now();
-          long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
-          System.out.println(difference);
-          if (food != null) {
-            if (difference <= 10) {
-              setStyle("-fx-text-fill: red");
-              setText(food.toString());
-            }
+    // fridgeContent.setCellFactory(cell -> {
+    //   return new ListCell<Food>() {
+    //     @Override
+    //     protected void updateItem(Food food, boolean empty) {
+    //       super.updateItem(food, empty);
+    //       LocalDate localtoday = LocalDate.now();
+    //       long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
+    //       System.out.println(difference);
+    //       if (food != null) {
+    //         if (difference <= 10) {
+    //           setStyle("-fx-text-fill: red");
+    //           setText(food.toString());
+    //         }
             
-          }
-        }
-      };
-    });
+    //       }
+    //     }
+    //   };
+    // });
   }
 
   /**

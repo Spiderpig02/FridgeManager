@@ -2,6 +2,7 @@ package fridgemanager.ui;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
@@ -282,7 +283,7 @@ public class RemoteFridgeController {
     Integer quantity = Integer.parseInt(textfieldQuantityRemove.getText());
     if (validateRemovalInput(foodname, quantity) == true) {
       if (choice == "fridge") {
-        for (Food food : remoteFridgeAccess.getFrigdeContent()) {
+        for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
               food.setQuantity(food.getQuantity() - quantity);
@@ -296,7 +297,7 @@ public class RemoteFridgeController {
           }
         }
       } else if (choice == "freezer") {
-        for (Food food : remoteFridgeAccess.getFreezerContent()) {
+        for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
           if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
             if (food.getQuantity() >= quantity) {
               food.setQuantity(food.getQuantity() - quantity);
@@ -331,7 +332,9 @@ public class RemoteFridgeController {
     // fridgecontent.getItems().add(food);
     // }
     // }
-    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
+    List<Food> tmpFridge = remoteFridgeAccess.getFridgeManager().getFridgeContents();
+    for (Food food : tmpFridge) {
+      System.out.println(food.toString());
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFridgeContent(food);
       } else {
@@ -348,7 +351,7 @@ public class RemoteFridgeController {
     // freezercontent.getItems().add(food);
     // }
     // }
-    for (Food food : remoteFridgeAccess.getFreezerContent()) {
+    for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFreezerContent(food);
       } else {

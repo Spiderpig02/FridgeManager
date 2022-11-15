@@ -49,15 +49,15 @@ public class FridgeManagerController {
         return this.fridgeManagerService.getFridgeManager().getFreezerContents();
     }
 
-    @GetMapping(path = "/getFreezerSize")
-    public int getFreezerSize() {
-        logger.debug("getFreezerSize");
+    @GetMapping(path = "/getFreezerMaxsize")
+    public int getFreezerMaxsize() {
+        logger.debug("getFreezerMaxsize");
         return this.fridgeManagerService.getFridgeManager().getFreezerMaxsize();
     }
 
-    @GetMapping(path = "/getFridgeSize")
-    public int getFridgeSize() {
-        logger.debug("getFridgeSize");
+    @GetMapping(path = "/getFrigdeMaxsize")
+    public int getFrigdeMaxsize() {
+        logger.debug("getFrigdeMaxsize");
         return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
     }
 

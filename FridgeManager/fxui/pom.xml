@@ -85,7 +85,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>fridgemanager.ui/fridgemanager.ui.FridgeApp</mainClass>
+                    <mainClass>fridgemanager.ui/fridgemanager.ui.RemoteFridgeApp</mainClass>
                 </configuration>
             </plugin>
             <!-- Run the checkstyle code quality tool -->

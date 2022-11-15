@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,11 +58,9 @@ public class RemoteFridgeAccess {
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
           .POST(BodyPublishers.ofString(json))
           .build();
-      
 
-      final HttpResponse<String> response =
-        HttpClient.newBuilder().build().send(request,
-        HttpResponse.BodyHandlers.ofString());
+      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+          HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
       System.out.println("add(" + food.toString() + ") response: " + responseString);
 
@@ -78,10 +77,9 @@ public class RemoteFridgeAccess {
           .header(food.id(), APPLICATION_JSON)
           .DELETE()
           .build();
-      
-      final HttpResponse<String> response =
-        HttpClient.newBuilder().build().send(request,
-        HttpResponse.BodyHandlers.ofString());
+
+      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+          HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
       System.out.println("remove(" + food.toString() + ") response: " + responseString);
 
@@ -98,11 +96,14 @@ public class RemoteFridgeAccess {
           .newBuilder()
           .build()
           .send(request, HttpResponse.BodyHandlers.ofString());
-        
+
       String responseString = response.body();
       System.out.println(function + " response: " + responseString);
-  
-      List<Food> freezerContent = objectMapper.readValue(response.body(), List.class);
+
+      List<Food> freezerContent = new ArrayList<Food>();
+      for (Object object : objectMapper.readValue(response.body(), List.class)) {
+        freezerContent.add((Food) object);
+      }
       return freezerContent;
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
@@ -175,5 +176,10 @@ public class RemoteFridgeAccess {
 
   public int getFreezerMaxsize() {
     return getint("/getFreezerMaxsize");
+  }
+
+  public static void main(String[] args) throws URISyntaxException {
+    RemoteFridgeAccess remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
+    System.out.println(remoteFridgeAccess.getFrigdeContent());
   }
 }

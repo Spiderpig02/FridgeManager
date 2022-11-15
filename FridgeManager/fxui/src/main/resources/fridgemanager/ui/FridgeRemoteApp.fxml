@@ -1,11 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="todolist.ui.RemoteFridgeController">
-    <fx:define>
-        <String fx:id="endpointUri" fx:value="http://localhost:8080/"/>
-    </fx:define>
-    <fx:include fx:id="FridgeModelView" source="FridgeApp.fxml"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="1010.0" style="-fx-border-color: black; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fridgemanager.ui.RemoteFridgeController">
+   <children>
+      <ListView fx:id="freezercontent" layoutX="509.0" layoutY="212.0" onMouseClicked="#handleMouseClickFreezer" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange;" />
+      <Line endX="890.300048828125" layoutX="104.0" layoutY="158.0" startX="-100.0" strokeWidth="15.0" />
+      <Text fontSmoothingType="LCD" layoutX="133.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfieldFood" layoutX="133.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onKeyReleased="#enableAddButtons" onKeyTyped="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <TextField fx:id="textfieldQuantity" layoutX="325.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="325.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfieldExpiration" layoutX="517.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="517.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration date:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfieldOwner" layoutX="709.0" layoutY="47.0" onKeyPressed="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="33.0" prefWidth="165.0" />
+      <Text fontSmoothingType="LCD" layoutX="708.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner:" wrappingWidth="126.39996337890625">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="fridgeButton" layoutX="364.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFridge" prefHeight="34.0" prefWidth="126.0" text="Add to Fridge">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <ListView fx:id="fridgecontent" layoutX="15.0" layoutY="212.0" onMouseClicked="#handleMouseClickFridge" prefHeight="476.0" prefWidth="487.0" style="-fx-border-color: orange; -fx-background-insets: orange;" />
+      <Text layoutX="160.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fridge" wrappingWidth="188.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="661.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Freezer" wrappingWidth="188.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="35.0" />
+         </font>
+      </Text>
+      <Button fx:id="freezerButton" layoutX="517.0" layoutY="99.0" mnemonicParsing="false" onAction="#addToFreezer" prefHeight="34.0" prefWidth="126.0" text="Add to Freezer">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Text fx:id="removetext" layoutX="347.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" text="select an item to remove it" wrappingWidth="315.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="removebutton" layoutX="422.0" layoutY="724.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="34.0" prefWidth="165.0" text="Remove Item">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Text fx:id="removeSpecificAmount" layoutX="347.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="remove specific amount " wrappingWidth="315.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="20.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="dropDownMenu" layoutX="524.0" layoutY="841.0" prefHeight="34.0" prefWidth="143.0" />
+      <Text fx:id="removeFromText" layoutX="526.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove From:" wrappingWidth="174.7366943359375">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textfieldFoodRemove" layoutX="160.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
+      <TextField fx:id="textfieldQuantityRemove" layoutX="342.0" layoutY="841.0" onKeyPressed="#enableAddButtons" onMouseClicked="#hideErrorMessage" prefHeight="34.0" prefWidth="166.0" />
+      <Text fx:id="quantitytext" layoutX="342.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" wrappingWidth="174.7366943359375">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="foodtext" layoutX="160.0" layoutY="826.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food:" wrappingWidth="174.7366943359375">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="removebutton2" layoutX="684.0" layoutY="841.0" mnemonicParsing="false" onAction="#handleRemoveSpecificAmount" prefHeight="34.0" prefWidth="165.0" text="Remove Item">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Text fx:id="errortext" fill="RED" layoutX="401.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="CENTER" wrappingWidth="273.53668212890625">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="25.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

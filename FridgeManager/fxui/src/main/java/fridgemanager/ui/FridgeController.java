@@ -342,6 +342,8 @@ public class FridgeController {
         filehandler.saveObject(this.fridgemanager);
       } else {
         showErrorMessage("Invalid input!");
+        textFieldFoodRemove.clear();
+        textFieldQuantityRemove.clear();
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -406,13 +408,6 @@ public class FridgeController {
           return false;
         }
       }
-  
-      String[] exp = expiration.toString().split("-");
-      if (exp.length != 3 || exp[0].length() != 4 || exp[1].length() < 1 || exp[2].length() < 1 || exp[1].length() > 2 || exp[2].length() > 2) {
-        System.out.println("Feiler her 3");
-        return false;
-      }
-      
       for (Character letter : owner.toCharArray()) {
         if (Character.isDigit(letter) == true) {
           System.out.println("Feiler her 4");

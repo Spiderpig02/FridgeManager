@@ -26,10 +26,13 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
    * "Int",
    * "FreezerContents": [Food,...,...,...] }
   */
+
   /**
-   * The methode takes inn json text and returns a FridgeManager object if sucsessfull,
-   * else null.
-  */
+   * Deserializes JSON-text into treeNodes and calls deserialize() to create a FridgeManager-object.
+   * @param parser
+   * @param ctxt
+   * @return FridgeManager if it exists, null otherwise.
+   */
   @Override
   public FridgeManager deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JacksonException {
@@ -37,10 +40,11 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
     return deserialize((JsonNode) treeNode);
   }
 
-  /**
-   * This is a private helping methode for spliting up the complexety.
-   * ReturnsFridgeManager object if sucsessfull else null.
-   */
+   /**
+    * Deserializes JSON-texts into a FridgeManager-object.
+    * @param treeNode
+    * @return FridgeManaager if conversion is successful, null otherwise.
+    */
   private FridgeManager deserialize(JsonNode treeNode) {
     if (treeNode instanceof ObjectNode) {
       FridgeManager fridgeManager = null;

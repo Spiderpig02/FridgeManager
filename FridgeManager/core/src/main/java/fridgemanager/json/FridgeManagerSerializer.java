@@ -8,7 +8,7 @@ import fridgemanager.core.FridgeManager;
 import java.io.IOException;
 
 /**
- * FridgeManagerSerializer class handles the serializing of the FridgeManager object.
+ * FridgeManagerSerializer class handles the serializing of FridgeManager-objects.
 */
 public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
@@ -18,10 +18,13 @@ public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
    * "Int",
    * "FreezerContents": [Food,...,...,...] }
   */
+
   /**
-   * This methode creates a json string with the FileManager object.
-   * Methode formats the text as the comment above.
-  */
+   * Converts FridgeManager-object to JSON-text, formatted as specified above.
+   * @param fmanager
+   * @param jgenerator
+   * @param sprovider
+   */
   @Override
   public void serialize(
       FridgeManager fmanager, JsonGenerator jgenerator, SerializerProvider sprovider)

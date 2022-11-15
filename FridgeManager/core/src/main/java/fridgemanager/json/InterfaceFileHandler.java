@@ -13,7 +13,7 @@ public interface InterfaceFileHandler {
   void saveObject(FridgeManager fridge);
 
   /**
-   * Loads the saved FridgeManager object from disc.
+   * Loads the saved FridgeManager-object from disc.
   */
   FridgeManager loadFridgeManager();
 }

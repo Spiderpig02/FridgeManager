@@ -14,7 +14,7 @@ import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 
 /**
- * Unit test Fridgemanager.
+ * Class for testing FridgeManager.
 */
 public class FridgeManagerTest {
 
@@ -26,7 +26,7 @@ public class FridgeManagerTest {
   Food mugg;
 
   /**
-   * Initilize Frigemanager and Food variables.
+   * Initialize a FridgeManager-object and Food-variables.
   */
   @BeforeEach
   void init() {
@@ -40,16 +40,16 @@ public class FridgeManagerTest {
   }
 
   /**
-   * Simple constructortest.
+   * Test of Constructor.
   */
   @Test
   public void testConstructor() {
 
-    //Check the size of the Freezer and Fridge
+    //Check the size of the Freezer and the Fridge.
     assertEquals(3, fridgemanager.getFreezerMaxsize());
     assertEquals(3, fridgemanager.getFridgeMaxsize());
 
-    //Trigger the IllegalArgumentException. Size need to be a positive number
+    //Testing if IllegalArgumentException is correctly thrown in case of negative input.
     assertThrows(IllegalArgumentException.class,() -> {
       FridgeManager fridgeNeg = new FridgeManager(-2, 7);
     });
@@ -59,7 +59,8 @@ public class FridgeManagerTest {
   }
 
   /**
-  * Test that addfridge content works, and that it returns a copy of the list and not the real list.
+  * Test that addFridgeContent works and returns a copy of the content-list 
+  * instead of the actual list.
   */
   @Test
   public void testAddFridgeContents() {
@@ -71,22 +72,22 @@ public class FridgeManagerTest {
     fridgecontent.add(banan);
     fridgecontent.add(eple);
 
-    //Check if the list fridgecontent equals the content in the Fridge
+    //Check if the list fridgecontent equals the content in the Fridge.
     assertEquals(fridgecontent, fridgemanager.getFridgeContents());
 
     fridgemanager.addFridgeContent(tomat);
 
-    //Check if the list fridgecontent is different from the content in the Fridge
+    //Check if the list fridgecontent is different from the content in the Fridge.
     assertFalse(fridgecontent.equals(fridgemanager.getFridgeContents()));
 
-    //Trigger the IllegalArgumentException. Too many object are added to the Fridge
+    //Trigger the IllegalArgumentException. Too many object are added to the Fridge.
     assertThrows(IllegalArgumentException.class,() -> {
       fridgemanager.addFridgeContent(mugg);
     });
   }
 
   /**
-  * Test that addfreezercontent works, and that it returns a copy of the list and not the real list
+  * Test that addfreezercontent works, and that it returns a copy of the list and not the real list.
   */
   @Test
   public void testAddFreezerContents() {
@@ -98,22 +99,22 @@ public class FridgeManagerTest {
     freezercontent.add(banan);
     freezercontent.add(eple);
 
-    //Check if the list freezercontent equals the content in the Freezer
+    //Check if the list freezercontent equals the content in the Freezer.
     assertEquals(freezercontent, fridgemanager.getFreezerContents());
 
     fridgemanager.addFreezerContent(tomat);
 
-    //Check if the list fridgecontent is different from the content in the Fridge
+    //Check if the list fridgecontent is different from the content in the Fridge.
     assertFalse(freezercontent.equals(fridgemanager.getFreezerContents()));
 
-    //Trigger the IllegalArgumentException. Too many object are added to the Freezer
+    //Testing if IllegalArgumentException is thrown correctly when freezer is full.
     assertThrows(IllegalArgumentException.class,() -> {
       fridgemanager.addFreezerContent(mugg);
     });
   }
 
   /**
-   * Test for removeFrigdecontent.
+   * Test for removeFridgecontent.
   */
   @Test
   public void testRemoveFridgeContents() {
@@ -126,10 +127,10 @@ public class FridgeManagerTest {
     fridgecontent.add(banan);
     fridgecontent.add(eple);
 
-    //Check if the list fridgecontent is different from the content in the Fridge
+    //Check if the list fridgecontent is different from the content in the Fridge.
     assertFalse(fridgemanager.getFridgeContents().equals(fridgecontent));
 
-    //Try to delete an object that is not in the fridge
+    //Try to delete an object that is not in the fridge.
     fridgemanager.removeFridgeContent(mugg);
   }
 
@@ -147,10 +148,10 @@ public class FridgeManagerTest {
     freezercontent.add(banan);
     freezercontent.add(eple);
 
-    //Check if the list freezercontent is different from the content in the Freezer
+    //Check if the list freezercontent is different from the content in the Freezer.
     assertFalse(fridgemanager.getFreezerContents().equals(freezercontent));
 
-    //Try to delete an object that is not in the freezer
+    //Try to delete an object that is not in the freezer.
     fridgemanager.removeFreezerContent(mugg);
   }
 }

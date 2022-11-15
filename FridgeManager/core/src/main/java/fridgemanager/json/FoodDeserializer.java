@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * FoodDeserializier handles the task of deserializing json text to a Food class.
+ * FoodDeserializer handles the task of deserializing json-text to Food-objects.
 */
 public class FoodDeserializer extends JsonDeserializer<Food> {
 
@@ -22,10 +22,13 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
    * format: { "Name": "String","Unit": "String", "Quantity": int, "Owner": "String",
    * "ExpirationDate": "String" }
   */
+
   /**
-   * This method handles the main task of getting json text inn and returning a Food object.
-   * If no Food object exist, return null.
-  */
+   * Deserializes JSON-text into treeNodes and calls deserializer() to create a Food-object.
+   * @param parser 
+   * @param ctxt
+   * @return Food if it exists, null otherwise
+   */
   @Override
   public Food deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JacksonException {
@@ -34,9 +37,10 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
   }
 
   /**
-   * Deserialize jsonNode objects and returns Food object if sucsessfull,
-   * else null.
-  */
+   * Converts content of JSON-text into a Food-object.
+   * @param jsonNode
+   * @return Food if it exists, null otherwise.
+   */
   public Food deserializer(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       String name = null;

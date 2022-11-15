@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 import fridgemanager.core.Food;
 
 /**
- * Unit test Food.
+ * Class for testing Food.
 */
 public class FoodTest {
 
   Food paprika;
 
   /**
-   * Initilize Food variables.
+   * Initialize food-object.
   */
   @BeforeEach
   void init() {
@@ -26,36 +26,36 @@ public class FoodTest {
   }
 
   /**
-   * Simple constructortest.
+   * Tests constructor.
   */
   @Test
   public void testConstructor() {
 
-    //Checking if the initilized variables are correct
+    //Checking if the initialized variables are correct.
     assertEquals(4, paprika.getQuantity());
     assertEquals("Paprika", paprika.getName());
     assertEquals("stk", paprika.getUnit());
     assertEquals("Ola", paprika.getOwner());
     assertEquals(LocalDate.of(2022,1,28), paprika.getExpirationDate());
 
-    //Testing IllegalArgumentException for negative input
+    //Testing if IllegalArgumentException is correctly thrown in case of negative input.
     assertThrows(IllegalArgumentException.class, () -> {
       Food laks = new Food("Laks","stk",-4, LocalDate.of(2022,1,28),"Ola");
     });
   }
 
   /**
-  * Test changeQuantity.
+  * Test setQuantity.
   */
   @Test
   public void testsetQuantity() {
   
       paprika.setQuantity(1500);
   
-      //Check if the quantity is changed
+      //Check if the quantity is changed.
       assertEquals(1500, paprika.getQuantity());
   
-      //Test IllegalArgumentException for negative input
+      //Test IllegalArgumentException for negative input.
       assertThrows(IllegalArgumentException.class,() -> {
       paprika.setQuantity(-2);
       });
@@ -69,12 +69,12 @@ public class FoodTest {
   public void testSetUnit() {
       paprika.setUnit("kg");
   
-      //Check if the quantity is changed
+      //Check if the quantity is changed.
       assertEquals("kg", paprika.getUnit());
   }
   
   /**
-  * Test toString method.
+  * Test toString-method.
   */
   @Test
   public void testToString() {

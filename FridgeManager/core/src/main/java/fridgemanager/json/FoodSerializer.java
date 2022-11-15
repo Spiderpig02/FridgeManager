@@ -7,7 +7,7 @@ import fridgemanager.core.Food;
 import java.io.IOException;
 
 /**
- * FoodSerializer class handles the serializing of the Food object.
+ * FoodSerializer class handles the serializing of Food-objects into JSON-text.
 */
 public class FoodSerializer extends JsonSerializer<Food> {
 
@@ -15,10 +15,13 @@ public class FoodSerializer extends JsonSerializer<Food> {
    * format: { "Name": "String", "Unit": "String", "Quantity": "int", "Owner": "String",
    * "ExpirationDate": "String" }
   */
+
   /**
-   * The method for converting Food objects to a json format,
-   * with the expected outcome above this coment.
-  */
+   * Converts Food-object to JSON-text, formatted as specified above.
+   * @param food
+   * @param jgenerator
+   * @param sprovider
+   */
   @Override
   public void serialize(Food food, JsonGenerator jgenerator, SerializerProvider sprovider)
       throws IOException {

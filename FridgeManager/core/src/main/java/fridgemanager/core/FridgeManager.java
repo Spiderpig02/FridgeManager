@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that contains food-items and handles adding and removing from fridge or freezer
+ * Class that contains food-items and handles adding and removing from fridge or freezer.
 */
 public class FridgeManager {
   private List<Food> frigdecontents = new ArrayList<Food>();
@@ -17,7 +17,7 @@ public class FridgeManager {
    * of fridge and freezer. 
    * @param fridgemaxsize
    * @param freezermaxsize
-   * @throws IllegalArgumentException if invalid input is given (sizes < 0)
+   * @throws IllegalArgumentException if invalid input is given (sizes < 0).
    */
   public FridgeManager(int fridgemaxsize, int freezermaxsize) throws IllegalArgumentException {
     if (fridgemaxsize < 0) {
@@ -31,37 +31,37 @@ public class FridgeManager {
   }
 
   /**
-   * Returns a list containing food-items in fridge
+   * Returns a list containing food-items in fridge.
   */
   public List<Food> getFridgeContents() {
     return new ArrayList<>(frigdecontents);
   }
 
   /**
-   * Returns a list containing food-items in freezer
+   * Returns a list containing food-items in freezer.
   */
   public List<Food> getFreezerContents() {
     return new ArrayList<>(freezercontents);
   }
 
   /**
-   * Getter freezermaxsize
+   * Getter freezermaxsize.
   */
   public int getFreezerMaxsize() {
     return freezermaxsize;
   }
 
   /**
-   * Getter fridgemaxsize
+   * Getter fridgemaxsize.
   */
   public int getFridgeMaxsize() {
     return fridgemaxsize;
   }
 
   /**
-   * Adds a food-item to the fridge
-   * @param content - food to be added
-   * @throws IllegalArgumentException if fridge is full (number of items = max size)
+   * Adds a food-item to the fridge.
+   * @param content - food to be added.
+   * @throws IllegalArgumentException if fridge is full (number of items = max size).
    */
   public void addFridgeContent(Food content) throws IllegalArgumentException {
     if (frigdecontents.size() == fridgemaxsize) {
@@ -72,9 +72,9 @@ public class FridgeManager {
   }
 
   /**
-   * Adds a food-item to the freezer
-   * @param content - food to be added
-   * @throws IllegalArgumentException if freezer is full 
+   * Adds a food-item to the freezer.
+   * @param content - food to be added.
+   * @throws IllegalArgumentException if freezer is full.
    */
   public void addFreezerContent(Food content) throws IllegalArgumentException {
     if (freezercontents.size() == freezermaxsize) {
@@ -85,9 +85,9 @@ public class FridgeManager {
   }
 
   /**
-   * Removes a given food-item from the fridge
-   * @param remove - food to be removed
-   * @returns true if item exists in fridge and was removed succesfully, false if not
+   * Removes a given food-item from the fridge.
+   * @param remove - food to be removed.
+   * @returns true if item exists in fridge and was removed succesfully, false if not.
    */
   public boolean removeFridgeContent(Food remove) {
     if (frigdecontents.contains(remove)) {
@@ -98,9 +98,9 @@ public class FridgeManager {
   }
 
   /**
-   * Removes a given food-item from the freezer
-   * @param remove - food to be removed
-   * @return true if item exists in fridge and was removed succesfully, false if not
+   * Removes a given food-item from the freezer.
+   * @param remove - food to be removed.
+   * @return true if item exists in fridge and was removed succesfully, false if not.
    */
   public boolean removeFreezerContent(Food remove) {
     if (freezercontents.contains(remove)) {

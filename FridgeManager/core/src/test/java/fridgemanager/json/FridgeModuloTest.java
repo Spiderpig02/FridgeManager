@@ -60,14 +60,14 @@ public class FridgeModuloTest {
   }
 
   /*
-   * Testing the Serializer.
+   * Testing the serializer.
    */
   @Test
   public void testSerializers() throws JsonProcessingException {
     fridgemanager.addFreezerContent(paprika);
     fridgemanager.addFridgeContent(banan);
 
-    // Verifing that fridgeManagerWithTwoItems is equal to content written into JSON.
+    // Verifying that fridgeManagerWithTwoItems is equal to content written in JSON-text.
     try {
       assertEquals(fridgeManagerWithTwoItems, mapper.writeValueAsString(fridgemanager));
 
@@ -85,7 +85,7 @@ public class FridgeModuloTest {
       FridgeManager fridgemanager = mapper.readValue(fridgeManagerWithTwoItems,FridgeManager.class);
       List<Food> frigdecontents = fridgemanager.getFridgeContents();
 
-      //Checking that Banan is the only content in fridgecontents.
+      //Checking that "Banan" is the only Food-item in fridgecontents.
       Iterator<Food> it = frigdecontents.iterator();
       assertTrue(it.hasNext());
       checkItem(it.next(),"Banan", 8, "stk", LocalDate.of(2022,2,10), "Halvor");
@@ -119,7 +119,7 @@ public class FridgeModuloTest {
 
 
   /*
-   * Help function. Verifing food element.
+   * Function used to verify validity of values of food-items.
    */
   public void checkItem(Food food, String name, int quantity, String unit, LocalDate localDate, String owner) {
     assertEquals(name, food.getName());

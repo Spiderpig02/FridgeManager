@@ -1,16 +1,12 @@
 package fridgemanager.ui;
 
-//imports
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
 import javax.security.auth.callback.Callback;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,7 +46,6 @@ public class FridgeController {
   @FXML private ChoiceBox<String> dropDownMenuRemove;
   @FXML private DatePicker datePickerExpiration;
   
-  
   private FridgeManager fridgemanager;
   private Food toBeRemoved;
   private FileHandler filehandler;
@@ -85,7 +80,7 @@ public class FridgeController {
   }
   
   /**
-   * Starts program by initializing UI
+   * Starts program by initializing UI.
   */
   @FXML
   private void initialize() {
@@ -101,7 +96,7 @@ public class FridgeController {
   }
   
   /**
-   * Setting FXML-elements to correct state upon startup
+   * Setting FXML-elements to correct state upon startup.
   */
   @FXML
   private void startup() {
@@ -128,14 +123,14 @@ public class FridgeController {
   }
 
   /**
-   * Retrieves expiration-date entered by user
+   * Retrieves expiration-date entered by user.
    */
   public void getDatePick() {
     this.datepick = datePickerExpiration.getValue();
   }
   
   /**
-   * Registers if the user wants to add a food-item to either the fridge or the freezer
+   * Registers if the user wants to add a food-item to either the fridge or the freezer.
    * @param mouse-click
    */
   public void getAddChoice(ActionEvent event) {
@@ -143,7 +138,7 @@ public class FridgeController {
   }
 
   /**
-   * Retrieves unit selected by user 
+   * Retrieves unit selected by user.
    * @param mouse-click
    */
   public void getUnitChoice(ActionEvent event) {
@@ -151,7 +146,7 @@ public class FridgeController {
   }
 
   /**
-   * Registers if the users wants to remove a food-item from either the fridge or the freezer
+   * Registers if the users wants to remove a food-item from either the fridge or the freezer.
    * @param mouse-click
    */
   public void getRemovalChoice(ActionEvent event) {
@@ -159,7 +154,7 @@ public class FridgeController {
   }
 
   /**
-   * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields
+   * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
    * @param keypress
    */
   @FXML
@@ -175,7 +170,7 @@ public class FridgeController {
   }
 
   /**
-   * Adds a food-item to either the fridge or the freezer 
+   * Adds a food-item to either the fridge or the freezer
    * depending on input given by the user, and saves state of program. 
   */
   @FXML
@@ -236,7 +231,7 @@ public class FridgeController {
   }
 
   /**
-   * Hides FXML-elements that make up the removal-menu
+   * Hides FXML-elements that make up the removal-menu.
    */
   @FXML
   private void hideRemovalMenu() {
@@ -252,7 +247,7 @@ public class FridgeController {
   }
 
   /**
-   * Creates a food-item depending on input given by the user 
+   * Creates a food-item depending on input given by the user.
    */
   @FXML
   private Food createFoodFromInput() {
@@ -272,7 +267,7 @@ public class FridgeController {
   }
 
   /**
-   * Registers what food-item the user has selected in the fridge
+   * Registers what food-item the user has selected in the fridge.
    * @param mouse-selection
    */
   @FXML
@@ -282,7 +277,7 @@ public class FridgeController {
   }
 
   /**
-   * Registers what food-item the user has selected in the freezer
+   * Registers what food-item the user has selected in the freezer.
    * @param mouse-selection
    */
   @FXML
@@ -384,12 +379,12 @@ public class FridgeController {
   }
 
   /**
-   * Refreshes visual content in fridge and freezer by retrieving content from fridgemanager
+   * Refreshes visual content in fridge and freezer by retrieving content from fridgemanager.
   */
   @FXML
   private void updateContent() {
-
     fridgeContent.getItems().clear();
+
     for (Food food : fridgemanager.getFridgeContents()) {
       if (food.getQuantity() == 0) {
         fridgemanager.getFridgeContents().remove(food);
@@ -397,6 +392,7 @@ public class FridgeController {
         fridgeContent.getItems().add(food);
       }
     }
+    changeFoodColorFridge();
     
     freezerContent.getItems().clear();
     for (Food food : fridgemanager.getFreezerContents()) {
@@ -406,33 +402,11 @@ public class FridgeController {
         freezerContent.getItems().add(food);
       }
     }
-    changeFoodColor();
+    changeFoodColorFreezer();
   }  
 
-  @FXML
-  private void changeFoodColor() {
-    // fridgeContent.setCellFactory(cell -> {
-    //   return new ListCell<Food>() {
-    //     @Override
-    //     protected void updateItem(Food food, boolean empty) {
-    //       super.updateItem(food, empty);
-    //       LocalDate localtoday = LocalDate.now();
-    //       long difference = ChronoUnit.DAYS.between(localtoday, food.getExpirationDate());
-    //       System.out.println(difference);
-    //       if (food != null) {
-    //         if (difference <= 10) {
-    //           setStyle("-fx-text-fill: red");
-    //           setText(food.toString());
-    //         }
-            
-    //       }
-    //     }
-    //   };
-    // });
-  }
-
   /**
-   * Displays error-message to user on screen
+   * Displays error-message to user on screen.
    * @param errormessage
    */
   @FXML
@@ -441,7 +415,58 @@ public class FridgeController {
   }
 
   /**
-   * Hides/removes error message when user selects a textfield
+   * Changes text-color of food items in fridge that 
+   * expire in 10 days or less to red. 
+   */
+  @FXML
+  private void changeFoodColorFridge() {
+    fridgeContent.setCellFactory(cell -> {
+      return new ListCell<Food>() {
+        @Override
+        protected void updateItem(Food food, boolean empty) {
+          super.updateItem(food, empty);
+          if (food != null) {
+            LocalDate today = LocalDate.now();
+            long difference = ChronoUnit.DAYS.between(today, food.getExpirationDate());
+            if (difference <= 10) {
+              setStyle("-fx-text-fill: red");
+            }
+            setText(food.toString());
+          }
+          else {
+            setText(null);
+          }
+        }
+      };
+    });
+  }
+
+  /**
+   * Changes text-color of food items in freezer that 
+   * expire in 10 days or less to red. 
+   */
+  @FXML
+  private void changeFoodColorFreezer() {
+    freezerContent.setCellFactory(cell -> {
+      return new ListCell<Food>() {
+        @Override
+        protected void updateItem(Food food, boolean empty) {
+          super.updateItem(food, empty);
+          if (food != null) {
+            LocalDate today = LocalDate.now();
+            long difference = ChronoUnit.DAYS.between(today, food.getExpirationDate());
+            if (difference <= 10) { 
+              setStyle("-fx-text-fill: red");
+            }
+            setText(food.toString());
+          }
+        }
+      };
+    });
+  }
+
+  /**
+   * Hides/removes error message when user selects a textfield.
   */
   @FXML
   private void hideErrorMessage() {
@@ -449,12 +474,12 @@ public class FridgeController {
   }
 
   /**
-   * Validates input given by user in textfields
+   * Validates input given by user in textfields.
    * @param food
    * @param quantity
    * @param expiration
    * @param owner
-   * @return true if input is valid, false if not
+   * @return true if input is valid, false if not.
    */
   private Boolean validateInput(String food, int quantity, LocalDate expiration, String owner) {
     try {
@@ -481,10 +506,10 @@ public class FridgeController {
   }
 
   /**
-   * Validates input given by user in textfields when trying to remove specific amount of food-item
+   * Validates input given by user in textfields when trying to remove specific amount of food-item.
    * @param food
    * @param quantity
-   * @return true if input is approved, false if not
+   * @return true if input is approved, false if not.
    */
   private Boolean validateRemovalInput(String food, int quantity) {
     try {
@@ -505,7 +530,7 @@ public class FridgeController {
   }
 
   /**
-   * @return FridgeManager-object
+   * @return FridgeManager-object.
    */
   public FridgeManager getFridgeManager() {
     return this.fridgemanager;

@@ -6,7 +6,7 @@ import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 
 /**
- * A jacson module for configuring json serialization and deserializing of FridgeManager objects.
+ * A Jackson module for configuring JSON-serialization and deserialization of FridgeManager-objects.
 */
 @SuppressWarnings("serial")
 public class FridgeManagerModule extends SimpleModule {
@@ -16,7 +16,7 @@ public class FridgeManagerModule extends SimpleModule {
       new Version(1, 0, 1, "SNAPSHOT", "fridge_manager", "gruppe_39");
 
   /**
-   * Initializes this object with the coresponding serializing and deserializing classes.
+   * Initializes object with the correspondig serialization and deserialization-classes.
   */
   public FridgeManagerModule() {
     super(NAME, VERSION);

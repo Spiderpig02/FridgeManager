@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 /**
  * Wrapper class for JSON serialization and deserialization.
- * Avoid direct compile dependencies on Jackson for other modules.
+ * Avoids direct compilation-dependencies on Jackson for other modules.
  */
 public class FileHandler implements InterfaceFileHandler {
 
@@ -30,7 +30,7 @@ public class FileHandler implements InterfaceFileHandler {
   }
 
   /**
-   * Method for initializing the the object with specified path.
+   * Method for initializing the object when path is specified.
    */
   public FileHandler(String fileName) {
     this.fileName = fileName;
@@ -58,8 +58,7 @@ public class FileHandler implements InterfaceFileHandler {
 
   /**
    * Loads the saved FridgeManager object from system to app.
-   * Returns the saved object if it exists,
-   * null otherwise.
+   * Returns the saved object if it exists, null otherwise.
    */
   public FridgeManager loadFridgeManager() {
     try (Reader reader = new FileReader(fileName, StandardCharsets.UTF_8)) {

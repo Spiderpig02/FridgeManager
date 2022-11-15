@@ -57,6 +57,8 @@ public class RemoteFridgeController {
   private ListView<Food> freezercontent;
   @FXML
   private ChoiceBox<String> dropDownMenu;
+  @FXML
+  String endpointUri;
 
   private Food toBeRemoved;
   private Boolean infridge;
@@ -79,6 +81,7 @@ public class RemoteFridgeController {
    */
   @FXML
   private void initialize() {
+
     startup();
     updateContent();
     // if (fridgemanager.getFridgeContents().size() > 0

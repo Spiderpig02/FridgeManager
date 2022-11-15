@@ -13,11 +13,11 @@ public class FridgeManagerService {
 
     public FridgeManagerService(FridgeManager fridgeManager) {
         this.fridgeManager = fridgeManager;
-        this.filhander = new FileHandler("RestServerSave.txt");
+        this.filhander = new FileHandler("RestServerSave.json");
     }
 
     public FridgeManagerService() {
-        this.filhander = new FileHandler("RestServerSave.txt");
+        this.filhander = new FileHandler("RestServerSave.json");
         this.fridgeManager = inizializeFridgeManager();
     }
 

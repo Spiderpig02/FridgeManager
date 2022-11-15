@@ -21,6 +21,6 @@ public class RemoteFridgeApp extends Application {
   }
 
   public static void main(String[] args) {
-    launch();
+    launch(RemoteFridgeApp.class, args);
   }
 }

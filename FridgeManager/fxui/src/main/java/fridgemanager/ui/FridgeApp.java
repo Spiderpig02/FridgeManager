@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 /**
  * JavaFX App.
-*/
+ */
 public class FridgeApp extends Application {
 
   @Override

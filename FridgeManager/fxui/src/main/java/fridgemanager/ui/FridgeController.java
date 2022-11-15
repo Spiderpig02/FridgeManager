@@ -20,43 +20,61 @@ import javafx.scene.text.Text;
  */
 public class FridgeController {
 
-  @FXML private TextField textfieldFood;
-  @FXML private TextField textfieldQuantity;
-  @FXML private TextField textfieldExpiration;
-  @FXML private TextField textfieldOwner;
-  @FXML private TextField textfieldFoodRemove;
-  @FXML private TextField textfieldQuantityRemove;
-  @FXML private Text removetext;
-  @FXML private Text removeSpecificAmount;
-  @FXML private Text foodtext;
-  @FXML private Text quantitytext;
-  @FXML private Text removeFromText;
-  @FXML private Text errortext;
-  @FXML private Button fridgeButton;
-  @FXML private Button freezerButton;
-  @FXML private Button removebutton;
-  @FXML private Button removebutton2;
-  @FXML private ListView<Food> fridgecontent;
-  @FXML private ListView<Food> freezercontent;
-  @FXML private ChoiceBox<String> dropDownMenu;
+  @FXML
+  private TextField textfieldFood;
+  @FXML
+  private TextField textfieldQuantity;
+  @FXML
+  private TextField textfieldExpiration;
+  @FXML
+  private TextField textfieldOwner;
+  @FXML
+  private TextField textfieldFoodRemove;
+  @FXML
+  private TextField textfieldQuantityRemove;
+  @FXML
+  private Text removetext;
+  @FXML
+  private Text removeSpecificAmount;
+  @FXML
+  private Text foodtext;
+  @FXML
+  private Text quantitytext;
+  @FXML
+  private Text removeFromText;
+  @FXML
+  private Text errortext;
+  @FXML
+  private Button fridgeButton;
+  @FXML
+  private Button freezerButton;
+  @FXML
+  private Button removebutton;
+  @FXML
+  private Button removebutton2;
+  @FXML
+  private ListView<Food> fridgecontent;
+  @FXML
+  private ListView<Food> freezercontent;
+  @FXML
+  private ChoiceBox<String> dropDownMenu;
 
   private FridgeManager fridgemanager;
   private Food toBeRemoved;
   private FileHandler filehandler;
   private Boolean infridge;
   private Boolean infreezer;
-  private String[] options = {"fridge", "freezer"};
+  private String[] options = { "fridge", "freezer" };
   private String choice;
 
   /**
    * Initializes Controller by creating a new fridgemanager-object.
+   * 
    * @throws URISyntaxException
-  */
+   */
   public FridgeController() throws URISyntaxException {
     this.filehandler = new FileHandler();
     loadOrCreateFridgeManager();
-    RemoteFridgeAccess access = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
-    access.getFridgeManager();
   }
 
   /**
@@ -64,7 +82,7 @@ public class FridgeController {
    * Determine if there was a prior save or first time the program launches.
    * Return saved fridgemanager,
    * if first time a new FridgeManager is created.
-  */
+   */
   private void loadOrCreateFridgeManager() {
     FridgeManager tempFridge = filehandler.loadFridgeManager();
     if (tempFridge == null) {
@@ -76,7 +94,7 @@ public class FridgeController {
 
   /**
    * Starts program by initializing UI.
-  */
+   */
   @FXML
   private void initialize() {
     startup();
@@ -89,7 +107,7 @@ public class FridgeController {
 
   /**
    * Setting FXML-elements to correct state upon startup.
-  */
+   */
   @FXML
   private void startup() {
     fridgeButton.setDisable(true);
@@ -113,7 +131,7 @@ public class FridgeController {
 
   /**
    * Enables the "Add To Fridge" and "Add To Freezer"-buttons.
-  */
+   */
   @FXML
   private void enableAddButtons() {
     if (!textfieldFood.getText().equals("")
@@ -130,7 +148,7 @@ public class FridgeController {
 
   /**
    * Creates a new food item from input given by user and adds this to the fridge.
-  */
+   */
   @FXML
   private void addToFridge() {
     showRemovalMenu();
@@ -146,8 +164,9 @@ public class FridgeController {
   }
 
   /**
-   * Creates a new food item from input given by user and adds this to the freezer.
-  */
+   * Creates a new food item from input given by user and adds this to the
+   * freezer.
+   */
   @FXML
   private void addToFreezer() {
     showRemovalMenu();
@@ -165,7 +184,7 @@ public class FridgeController {
 
   /**
    * Clears input in textfields.
-  */
+   */
   @FXML
   private void clearInput() {
     textfieldFood.clear();
@@ -176,7 +195,7 @@ public class FridgeController {
 
   /**
    * Shows FXML-elements connected to the removal-menu.
-  */
+   */
   @FXML
   private void showRemovalMenu() {
     removetext.setVisible(true);
@@ -195,7 +214,7 @@ public class FridgeController {
 
   /**
    * Food item generated from input.
-  */
+   */
   @FXML
   private Food createFoodFromInput() {
     String food = textfieldFood.getText();
@@ -213,7 +232,7 @@ public class FridgeController {
 
   /**
    * Handle a mouse click on an fridge element.
-  */
+   */
   @FXML
   private void handleMouseClickFridge(MouseEvent mouseevent) {
     toBeRemoved = fridgecontent.getSelectionModel().getSelectedItem();
@@ -222,7 +241,7 @@ public class FridgeController {
 
   /**
    * Handle a mouse click on an freezer element.
-  */
+   */
   @FXML
   private void handleMouseClickFreezer(MouseEvent mouseevent) {
     toBeRemoved = freezercontent.getSelectionModel().getSelectedItem();
@@ -309,8 +328,9 @@ public class FridgeController {
   }
 
   /**
-   * Refreshes content in fridge and freezer by retrieving content from fridgemanager.
-  */
+   * Refreshes content in fridge and freezer by retrieving content from
+   * fridgemanager.
+   */
   @FXML
   private void updateContent() {
     fridgecontent.getItems().clear();
@@ -334,7 +354,7 @@ public class FridgeController {
 
   /**
    * Displays error message.
-  */
+   */
   @FXML
   private void showErrorMessage(String message) {
     errortext.setText(message);
@@ -342,7 +362,7 @@ public class FridgeController {
 
   /**
    * Hides/removes error message when users selects a textfield.
-  */
+   */
   @FXML
   private void hideErrorMessage() {
     errortext.setText("");
@@ -398,7 +418,7 @@ public class FridgeController {
 
   /**
    * Getter fridgemanager.
-  */
+   */
   public FridgeManager getFridgeManager() {
     return this.fridgemanager;
   }

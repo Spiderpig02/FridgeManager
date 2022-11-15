@@ -24,7 +24,7 @@ public class FileHandler implements InterfaceFileHandler {
    * Method for initializing the object without specified path
    */
   public FileHandler() {
-    this("FridgeSave.txt");
+    this("FridgeSave.json");
   }
 
   /**

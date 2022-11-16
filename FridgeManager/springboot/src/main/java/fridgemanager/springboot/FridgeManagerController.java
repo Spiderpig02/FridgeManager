@@ -3,7 +3,6 @@ package fridgemanager.springboot;
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class FridgeManagerController {
   @GetMapping
   public FridgeManager getFridgeManager() {
     logger.debug("getFridgeManager");
-    return this.fridgeManagerService.getFridgeManager();>
+    return this.fridgeManagerService.getFridgeManager();
   }
   
   private void autoSave() {
@@ -65,6 +64,11 @@ public class FridgeManagerController {
     return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
   }
   
+  /**
+   * Removes element from Fridge.
+   *
+   * @param id id of the Food to be removed
+   */
   @DeleteMapping(path = "/removeFridgeContent/{id}")
   public boolean removeFridgeContent(@PathVariable("id") String id) {
     logger.debug("removeFridgeContent: " + id);
@@ -73,6 +77,11 @@ public class FridgeManagerController {
     return removed;
   }
   
+  /**
+   * Removes element from Freezer.
+   *
+   * @param id id of the Food to be removed
+   */
   @DeleteMapping(path = "/removeFreezerContent/{id}")
   public boolean removeFreezerContent(@PathVariable("id") String id) {
     logger.debug("removeFreezerContent: " + id);
@@ -81,14 +90,28 @@ public class FridgeManagerController {
     return removed;
   }
   
+  /**
+   * Set new quantity for Food.
+   *
+   * @param quantity new quantity
+   * @param food the Food object
+   * @return true if it was added, false if it replaced
+   */
   @PutMapping(path = "/setQuantity/{quantity}")
   public boolean setQuantity(@PathVariable("quantity") int quantity, @RequestBody Food food) {
     logger.debug(food.toString());
-    System.out.println(this.fridgeManagerService.getFridgeManager().setQuantity(quantity, food.getId()));
+    System.out.println(this.fridgeManagerService.getFridgeManager()
+        .setQuantity(quantity, food.getId()));
     this.autoSave();
     return true;
   }
   
+  /**
+   * Add new Food object to Fridge.
+   *
+   * @param food the Food object
+   * @return true if it was added, else false
+   */
   @PostMapping(path = "/addFridgeContent")
   public boolean addFridgeContent(@RequestBody Food food) {
     boolean tmp = false;
@@ -97,11 +120,18 @@ public class FridgeManagerController {
       tmp = true;
       logger.debug(food.toString());
     } catch (Exception e) {
+      System.out.println("Could not add Food to Fridge");
     }
     this.autoSave();
     return tmp;
   }
   
+  /**
+   * Add new Food object to Freezer.
+   *
+   * @param food the Food object
+   * @return true if it was added, else false
+   */
   @PostMapping(path = "/addFreezerContent")
   public boolean addFreezerContent(@RequestBody Food food) {
     boolean tmp = false;
@@ -110,6 +140,7 @@ public class FridgeManagerController {
       tmp = true;
       logger.debug(food.toString());
     } catch (Exception e) {
+      System.out.println("Could not add Food to Freezer");
     }
     this.autoSave();
     return tmp;

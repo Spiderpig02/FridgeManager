@@ -6,14 +6,14 @@
     "Unit" : "stk",
     "Owner" : "Halvor",
     "ExpirationDate" : "2022-11-16",
-    "UUID" : "cb888ff6-9dc5-49fd-be4e-e446a5ce66f6"
+    "UUID" : "a17c4828-8dfb-4a96-ac97-5cfb8824e015"
   }, {
     "Name" : "Ostepopp",
     "Quantity" : 0,
     "Unit" : "stk",
     "Owner" : "Halvor",
     "ExpirationDate" : "2022-11-16",
-    "UUID" : "06e5d50f-1a14-423b-abae-b78ec45773fc"
+    "UUID" : "b51ee06f-ccbe-4b32-a747-67f791ed7832"
   } ],
   "FreezerMaxSize" : 10,
   "FreezerContents" : [ {
@@ -22,20 +22,20 @@
     "Unit" : "stk",
     "Owner" : "Halvor",
     "ExpirationDate" : "2022-11-16",
-    "UUID" : "d1ad7a45-d520-4451-8cb4-bb70de2198cd"
+    "UUID" : "228e5c5d-46ef-4bca-aa04-63b83628079b"
   }, {
     "Name" : "Pære",
     "Quantity" : 3,
     "Unit" : "stk",
     "Owner" : "Halvor",
     "ExpirationDate" : "2022-11-16",
-    "UUID" : "45c2417d-6345-495a-9165-85990c07bf8a"
+    "UUID" : "25db348c-f7dc-42ef-8536-d05a5551e054"
   }, {
     "Name" : "Ostepopp",
     "Quantity" : 0,
     "Unit" : "stk",
     "Owner" : "Halvor",
     "ExpirationDate" : "2022-11-16",
-    "UUID" : "5a52addc-d292-48e6-be6e-d9a1b878aaa7"
+    "UUID" : "32c30ad9-2bc8-4b82-82ef-ede1ccd315e5"
   } ]
 }

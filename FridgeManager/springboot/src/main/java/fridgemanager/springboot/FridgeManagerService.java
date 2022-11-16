@@ -36,7 +36,7 @@ public class FridgeManagerService {
   private FridgeManager inizializeFridgeManager() {
     FridgeManager tmp = this.filhander.loadFridgeManager();
     if (tmp == null) {
-        tmp = new FridgeManager(25, 25);
+      tmp = new FridgeManager(25, 25);
     }
     return tmp;
   }

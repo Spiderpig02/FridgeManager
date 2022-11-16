@@ -17,11 +17,11 @@ public class Food {
   /**
    * Creates a new Food-object from input.
    * 
-   * @param name name of Food.
-   * @param unit unit of Food.
-   * @param quantity quantity of Food.
-   * @param expirationDate date of expiration to Food.
-   * @param owner owner of Food.
+   * @param name name of Food
+   * @param unit unit of Food
+   * @param quantity quantity of Food
+   * @param expirationDate date of expiration to Food
+   * @param owner owner of Food
    * @throws IllegalArgumentException if invalid quantity (<0) is given as argument.
    */
   public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner)

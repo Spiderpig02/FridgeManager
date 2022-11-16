@@ -114,7 +114,7 @@ public class FridgeManagerTest {
    * Test for removeFridgecontent.
   */
   @Test
-  public void testRemoveFridgeContents() {
+  public void testRemoveFridgeContent() {
 
     fridgemanager.addFridgeContent(banan);
     fridgemanager.addFridgeContent(eple);
@@ -130,13 +130,14 @@ public class FridgeManagerTest {
 
     //Try to delete an object that is not in the fridge.
     fridgemanager.removeFridgeContent(mugg);
+    fridgemanager.removeFridgeContent(mugg.getId());
   }
 
   /**
    * Test for removeFreezercontent.
   */
   @Test
-  public void testRemoveFreezerContents() {
+  public void testRemoveFreezerContent() {
 
     fridgemanager.addFreezerContent(banan);
     fridgemanager.addFreezerContent(eple);
@@ -152,8 +153,27 @@ public class FridgeManagerTest {
 
     //Try to delete an object that is not in the freezer.
     fridgemanager.removeFreezerContent(mugg);
+    fridgemanager.removeFreezerContent(mugg.getId());
   }
 
+
+
+  /**
+   * Test setQuantity in Fridge.
+  */
+  @Test
+  public void testSetQuantityFridge() {
+
+    //Add Food Freezer
+    fridgemanager.addFridgeContent(banan);
+    fridgemanager.addFridgeContent(eple);
+
+    //set quantity to 333. Verify that it is changed.
+  
+    fridgemanager.setQuantity(333,banan.getId());
+    assertEquals(333, banan.getQuantity());
+  }
+  
   /**
    * Test setQuantity in FridgeManager.
   */
@@ -163,10 +183,12 @@ public class FridgeManagerTest {
     //Add Food Freezer
     fridgemanager.addFreezerContent(banan);
     fridgemanager.addFreezerContent(eple);
-    
-    fridgemanager.setQuantity(333,banan.getId());
 
-    //Check if the quantity is changed.
+    //set quantity to 333. Verify that it is changed.
+    fridgemanager.setQuantity(333,banan.getId());
     assertEquals(333, banan.getQuantity());
+
+    //try to set an object not existing in freezer or fridge.
+    fridgemanager.setQuantity(333,mugg.getId());
   }
 }

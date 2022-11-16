@@ -1,15 +1,10 @@
 package fridgemanager.ui;
 
-import java.net.URI;
 import java.net.URISyntaxException;
-
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import javax.security.auth.callback.Callback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +13,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -155,6 +149,7 @@ public class FridgeController {
   
   /**
    * Registers if the user wants to add a food-item to either the fridge or the freezer.
+   * 
    * @param mouse-click
    */
   public void getAddChoice(ActionEvent event) {
@@ -163,6 +158,7 @@ public class FridgeController {
 
   /**
    * Retrieves unit selected by user.
+   * 
    * @param mouse-click
    */
   public void getUnitChoice(ActionEvent event) {
@@ -171,6 +167,7 @@ public class FridgeController {
 
   /**
    * Registers if the users wants to remove a food-item from either the fridge or the freezer.
+   * 
    * @param mouse-click
    */
   public void getRemovalChoice(ActionEvent event) {
@@ -179,6 +176,7 @@ public class FridgeController {
 
   /**
    * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
+   * 
    * @param keypress
    */
   @FXML
@@ -194,7 +192,7 @@ public class FridgeController {
   }
 
   /**
-   * Adds a food-item to either the fridge or the freezer
+   * Adds a food-item to either the fridge or the freezer.
    * depending on input given by the user, and saves state of program. 
   */
   @FXML
@@ -292,6 +290,7 @@ public class FridgeController {
 
   /**
    * Registers what food-item the user has selected in the fridge.
+   * 
    * @param mouse-selection
    */
   @FXML
@@ -302,6 +301,7 @@ public class FridgeController {
 
   /**
    * Registers what food-item the user has selected in the freezer.
+   * 
    * @param mouse-selection
    */
   @FXML
@@ -311,10 +311,10 @@ public class FridgeController {
   }
 
   /**
-   * Removes food-item from either the fridge or freezer depending on 
-   * value of variables infridge and infreezer.
-   * Updates visibility of FXML-elements depending on amount of items
-   * in fridge and freezer.
+   * Removes food-item from either the fridge or freezer,
+   * depending on the value of variables infridge and infreezer.
+   * Updates visibility of FXML-elements,
+   * depending on amount of items in fridge and freezer.
    */
   @FXML
   private void handleRemove() {
@@ -341,7 +341,7 @@ public class FridgeController {
   
 
   /**
-   * Removes specific amount of food from either fridge or freezer
+   * Removes specific amount of food from either fridge or freezer,
    * depending on input given by user.
    */
   @FXML
@@ -431,6 +431,7 @@ public class FridgeController {
 
   /**
    * Displays error-message to user on screen.
+   * 
    * @param errormessage
    */
   @FXML
@@ -439,8 +440,8 @@ public class FridgeController {
   }
 
   /**
-   * Changes text-color of food items in fridge that 
-   * expire in 10 days or less to red. 
+   * Changes text-color of food items in fridge that expire in 10 days or less.
+   * Changed to red.
    */
   @FXML
   private void changeFoodColorFridge() {

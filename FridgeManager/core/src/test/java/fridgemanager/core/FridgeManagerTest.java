@@ -10,9 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fridgemanager.core.Food;
-import fridgemanager.core.FridgeManager;
-
 /**
  * Class for testing FridgeManager.
 */
@@ -122,6 +119,7 @@ public class FridgeManagerTest {
     fridgemanager.addFridgeContent(banan);
     fridgemanager.addFridgeContent(eple);
     fridgemanager.removeFridgeContent(eple);
+    fridgemanager.removeFridgeContent(banan.getId());
 
     List<Food> fridgecontent = new ArrayList<>();
     fridgecontent.add(banan);
@@ -143,6 +141,7 @@ public class FridgeManagerTest {
     fridgemanager.addFreezerContent(banan);
     fridgemanager.addFreezerContent(eple);
     fridgemanager.removeFreezerContent(eple);
+    fridgemanager.removeFreezerContent(banan.getId());
 
     List<Food> freezercontent = new ArrayList<>();
     freezercontent.add(banan);
@@ -153,5 +152,21 @@ public class FridgeManagerTest {
 
     //Try to delete an object that is not in the freezer.
     fridgemanager.removeFreezerContent(mugg);
+  }
+
+  /**
+   * Test setQuantity in FridgeManager.
+  */
+  @Test
+  public void testSetQuantityFreezer() {
+
+    //Add Food Freezer
+    fridgemanager.addFreezerContent(banan);
+    fridgemanager.addFreezerContent(eple);
+    
+    fridgemanager.setQuantity(333,banan.getId());
+
+    //Check if the quantity is changed.
+    assertEquals(333, banan.getQuantity());
   }
 }

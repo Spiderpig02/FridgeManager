@@ -1,7 +1,6 @@
 package fridgemanager.core;
 
 import java.time.LocalDate;
-
 import java.util.UUID;
 
 /**
@@ -13,15 +12,16 @@ public class Food {
   private String owner;
   private LocalDate expirationDate;
   private String unit;
-  private String uniqueID;
+  private String uniqueId;
 
   /**
    * Creates a new Food-object from input.
-   * @param name
-   * @param unit
-   * @param quantity
-   * @param expirationDate
-   * @param owner
+   * 
+   * @param name name of Food.
+   * @param unit unit of Food.
+   * @param quantity quantity of Food.
+   * @param expirationDate date of expiration to Food.
+   * @param owner owner of Food.
    * @throws IllegalArgumentException if invalid quantity (<0) is given as argument.
    */
   public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner)
@@ -35,14 +35,23 @@ public class Food {
     }
     this.quantity = quantity;
 
-    this.uniqueID = UUID.randomUUID().toString();
+    this.uniqueId = UUID.randomUUID().toString();
   }
 
   /**
-   * Constructor.
+   * Creates a new Food-object from input.
+   * 
+   * @param name name of Food.
+   * @param unit unit of Food.
+   * @param quantity quantity of Food.
+   * @param expirationDate date of expiration to Food.
+   * @param owner owner of Food.
+   * @param uuid unique id to the Food object
+   * @throws IllegalArgumentException if invalid quantity (<0) is given as argument.
    */
-  public Food(String name, String unit, int quantity, LocalDate expirationDate, String owner, String uuid)
-      throws IllegalArgumentException {
+  public Food(String name, String unit, int quantity, LocalDate expirationDate,
+      String owner, String uuid) throws IllegalArgumentException {
+    
     this.name = name;
     this.unit = unit;
     this.expirationDate = expirationDate;
@@ -51,8 +60,7 @@ public class Food {
       throw new IllegalArgumentException("Quantity needs to have a positive value");
     }
     this.quantity = quantity;
-
-    this.uniqueID = uuid;
+    this.uniqueId = uuid;
   }
 
   /**
@@ -65,8 +73,8 @@ public class Food {
   /**
    * Getter ID.
    */
-  public String id() {
-    return this.uniqueID;
+  public String getId() {
+    return this.uniqueId;
   }
 
   /**
@@ -99,7 +107,7 @@ public class Food {
 
   /**
    * Sets new quantity for Food-item.
-   * @param newQuantity
+   * @param newQuantity .
    * @throws IllegalArgumentException if newQuantity < 0.
    */
   public void setQuantity(int newQuantity) {

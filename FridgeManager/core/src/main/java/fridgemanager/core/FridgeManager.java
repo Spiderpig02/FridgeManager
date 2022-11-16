@@ -104,7 +104,7 @@ public class FridgeManager {
   public boolean removeFridgeContent(String uuid) {
 
     for (Food food : frigdecontents) {
-      if (food.id().equals(uuid)) {
+      if (food.getId().equals(uuid)) {
         frigdecontents.remove(food);
         return true;
       }
@@ -131,7 +131,7 @@ public class FridgeManager {
   public boolean removeFreezerContent(String uuid) {
 
     for (Food food : freezercontents) {
-      if (food.id().equals(uuid)) {
+      if (food.getId().equals(uuid)) {
         freezercontents.remove(food);
         return true;
       }
@@ -141,13 +141,13 @@ public class FridgeManager {
 
   public boolean setQuantity(int quantity, String uuid) {
     for (Food food : frigdecontents) {
-      if (food.id().equals(uuid)) {
+      if (food.getId().equals(uuid)) {
         food.setQuantity(quantity);
         return true;
       }
     }
     for (Food food : freezercontents) {
-      if (food.id().equals(uuid)) {
+      if (food.getId().equals(uuid)) {
         food.setQuantity(quantity);
         return true;
       }

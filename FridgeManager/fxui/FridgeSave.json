@@ -1,0 +1,41 @@
+{
+  "FridgeMaxSize" : 10,
+  "FridgeContents" : [ {
+    "Name" : "Popcorn",
+    "Quantity" : 1,
+    "Unit" : "stk",
+    "Owner" : "Halvor",
+    "ExpirationDate" : "2022-11-16",
+    "UUID" : "cb888ff6-9dc5-49fd-be4e-e446a5ce66f6"
+  }, {
+    "Name" : "Ostepopp",
+    "Quantity" : 0,
+    "Unit" : "stk",
+    "Owner" : "Halvor",
+    "ExpirationDate" : "2022-11-16",
+    "UUID" : "06e5d50f-1a14-423b-abae-b78ec45773fc"
+  } ],
+  "FreezerMaxSize" : 10,
+  "FreezerContents" : [ {
+    "Name" : "Storfe",
+    "Quantity" : 1,
+    "Unit" : "stk",
+    "Owner" : "Halvor",
+    "ExpirationDate" : "2022-11-16",
+    "UUID" : "d1ad7a45-d520-4451-8cb4-bb70de2198cd"
+  }, {
+    "Name" : "Pære",
+    "Quantity" : 3,
+    "Unit" : "stk",
+    "Owner" : "Halvor",
+    "ExpirationDate" : "2022-11-16",
+    "UUID" : "45c2417d-6345-495a-9165-85990c07bf8a"
+  }, {
+    "Name" : "Ostepopp",
+    "Quantity" : 0,
+    "Unit" : "stk",
+    "Owner" : "Halvor",
+    "ExpirationDate" : "2022-11-16",
+    "UUID" : "5a52addc-d292-48e6-be6e-d9a1b878aaa7"
+  } ]
+}

@@ -452,10 +452,13 @@ public class RemoteFridgeController {
           if (food != null) {
             LocalDate today = LocalDate.now();
             long difference = ChronoUnit.DAYS.between(today, food.getExpirationDate());
-            if (difference <= 10) { 
+            if (difference <= 10) {
               setStyle("-fx-text-fill: red");
             }
             setText(food.toString());
+          }
+          else {
+            setText(null);
           }
         }
       };

@@ -9,7 +9,7 @@
 
     <artifactId>fxui</artifactId>
 
-      <dependencies>
+    <dependencies>
         <dependency>
             <groupId>FridgeManager</groupId>
             <artifactId>core</artifactId>
@@ -64,8 +64,7 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
-      </dependencies>
+    </dependencies>
 
       
 
@@ -86,8 +85,44 @@
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
                     <mainClass>fridgemanager.ui/fridgemanager.ui.RemoteFridgeApp</mainClass>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>fridgemanagerfx</launcher>
+                    <jlinkImageName>fridgemanagerfx</jlinkImageName>
+                    <jlinkZipName>fridgemanagerfx</jlinkZipName>
                 </configuration>
             </plugin>
+
+            <!-- config above and below taken from https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>FridgeManagerFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>fridgemanager.ui/fridgemanager.ui.RemoteFridgeApp</module>
+                    <runtimeImage>target/fridgemanagerfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>FridgeManagerFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>FridgeManagerFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
+
             <!-- Run the checkstyle code quality tool -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

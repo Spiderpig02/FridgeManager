@@ -1,17 +1,16 @@
-module fridgemanager.ui {
-  requires transitive fridgemanager.core;
-  requires javafx.base;
-  requires javafx.controls;
-  requires javafx.fxml;
-  requires transitive javafx.graphics;
-  requires com.fasterxml.jackson.core;
-  requires com.fasterxml.jackson.databind;
+module fridge_manager.ui {
+    requires transitive fridge_manager.core;
 
-  opens fridgemanager.ui to
-      javafx.graphics,
-      javafx.fxml;
+    requires javafx.base;
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires transitive javafx.graphics;
 
-  exports fridgemanager.ui;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
-  requires java.net.http;
+    opens fridge_manager.ui to javafx.graphics, javafx.fxml;
+    exports fridge_manager.ui;
+
+    requires java.net.http;
 }

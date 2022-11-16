@@ -1,9 +1,9 @@
-module fridgemanager.core {
-  requires transitive com.fasterxml.jackson.databind;
+module fridge_manager.core {
+    requires transitive com.fasterxml.jackson.databind;
 
-  exports fridgemanager.core;
-  exports fridgemanager.json;
+    exports fridge_manager.core;
+    exports fridge_manager.json;
 
-  opens fridgemanager.core;
-  opens fridgemanager.json;
+    opens fridge_manager.core;
+    opens fridge_manager.json;
 }

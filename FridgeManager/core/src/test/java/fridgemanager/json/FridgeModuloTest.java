@@ -40,8 +40,8 @@ public class FridgeModuloTest {
    */
   @BeforeEach
   void init() {
-    paprika = new Food("Paprika","stk", 4, LocalDate.of(2022,1,30),"Ola");
-    banan = new Food("Banan","stk", 8, LocalDate.of(2022,2,10), "Halvor");
+    paprika = new Food("Paprika","stk", 4, LocalDate.of(2022,1,30),"Ola", "3ba10b09-ba60-49da-b1ac-455b384a5f8b");
+    banan = new Food("Banan","stk", 8, LocalDate.of(2022,2,10), "Halvor", "a75ce814-8f3d-4011-a92d-878dbc7af2c2");
     fridgemanager = new FridgeManager(3, 3);
 
     /*
@@ -54,9 +54,9 @@ public class FridgeModuloTest {
      */
     fridgeManagerWithTwoItems =
       "{\"FridgeMaxSize\":3,"
-        + "\"FridgeContents\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Unit\":\"stk\",\"Owner\":\"Halvor\",\"ExpirationDate\":\"2022-02-10\"}],"
+        + "\"FridgeContents\":[{\"Name\":\"Banan\",\"Quantity\":8,\"Unit\":\"stk\",\"Owner\":\"Halvor\",\"ExpirationDate\":\"2022-02-10\",\"UUID\":\"a75ce814-8f3d-4011-a92d-878dbc7af2c2\"}],"
         + "\"FreezerMaxSize\":3,"
-        + "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Unit\":\"stk\",\"Owner\":\"Ola\",\"ExpirationDate\":\"2022-01-30\"}]}";
+        + "\"FreezerContents\":[{\"Name\":\"Paprika\",\"Quantity\":4,\"Unit\":\"stk\",\"Owner\":\"Ola\",\"ExpirationDate\":\"2022-01-30\",\"UUID\":\"3ba10b09-ba60-49da-b1ac-455b384a5f8b\"}]}";
   }
 
   /*

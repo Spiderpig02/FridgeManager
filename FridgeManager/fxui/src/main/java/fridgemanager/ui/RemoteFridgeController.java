@@ -4,10 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-
 import fridgemanager.core.Food;
-import fridgemanager.core.FridgeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -78,9 +75,9 @@ public class RemoteFridgeController {
   private RemoteFridgeAccess remoteFridgeAccess;
 
   /**
-   * Initializes Controller by creating a new fridgemanager-object.
-   * 
-   * @throws URISyntaxException
+   * Add new Food object to Fridge.
+   *
+   * @throws URISyntaxExeption exseption
    */
   public RemoteFridgeController() throws URISyntaxException {
     remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
@@ -150,6 +147,7 @@ public class RemoteFridgeController {
 
   /**
    * Registers if the users wants to remove a food-item from either the fridge or the freezer.
+   * 
    * @param mouse-click
    */
   public void getRemovalChoice(ActionEvent event) {
@@ -158,6 +156,7 @@ public class RemoteFridgeController {
 
     /**
    * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
+   * 
    * @param keypress
    */
   @FXML

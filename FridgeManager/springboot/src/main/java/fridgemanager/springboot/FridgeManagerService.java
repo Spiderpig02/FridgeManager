@@ -11,37 +11,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class FridgeManagerService {
 
-    private FileHandler filhander;
-    private FridgeManager fridgeManager;
+  private FileHandler filhander;
+  private FridgeManager fridgeManager;
+  
+  public FridgeManagerService(FridgeManager fridgeManager) {
+    this.fridgeManager = fridgeManager;
+    this.filhander = new FileHandler("RestServerSave.json");
+  }
+  
+  public FridgeManagerService() {
+    this.filhander = new FileHandler("RestServerSave.json");
+    this.fridgeManager = inizializeFridgeManager();
+  }
 
-    public FridgeManagerService(FridgeManager fridgeManager) {
-        this.fridgeManager = fridgeManager;
-        this.filhander = new FileHandler("RestServerSave.json");
+  public FridgeManager getFridgeManager() {
+    return this.fridgeManager;
+  }
+  
+  public void setFridgeManager(FridgeManager fridgeManager) {
+    this.fridgeManager = fridgeManager;
+    this.autoSave();
+  }
+  
+  private FridgeManager inizializeFridgeManager() {
+    FridgeManager tmp = this.filhander.loadFridgeManager();
+    if (tmp == null) {
+      tmp = new FridgeManager(25, 25);
     }
-
-    public FridgeManagerService() {
-        this.filhander = new FileHandler("RestServerSave.json");
-        this.fridgeManager = inizializeFridgeManager();
-    }
-
-    public FridgeManager getFridgeManager() {
-        return this.fridgeManager;
-    }
-
-    public void setFridgeManager(FridgeManager fridgeManager) {
-        this.fridgeManager = fridgeManager;
-        this.autoSave();
-    }
-
-    private FridgeManager inizializeFridgeManager() {
-        FridgeManager tmp = this.filhander.loadFridgeManager();
-        if (tmp == null) {
-            tmp = new FridgeManager(25, 25);
-        }
-        return tmp;
-    }
-
-    public void autoSave() {
-        this.filhander.saveObject(this.fridgeManager);
-    }
+    return tmp;
+  }
+  
+  public void autoSave() {
+    this.filhander.saveObject(this.fridgeManager);
+  }
 }

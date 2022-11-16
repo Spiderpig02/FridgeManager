@@ -71,10 +71,10 @@ public class RemoteFridgeAccess {
 
   private void remove(Food food, String function) {
     try {
-      HttpRequest request = HttpRequest.newBuilder(makeUri(function + "/" + food.id()))
+      HttpRequest request = HttpRequest.newBuilder(makeUri(function + "/" + food.getId()))
           .header(ACCEPT_HEADER, APPLICATION_JSON)
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-          .header(food.id(), APPLICATION_JSON)
+          .header(food.getId(), APPLICATION_JSON)
           .DELETE()
           .build();
 

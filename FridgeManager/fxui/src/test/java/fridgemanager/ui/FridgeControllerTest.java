@@ -250,6 +250,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /**
   * Compare if two elements are equal.
+  *
   * @param food1
   * @param food2
   */
@@ -263,6 +264,7 @@ public class FridgeControllerTest extends ApplicationTest {
 
   /**
   * Write values of food-item into textfields.
+  *
   * @param name
   * @param quantity
   * @param unit

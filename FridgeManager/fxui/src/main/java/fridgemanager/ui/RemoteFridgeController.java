@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import fridgemanager.core.Food;
+import fridgemanager.core.FoodComparator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -404,6 +405,9 @@ public class RemoteFridgeController {
       }
     }
     changeFoodColorFreezer();
+
+    fridgeContent.getItems().sort(new FoodComparator());
+    freezerContent.getItems().sort(new FoodComparator());
   }
 
   /**

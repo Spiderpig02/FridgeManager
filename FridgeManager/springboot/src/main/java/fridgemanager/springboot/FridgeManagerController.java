@@ -130,8 +130,7 @@ public class FridgeManagerController {
   @PutMapping(path = "/setQuantity/{quantity}")
   public boolean setQuantity(@PathVariable("quantity") int quantity, @RequestBody Food food) {
     logger.debug(food.toString());
-    System.out.println(this.fridgeManagerService.getFridgeManager()
-        .setQuantity(quantity, food.getId()));
+    System.out.println(this.fridgeManagerService.getFridgeManager().setQuantity(quantity, food.getId()));
     this.autoSave();
     return true;
   }

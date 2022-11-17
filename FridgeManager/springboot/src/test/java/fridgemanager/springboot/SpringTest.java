@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,6 +21,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
 
+@AutoConfigureMockMvc
+@ContextConfiguration(classes = { FridgeManagerApp.class, FridgeManagerService.class, FridgeManagerController.class })
+@WebMvcTest
 public class SpringTest {
 
     @Autowired
@@ -47,7 +53,7 @@ public class SpringTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-        try {
+        try { 
             FridgeManager fridgeManager = objectMapper.readValue(result.getResponse().getContentAsString(),
                     FridgeManager.class);
             System.out.println(fridgeManager);
@@ -67,13 +73,9 @@ public class SpringTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         try {
-            FridgeManager fridgeManager = objectMapper.readValue(result.getResponse().getContentAsString(),
-                    FridgeManager.class);
-            System.out.println(fridgeManager);
-            assertEquals(fridgeManager.getFridgeMaxsize(), 25);
-            assertEquals(fridgeManager.getFreezerMaxsize(), 25);
-            assertNotEquals(fridgeManager.getFridgeContents(), null);
-            assertNotEquals(fridgeManager.getFreezerContents(), null);
+            int fridgeSize = objectMapper.readValue(result.getResponse().getContentAsString(),
+                    Integer.class);
+            assertEquals(fridgeSize, 25);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

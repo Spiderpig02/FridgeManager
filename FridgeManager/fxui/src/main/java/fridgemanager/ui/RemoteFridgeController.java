@@ -336,11 +336,11 @@ public class RemoteFridgeController {
       Integer quantity = Integer.parseInt(textFieldQuantityRemove.getText());
       if (validateRemovalInput(foodname, quantity) == true) {
         if (choice == "fridge") {
-          if (remoteFridgeAccess.getFridgeManager().getFridgeContents().size() == 0) {
+          if (remoteFridgeAccess.getFrigdeContent().size() == 0) {
             throw new IllegalArgumentException();
           }
   
-          for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
+          for (Food food : remoteFridgeAccess.getFrigdeContent()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
                 remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
@@ -354,10 +354,10 @@ public class RemoteFridgeController {
             }
           }
         } else if (choice == "freezer") {
-          if (remoteFridgeAccess.getFridgeManager().getFreezerContents().size() == 0) {
+          if (remoteFridgeAccess.getFreezerContent().size() == 0) {
             throw new IllegalArgumentException();
           }
-          for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
+          for (Food food : remoteFridgeAccess.getFreezerContent()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
                 remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
@@ -389,7 +389,7 @@ public class RemoteFridgeController {
   @FXML
   private void updateContent() {
     fridgeContent.getItems().clear();
-    for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
+    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
       System.out.println(food.toString());
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFridgeContent(food);
@@ -401,7 +401,7 @@ public class RemoteFridgeController {
 
 
     freezerContent.getItems().clear();
-    for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
+    for (Food food : remoteFridgeAccess.getFreezerContent()) {
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFreezerContent(food);
       } else {

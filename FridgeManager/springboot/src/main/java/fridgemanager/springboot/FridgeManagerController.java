@@ -31,7 +31,7 @@ public class FridgeManagerController {
   
   /**
    * Returns a fridgemanager-object.
-   * 
+
    * @return FridgeManager
    */
   @GetMapping
@@ -50,8 +50,8 @@ public class FridgeManagerController {
   
   /**
    * Retrieve and return content in fridge. 
-   * 
-   * @return List<Food> fridgecontent
+
+   * @return fridgecontent
    */
   @GetMapping(path = "/getFridgeContent")
   public List<Food> getFridgeContent() {
@@ -61,7 +61,7 @@ public class FridgeManagerController {
   
   /**
    * Retrieve and return content in freezer.
-   * 
+
    * @return ListzFood> freezercontent
    */
   @GetMapping(path = "/getFreezerContent")
@@ -72,7 +72,7 @@ public class FridgeManagerController {
   
   /**
    * Retrieves and returns max number of items allowed in fridge.
-   * 
+
    * @return int fridgemaxsize
    */
   @GetMapping(path = "/getFrigdeMaxsize")
@@ -83,7 +83,7 @@ public class FridgeManagerController {
 
   /**
    * Retrieves and returns max number of items allowed in freezer.
-   * 
+
    * @return int freezermaxsize
    */
   @GetMapping(path = "/getFreezerMaxsize")
@@ -94,7 +94,7 @@ public class FridgeManagerController {
   
   /**
    * Removes Food-item from Fridge.
-   * 
+
    * @param id id of the Food to be removed.
    * @return Food that has been removed.
    */
@@ -108,7 +108,7 @@ public class FridgeManagerController {
   
   /**
    * Removes Food-item from Freezer.
-   * 
+
    * @param id id of the Food to be removed.
    * @return Food that has been removed.
    */
@@ -122,7 +122,7 @@ public class FridgeManagerController {
   
   /**
    * Sets new quantity for Food.
-   * 
+
    * @param quantity new quantity.
    * @param food the Food object.
    * @return true if it was added, false if it is replaced.
@@ -130,14 +130,15 @@ public class FridgeManagerController {
   @PutMapping(path = "/setQuantity/{quantity}")
   public boolean setQuantity(@PathVariable("quantity") int quantity, @RequestBody Food food) {
     logger.debug(food.toString());
-    System.out.println(this.fridgeManagerService.getFridgeManager().setQuantity(quantity, food.getId()));
+    System.out.println(this.fridgeManagerService.getFridgeManager()
+        .setQuantity(quantity, food.getId()));
     this.autoSave();
     return true;
   }
   
   /**
    * Add new Food-item to Fridge.
-   * 
+
    * @param food the Food object.
    * @return true if it was added, false otherwise.
    */
@@ -157,7 +158,7 @@ public class FridgeManagerController {
   
   /**
    * Add new Food-item to Freezer.
-   * 
+
    * @param food the Food object.
    * @return true if it was added, false otherwise.
    */

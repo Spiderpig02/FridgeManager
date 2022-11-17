@@ -14,7 +14,7 @@ public class FridgeManagerApp {
 
   /**
    * Method to retrieve a Jackson-module from FileHandler. 
-   * 
+
    * @return Jackson-module
    */
   @Bean

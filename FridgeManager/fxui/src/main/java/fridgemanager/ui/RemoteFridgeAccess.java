@@ -8,12 +8,10 @@ import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

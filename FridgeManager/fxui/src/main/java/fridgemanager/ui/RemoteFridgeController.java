@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -535,5 +536,9 @@ public class RemoteFridgeController {
       showErrorMessage("Ugyldig input!");
     }
     return true;
+  }
+
+  public FridgeManager getFridgeManager(){
+    return remoteFridgeAccess.getFridgeManager();
   }
 }

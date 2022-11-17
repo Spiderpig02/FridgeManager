@@ -16,7 +16,7 @@ public class Food {
 
   /**
    * Creates a new Food-object from input.
-   * 
+
    * @param name name of Food
    * @param unit unit of Food
    * @param quantity quantity of Food
@@ -40,7 +40,7 @@ public class Food {
 
   /**
    * Creates a new Food-object from input.
-   * 
+
    * @param name name of Food.
    * @param unit unit of Food.
    * @param quantity quantity of Food.
@@ -107,8 +107,8 @@ public class Food {
 
   /**
    * Sets new quantity for Food-item.
-   * 
-   * @param newQuantity.
+
+   * @param newQuantity the new quantity
    * @throws IllegalArgumentException if newQuantity < 0.
    */
   public void setQuantity(int newQuantity) {
@@ -121,8 +121,8 @@ public class Food {
 
   /**
    * Sets new unit for Food-item.
-   * 
-   * @param unit
+
+   * @param unit unit for the food
    */
   public void setUnit(String unit) {
     this.unit = unit;

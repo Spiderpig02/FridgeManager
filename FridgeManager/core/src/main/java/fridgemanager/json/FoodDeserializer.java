@@ -25,9 +25,9 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
 
   /**
    * Deserializes JSON-text into treeNodes and calls deserializer() to create a Food-object.
-   * 
-   * @param parser 
-   * @param ctxt
+
+   * @param parser  parser for jsonobject
+   * @param ctxt context for json
    * @return Food if it exists, null otherwise
    */
   @Override
@@ -38,8 +38,9 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
   }
 
   /**
-  * Converts content of JSON-text into a Food-object.
-  * @param jsonNode
+  * Converts content of JSON-text into a Food-object. 
+
+  * @param jsonNode dezerializer for jsonstream
   * @return Food if it exists, null otherwise.
   */
   public Food deserializer(JsonNode jsonNode) {
@@ -48,7 +49,7 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
-      String Uuid = null;
+      String uuid = null;
       String unit = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
@@ -70,12 +71,12 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-      JsonNode UuidNode = jsonNode.get("UUID");
-      if (UuidNode instanceof TextNode) {
-        Uuid = UuidNode.asText();
+      JsonNode uuidNode = jsonNode.get("UUID");
+      if (uuidNode instanceof TextNode) {
+        uuid = uuidNode.asText();
       }
 
-      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner, Uuid);
+      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner, uuid);
     }
     return null;
   }

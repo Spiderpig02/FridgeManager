@@ -18,10 +18,10 @@ public class FoodSerializer extends JsonSerializer<Food> {
 
   /**
    * Converts Food-object to JSON-text, formatted as specified above.
-   * 
-   * @param food
-   * @param jgenerator
-   * @param sprovider
+
+   * @param food food to be serialized
+   * @param jgenerator generator for json
+   * @param sprovider provider for json
    */
   @Override
   public void serialize(Food food, JsonGenerator jgenerator, SerializerProvider sprovider)

@@ -1,7 +1,8 @@
 **Beskrivelse av klassene i core-mappen:**
 =
 <u><font size="2">**Food.java:**</font></u> Grunnleggende klasse for en matvare med tilhørende navn, antall, enhet, utløpsdato og eier.       
-<u><font size="2">**FridgeManager.java:**</font></u> Klasse som administrer to lister med Food-objekter i to lister Fridge og Freezer.          
+<u><font size="2">**FridgeManager.java:**</font></u> Klasse som administrer to lister med Food-objekter i to lister Fridge og Freezer.
+<u><font size="2">**FoodComparator.java:**</font></u> Funksjonelt grensesnitt som muligjør sammenlikning av Foodobjekter. Dette gjør at for eksempel at en liste Food-objekter kan sorteres.           
 <u><font size="2">**FileHandler.java:**</font></u> Administrerer lagring og skriving av innholdet i Fridge og Freezer til filen "FridgeSave.json"       
 <u><font size="2">**FoodDeserializer.java:**</font></u> Tar inn JSON-tekst tilhørende food-objekter og omgjør denne til faktiske Food-objekter          
 <u><font size="2">**FoodSerializer.java:**</font></u> Tar inn Food-objekter og gjør disse om til JSON-tekst      

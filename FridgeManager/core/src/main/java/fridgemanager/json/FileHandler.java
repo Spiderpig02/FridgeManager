@@ -68,15 +68,5 @@ public class FileHandler implements InterfaceFileHandler {
     }
     return null;
   }
-
-  public static void main(String[] args) {
-    FileHandler filehandler = new FileHandler();
-    FridgeManager fridgemanager = new FridgeManager(3, 3);
-
-    fridgemanager.addFreezerContent(new Food("Eple","stk",3,LocalDate.now(),"Halvor"));
-    filehandler.saveObject(fridgemanager);
-
-    System.out.println(filehandler.loadFridgeManager().getFreezerContents().get(0));
-  }
 }
 

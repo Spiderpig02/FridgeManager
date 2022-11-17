@@ -2,6 +2,7 @@ package fridgemanager.ui;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
@@ -100,11 +101,12 @@ public class RemoteFridgeAccess {
       String responseString = response.body();
       System.out.println(function + " response: " + responseString);
 
-      List<Food> freezerContent = new ArrayList<Food>();
-      for (Object object : objectMapper.readValue(response.body(), List.class)) {
-        freezerContent.add((Food) object);
-      }
-      return freezerContent;
+      CollectionType javaType = objectMapper.getTypeFactory()
+      .constructCollectionType(List.class, Food.class);
+
+      List<Food> Content = objectMapper.readValue(responseString, javaType);
+      return Content;
+
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
@@ -195,10 +197,5 @@ public class RemoteFridgeAccess {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static void main(String[] args) throws URISyntaxException {
-    RemoteFridgeAccess remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
-    System.out.println(remoteFridgeAccess.getFrigdeContent());
   }
 }

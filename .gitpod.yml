@@ -3,6 +3,7 @@ image:
 
 tasks:
   - init: sdk use java 19-open
+    command: cd FridgeManager;mvn install
 
 
 ports:

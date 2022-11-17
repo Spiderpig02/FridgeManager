@@ -15,7 +15,8 @@ public class FridgeManagerService {
   
   /**
    * Constructor FridgeManagerService.
-   * @param fridgeManager
+
+   * @param fridgeManager fridgemanager
    */
   public FridgeManagerService(FridgeManager fridgeManager) {
     this.fridgeManager = fridgeManager;
@@ -31,7 +32,8 @@ public class FridgeManagerService {
   }
 
   /**
-   * Getter FridgeManager
+   * Getter FridgeManager.
+
    * @return fridgemanager
    */
   public FridgeManager getFridgeManager() {
@@ -40,7 +42,8 @@ public class FridgeManagerService {
 
   /**
    * Sets new FridgeManager and saves.
-   * @param fridgeManager
+
+   * @param fridgeManager fridgemanager
    */
   public void setFridgeManager(FridgeManager fridgeManager) {
     this.fridgeManager = fridgeManager;
@@ -49,6 +52,7 @@ public class FridgeManagerService {
   
   /**
    * Initializes a fridgemanager-object.
+
    * @return fridgemanager
    */
   private FridgeManager initializeFridgeManager() {

@@ -7,11 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
- * The Spring application.
+ * The Springboot application.
  */
 @SpringBootApplication
 public class FridgeManagerApp {
 
+  /**
+   * Method to retrieve a Jackson-module from FileHandler. 
+   * 
+   * @return Jackson-module
+   */
   @Bean
   public Module objectMapperModule() {
     return FileHandler.createJacsonModule();

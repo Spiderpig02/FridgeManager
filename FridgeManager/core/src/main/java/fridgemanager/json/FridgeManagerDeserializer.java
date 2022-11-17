@@ -29,6 +29,7 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
 
   /**
    * Deserializes JSON-text into treeNodes and calls deserialize() to create a FridgeManager-object.
+   * 
    * @param parser
    * @param ctxt
    * @return FridgeManager if it exists, null otherwise.
@@ -42,6 +43,7 @@ public class FridgeManagerDeserializer extends JsonDeserializer<FridgeManager> {
 
    /**
     * Deserializes JSON-texts into a FridgeManager-object.
+    
     * @param treeNode
     * @return FridgeManaager if conversion is successful, null otherwise.
     */

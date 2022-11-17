@@ -21,6 +21,7 @@ public class FridgeManagerSerializer extends JsonSerializer<FridgeManager> {
 
   /**
    * Converts FridgeManager-object to JSON-text, formatted as specified above.
+   * 
    * @param fmanager
    * @param jgenerator
    * @param sprovider

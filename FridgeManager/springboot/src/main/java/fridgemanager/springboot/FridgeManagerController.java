@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The service implementation.
+ * Controller for communication with springboot-server.
+ * Logs every command. 
  */
-
 @RestController
 @RequestMapping(FridgeManagerController.FridgeManagerServicePath)
 public class FridgeManagerController {
@@ -29,45 +29,74 @@ public class FridgeManagerController {
   @Autowired
   private FridgeManagerService fridgeManagerService;
   
+  /**
+   * Returns a fridgemanager-object.
+   * 
+   * @return FridgeManager.
+   */
   @GetMapping
   public FridgeManager getFridgeManager() {
     logger.debug("getFridgeManager");
     return this.fridgeManagerService.getFridgeManager();
-  }
+  } 
   
+  /**
+   * Saves state of fridgemanager to file. 
+   */
   private void autoSave() {
     logger.debug("autoSaved");
     this.fridgeManagerService.autoSave();
   }
   
+  /**
+   * Retrieve and return content in fridge. 
+   * 
+   * @return List<Food> fridgecontent
+   */
   @GetMapping(path = "/getFridgeContent")
   public List<Food> getFridgeContent() {
     logger.debug("getFridgeContent");
     return this.fridgeManagerService.getFridgeManager().getFridgeContents();
   }
   
+  /**
+   * Retrieve and return content in freezer.
+   * 
+   * @return ListzFood> freezercontent
+   */
   @GetMapping(path = "/getFreezerContent")
   public List<Food> getFreezerContent() {
     logger.debug("getFreezerContent");
     return this.fridgeManagerService.getFridgeManager().getFreezerContents();
   }
   
+  /**
+   * Retrieves and returns max number of items allowed in fridge.
+   * 
+   * @return int fridgemaxsize
+   */
+  @GetMapping(path = "/getFrigdeMaxsize")
+  public int getFrigdeMaxsize() {
+    logger.debug("getFrigdeMaxsize");
+    return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
+  }
+
+  /**
+   * Retrieves and returns max number of items allowed in freezer.
+   * 
+   * @return int freezermaxsize
+   */
   @GetMapping(path = "/getFreezerMaxsize")
   public int getFreezerMaxsize() {
     logger.debug("getFreezerMaxsize");
     return this.fridgeManagerService.getFridgeManager().getFreezerMaxsize();
   }
   
-  @GetMapping(path = "/getFrigdeMaxsize")
-  public int getFrigdeMaxsize() {
-    logger.debug("getFrigdeMaxsize");
-    return this.fridgeManagerService.getFridgeManager().getFridgeMaxsize();
-  }
-  
   /**
-   * Removes element from Fridge.
-   *
-   * @param id id of the Food to be removed
+   * Removes Food-item from Fridge.
+   * 
+   * @param id id of the Food to be removed.
+   * @return Food that has been removed.
    */
   @DeleteMapping(path = "/removeFridgeContent/{id}")
   public boolean removeFridgeContent(@PathVariable("id") String id) {
@@ -78,9 +107,10 @@ public class FridgeManagerController {
   }
   
   /**
-   * Removes element from Freezer.
-   *
-   * @param id id of the Food to be removed
+   * Removes Food-item from Freezer.
+   * 
+   * @param id id of the Food to be removed.
+   * @return Food that has been removed.
    */
   @DeleteMapping(path = "/removeFreezerContent/{id}")
   public boolean removeFreezerContent(@PathVariable("id") String id) {
@@ -91,26 +121,25 @@ public class FridgeManagerController {
   }
   
   /**
-   * Set new quantity for Food.
-   *
-   * @param quantity new quantity
-   * @param food the Food object
-   * @return true if it was added, false if it replaced
+   * Sets new quantity for Food.
+   * 
+   * @param quantity new quantity.
+   * @param food the Food object.
+   * @return true if it was added, false if it is replaced.
    */
   @PutMapping(path = "/setQuantity/{quantity}")
   public boolean setQuantity(@PathVariable("quantity") int quantity, @RequestBody Food food) {
     logger.debug(food.toString());
-    System.out.println(this.fridgeManagerService.getFridgeManager()
-        .setQuantity(quantity, food.getId()));
+    System.out.println(this.fridgeManagerService.getFridgeManager().setQuantity(quantity, food.getId()));
     this.autoSave();
     return true;
   }
   
   /**
-   * Add new Food object to Fridge.
-   *
-   * @param food the Food object
-   * @return true if it was added, else false
+   * Add new Food-item to Fridge.
+   * 
+   * @param food the Food object.
+   * @return true if it was added, false otherwise.
    */
   @PostMapping(path = "/addFridgeContent")
   public boolean addFridgeContent(@RequestBody Food food) {
@@ -127,10 +156,10 @@ public class FridgeManagerController {
   }
   
   /**
-   * Add new Food object to Freezer.
-   *
-   * @param food the Food object
-   * @return true if it was added, else false
+   * Add new Food-item to Freezer.
+   * 
+   * @param food the Food object.
+   * @return true if it was added, false otherwise.
    */
   @PostMapping(path = "/addFreezerContent")
   public boolean addFreezerContent(@RequestBody Food food) {

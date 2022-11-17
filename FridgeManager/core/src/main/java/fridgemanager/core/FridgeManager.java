@@ -15,6 +15,7 @@ public class FridgeManager {
   /**
    * Creates a new FridgeManager-object with associated max-size 
    * of fridge and freezer. 
+   * 
    * @param fridgemaxsize
    * @param freezermaxsize
    * @throws IllegalArgumentException if invalid input is given (sizes < 0).
@@ -60,6 +61,7 @@ public class FridgeManager {
 
   /**
    * Adds a food-item to the fridge.
+   * 
    * @param content - food to be added.
    * @throws IllegalArgumentException if fridge is full (number of items = max size).
    */
@@ -73,6 +75,7 @@ public class FridgeManager {
 
   /**
    * Adds a food-item to the freezer.
+   * 
    * @param content - food to be added.
    * @throws IllegalArgumentException if freezer is full.
    */
@@ -86,6 +89,7 @@ public class FridgeManager {
 
   /**
    * Removes a given food-item from the fridge.
+   * 
    * @param remove - food to be removed.
    * @returns true if item exists in fridge and was removed succesfully, false if not.
    */
@@ -99,7 +103,9 @@ public class FridgeManager {
 
   /**
    * Method for removing fridgecontent based on uuid.
-   * Returns true if something is removed, false if nothing is removed.
+   * 
+   * @param uuid
+   * @return true if something is removed, false if nothing is removed.
    */
   public boolean removeFridgeContent(String uuid) {
 
@@ -114,7 +120,9 @@ public class FridgeManager {
 
   /**
    * Method for removing freezercontent.
-   * Returns true if something is removed, false if nothing is removed.
+   * 
+   * @param food - to remove
+   * @return true if something is removed, false if nothing is removed.
    */
   public boolean removeFreezerContent(Food remove) {
     if (freezercontents.contains(remove)) {
@@ -126,7 +134,9 @@ public class FridgeManager {
 
   /**
    * Method for removing fridgecontent based on uuid.
-   * Returns true if something is removed, false if nothing is removed.
+   * 
+   * @param uuid
+   * @return true if something is removed, false if nothing is removed.
    */
   public boolean removeFreezerContent(String uuid) {
 
@@ -139,6 +149,13 @@ public class FridgeManager {
     return false;
   }
 
+  /**
+   * Set new quantity for Food-item with specific uuid.
+   * 
+   * @param quantity
+   * @param uuid
+   * @return true if quantity is set successfully, false if not.
+   */
   public boolean setQuantity(int quantity, String uuid) {
     for (Food food : frigdecontents) {
       if (food.getId().equals(uuid)) {

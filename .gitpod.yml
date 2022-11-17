@@ -3,9 +3,6 @@ image:
 
 tasks:
   - init: sdk use java 19-open
-    command: cd FridgeManager
-    command: cd springboot;mvn spring-boot:run
-    command: cd ..;mvn claen install
 
 
 ports:

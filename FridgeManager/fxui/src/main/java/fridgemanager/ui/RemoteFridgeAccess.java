@@ -29,8 +29,9 @@ public class RemoteFridgeAccess {
   private ObjectMapper objectMapper;
 
   /**
-   * Basic Constructor
-   * @param endpointBaseUri
+   * Basic Constructor. 
+
+   * @param endpointBaseUri URI
    */
   public RemoteFridgeAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
@@ -41,7 +42,7 @@ public class RemoteFridgeAccess {
 
   /**
    * Create a specified URI.
-   * 
+
    * @param add - addition to baseURi
    * @return URI 
    */
@@ -51,9 +52,9 @@ public class RemoteFridgeAccess {
 
   /**
    * Add-request to server.
-   * 
-   * @param food
-   * @param function
+
+   * @param food food
+   * @param function function
    */
   private void add(Food food, String function) {
     try {
@@ -76,9 +77,9 @@ public class RemoteFridgeAccess {
 
   /**
    * remove-request to server.
-   * 
-   * @param food
-   * @param function
+
+   * @param food food
+   * @param function function
    */
   private void remove(Food food, String function) {
     try {
@@ -101,9 +102,9 @@ public class RemoteFridgeAccess {
 
   /**
    * get-request to server to retrieve either fridgecontent or freezercontent.
-   * 
-   * @param function
-   * @return List<Food>
+
+   * @param function function
+   * @return List with food
    */
   private List<Food> get(String function) {
     HttpRequest request = HttpRequest.newBuilder(makeUri(function))
@@ -130,8 +131,8 @@ public class RemoteFridgeAccess {
 
   /**
    * get-request to server to retrieve an int. 
-   * 
-   * @param function
+
+   * @param function function
    * @return int
    */
   private int getint(String function) {
@@ -153,7 +154,7 @@ public class RemoteFridgeAccess {
 
   /**
    * get-request to server to retrieve FridgeManager-object.
-   * 
+
    * @return FridgeManager.
    */
   public FridgeManager getFridgeManager() {
@@ -176,9 +177,9 @@ public class RemoteFridgeAccess {
   }
 
   /**
-   * Adds Food using addFridgeContent-method
-   * 
-   * @param food
+   * Adds Food using addFridgeContent-method.
+
+   * @param food food
    */
   public void addFridgeContent(Food food) {
     add(food, "/addFridgeContent");
@@ -186,8 +187,8 @@ public class RemoteFridgeAccess {
 
   /**
    * Adds Food using addFreezerContent-method.
-   * 
-   * @param food
+
+   * @param food food
    */
   public void addFreezerContent(Food food) {
     add(food, "/addFreezerContent");
@@ -195,8 +196,8 @@ public class RemoteFridgeAccess {
   
   /**
    * Removes Food using removeFridgeContent-method.
-   * 
-   * @param food
+
+   * @param food food
    */
   public void removeFridgeContent(Food food) {
     remove(food, "/removeFridgeContent");
@@ -204,8 +205,8 @@ public class RemoteFridgeAccess {
 
   /**
    * Removes Food using removeFreezerContent-method.
-   * 
-   * @param food
+
+   * @param food food
    */
   public void removeFreezerContent(Food food) {
     remove(food, "/removeFreezerContent");
@@ -213,8 +214,8 @@ public class RemoteFridgeAccess {
 
   /**
    * Retrieves Food from server using getFridgeContent-method.
-   * 
-   * @return List<Food> fridgecontent.
+
+   * @return fridgecontent.
    */
   public List<Food> getFrigdeContent() {
     return get("/getFridgeContent");
@@ -222,8 +223,8 @@ public class RemoteFridgeAccess {
 
   /**
    * Retrieves Food from server using getFreezerContent-method.
-   * 
-   * @return List<Food> freezercontent.
+
+   * @return freezercontent.
    */
   public List<Food> getFreezerContent() {
     return get("/getFreezerContent");
@@ -231,7 +232,7 @@ public class RemoteFridgeAccess {
 
   /**
    * Retrieves fridgemaxize from server using getFridgeMaxsize-method.
-   * 
+
    * @return int fridgemaxsize.
    */
   public int getFridgeMaxsize() {
@@ -240,7 +241,7 @@ public class RemoteFridgeAccess {
 
   /**
    * Retrieves freezermaxize from server using getFreezerMaxsize-method.
-   * 
+
    * @return int freezermaxsize.
    */
   public int getFreezerMaxsize() {
@@ -249,9 +250,9 @@ public class RemoteFridgeAccess {
 
   /**
    * Sets new quantity for Food-item on server.
-   * 
-   * @param quantity
-   * @param food
+
+   * @param quantity quantity
+   * @param food food
    */
   public void setQuantity(int quantity, Food food) {
     try {

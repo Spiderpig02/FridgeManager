@@ -176,7 +176,7 @@ public class FridgeController {
 
   /**
    * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
-   * 
+   *
    * @param keypress
    */
   @FXML
@@ -219,10 +219,7 @@ public class FridgeController {
       }
     }
   } 
-  
-
-
-  
+    
   /**
    * Clears input in textfields.
    */
@@ -503,6 +500,7 @@ public class FridgeController {
 
   /**
    * Validates input given by user in textfields.
+   * 
    * @param food
    * @param quantity
    * @param expiration
@@ -535,6 +533,7 @@ public class FridgeController {
 
   /**
    * Validates input given by user in textfields when trying to remove specific amount of food-item.
+   * 
    * @param food
    * @param quantity
    * @return true if input is approved, false if not.

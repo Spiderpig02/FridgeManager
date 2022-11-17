@@ -13,6 +13,11 @@ import javafx.stage.Stage;
  */
 public class FridgeApp extends Application {
 
+  /**
+   * Looads program and configures window size and position.
+   * 
+   * @param stage
+   */
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("FridgeApp.fxml"));
@@ -21,10 +26,14 @@ public class FridgeApp extends Application {
     stage.setTitle("FridgeManager");
     stage.setResizable(false);
     stage.centerOnScreen();
-    // setRes(stage);
     stage.show();
   }
 
+  /**
+   * sets position and size of window.
+   * 
+   * @param stage
+   */
   private void setRes(Stage stage) {
 
     int localScreenWidth = (int) Screen.getPrimary().getBounds().getWidth();

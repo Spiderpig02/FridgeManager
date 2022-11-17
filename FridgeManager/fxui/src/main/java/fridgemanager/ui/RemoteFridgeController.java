@@ -77,7 +77,7 @@ public class RemoteFridgeController {
   /**
    * Add new Food object to Fridge.
    *
-   * @throws URISyntaxExeption exseption
+   * @throws URISyntaxExeption exception
    */
   public RemoteFridgeController() throws URISyntaxException {
     remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
@@ -131,6 +131,7 @@ public class RemoteFridgeController {
   
   /**
    * Registers if the user wants to add a food-item to either the fridge or the freezer.
+   * 
    * @param mouse-click
    */
   public void getAddChoice(ActionEvent event) {
@@ -139,6 +140,7 @@ public class RemoteFridgeController {
 
   /**
    * Retrieves unit selected by user.
+   * 
    * @param mouse-click
    */
   public void getUnitChoice(ActionEvent event) {
@@ -154,7 +156,7 @@ public class RemoteFridgeController {
     this.choice = dropDownMenuRemove.getValue();
   }
 
-    /**
+  /**
    * Adds a food-item to fridge or freezer when user presses the ENTER-key in one of the upper textfields.
    * 
    * @param keypress
@@ -171,7 +173,7 @@ public class RemoteFridgeController {
     }
   }
   
-    /**
+  /**
    * Adds a food-item to either the fridge or the freezer
    * depending on input given by the user, and saves state of program. 
   */
@@ -268,6 +270,7 @@ public class RemoteFridgeController {
 
   /**
    * Registers what food-item the user has selected in the fridge.
+   * 
    * @param mouse-selection
    */
   @FXML
@@ -279,6 +282,7 @@ public class RemoteFridgeController {
 
   /**
    * Registers what food-item the user has selected in the freezer.
+   * 
    * @param mouse-selection
    */
   @FXML
@@ -287,7 +291,7 @@ public class RemoteFridgeController {
     infreezer = true;
   }
 
-    /**
+  /**
    * Removes food-item from either the fridge or freezer depending on 
    * value of variables infridge and infreezer.
    * Updates visibility of FXML-elements depending on amount of items
@@ -315,15 +319,6 @@ public class RemoteFridgeController {
       hideRemovalMenu();
     }
   }
-
-  // /**
-  //  * Registers what the user has selected in the dropdown-menu.
-  //  *
-  //  * @param event from ActionEvent (mouse click).
-  //  */
-  // public void getChoice(ActionEvent event) {
-  //   this.choice = dropDownMenu.getValue();
-  // }
 
   /**
    * Removes specific amount of food from either fridge or freezer
@@ -411,7 +406,7 @@ public class RemoteFridgeController {
     changeFoodColorFreezer();
   }
 
-    /**
+  /**
    * Changes text-color of food items in fridge that 
    * expire in 10 days or less to red. 
    */
@@ -438,7 +433,7 @@ public class RemoteFridgeController {
     });
   }
 
-    /**
+  /**
    * Changes text-color of food items in freezer that 
    * expire in 10 days or less to red. 
    */
@@ -467,6 +462,7 @@ public class RemoteFridgeController {
 
  /**
    * Displays error-message to user on screen.
+   * 
    * @param errormessage
    */
   @FXML
@@ -484,6 +480,7 @@ public class RemoteFridgeController {
 
   /**
    * Validates input given by user in textfields.
+   * 
    * @param food
    * @param quantity
    * @param expiration
@@ -516,6 +513,7 @@ public class RemoteFridgeController {
 
   /**
    * Validates input given by user in textfields when trying to remove specific amount of food-item.
+   * 
    * @param food
    * @param quantity
    * @return true if input is approved, false if not.

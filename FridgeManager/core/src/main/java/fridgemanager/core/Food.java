@@ -107,7 +107,8 @@ public class Food {
 
   /**
    * Sets new quantity for Food-item.
-   * @param newQuantity .
+   * 
+   * @param newQuantity.
    * @throws IllegalArgumentException if newQuantity < 0.
    */
   public void setQuantity(int newQuantity) {
@@ -120,6 +121,7 @@ public class Food {
 
   /**
    * Sets new unit for Food-item.
+   * 
    * @param unit
    */
   public void setUnit(String unit) {

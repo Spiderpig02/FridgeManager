@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this is a controller that utilizes the restAPI for controlling the program.
+ * Utilizes Rest-API to control the program.
  */
 public class RemoteFridgeAccess {
   private URI endpointBaseUri;
@@ -32,9 +32,9 @@ public class RemoteFridgeAccess {
   private ObjectMapper objectMapper;
 
   /**
-   * basic constructor.
+   * Basic Constructor
+   * @param endpointBaseUri
    */
-
   public RemoteFridgeAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
     objectMapper = new ObjectMapper();
@@ -43,13 +43,21 @@ public class RemoteFridgeAccess {
   }
 
   /**
-   * returns the fridgemanager object.
+   * Create a specified URI.
+   * 
+   * @param add - addition to baseURi
+   * @return URI 
    */
-
   private URI makeUri(String add) {
     return endpointBaseUri.resolve(endpointBaseUri + add);
   }
 
+  /**
+   * Add-request to server.
+   * 
+   * @param food
+   * @param function
+   */
   private void add(Food food, String function) {
     try {
       String json = objectMapper.writeValueAsString(food);
@@ -69,6 +77,12 @@ public class RemoteFridgeAccess {
     }
   }
 
+  /**
+   * remove-request to server.
+   * 
+   * @param food
+   * @param function
+   */
   private void remove(Food food, String function) {
     try {
       HttpRequest request = HttpRequest.newBuilder(makeUri(function + "/" + food.getId()))
@@ -88,6 +102,12 @@ public class RemoteFridgeAccess {
     }
   }
 
+  /**
+   * get-request to server to retrieve either fridgecontent or freezercontent.
+   * 
+   * @param function
+   * @return List<Food>
+   */
   private List<Food> get(String function) {
     HttpRequest request = HttpRequest.newBuilder(makeUri(function))
         .header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
@@ -110,6 +130,12 @@ public class RemoteFridgeAccess {
     }
   }
 
+  /**
+   * get-request to server to retrieve an int. 
+   * 
+   * @param function
+   * @return int
+   */
   private int getint(String function) {
     HttpRequest request = HttpRequest.newBuilder(makeUri(function))
         .header(ACCEPT_HEADER, APPLICATION_JSON).GET().build();
@@ -127,6 +153,11 @@ public class RemoteFridgeAccess {
     }
   }
 
+  /**
+   * get-request to server to retrieve FridgeManager-object.
+   * 
+   * @return FridgeManager.
+   */
   public FridgeManager getFridgeManager() {
     HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
         .header(ACCEPT_HEADER, APPLICATION_JSON)
@@ -146,38 +177,84 @@ public class RemoteFridgeAccess {
     }
   }
 
+  /**
+   * Adds Food using addFridgeContent-method
+   * 
+   * @param food
+   */
   public void addFridgeContent(Food food) {
     add(food, "/addFridgeContent");
   }
 
+  /**
+   * Adds Food using addFreezerContent-method.
+   * 
+   * @param food
+   */
   public void addFreezerContent(Food food) {
     add(food, "/addFreezerContent");
   }
-
-  public void removeFreezerContent(Food food) {
-    remove(food, "/removeFreezerContent");
-  }
-
+  
+  /**
+   * Removes Food using removeFridgeContent-method.
+   * 
+   * @param food
+   */
   public void removeFridgeContent(Food food) {
     remove(food, "/removeFridgeContent");
   }
 
-  public List<Food> getFreezerContent() {
-    return get("/getFreezerContent");
+  /**
+   * Removes Food using removeFreezerContent-method.
+   * 
+   * @param food
+   */
+  public void removeFreezerContent(Food food) {
+    remove(food, "/removeFreezerContent");
   }
 
+  /**
+   * Retrieves Food from server using getFridgeContent-method.
+   * 
+   * @return List<Food> fridgecontent.
+   */
   public List<Food> getFrigdeContent() {
     return get("/getFridgeContent");
   }
 
+  /**
+   * Retrieves Food from server using getFreezerContent-method.
+   * 
+   * @return List<Food> freezercontent.
+   */
+  public List<Food> getFreezerContent() {
+    return get("/getFreezerContent");
+  }
+
+  /**
+   * Retrieves fridgemaxize from server using getFridgeMaxsize-method.
+   * 
+   * @return int fridgemaxsize.
+   */
   public int getFridgeMaxsize() {
     return getint("/getFrigdeMaxsize");
   }
 
+  /**
+   * Retrieves freezermaxize from server using getFreezerMaxsize-method.
+   * 
+   * @return int freezermaxsize.
+   */
   public int getFreezerMaxsize() {
     return getint("/getFreezerMaxsize");
   }
 
+  /**
+   * Sets new quantity for Food-item on server.
+   * 
+   * @param quantity
+   * @param food
+   */
   public void setQuantity(int quantity, Food food) {
     try {
       String json = objectMapper.writeValueAsString(food);

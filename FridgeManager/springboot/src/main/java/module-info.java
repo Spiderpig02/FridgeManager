@@ -10,7 +10,7 @@ module fridgemanager.springboot {
     requires org.slf4j;
 
     requires fridgemanager.core;
+    requires java.net.http;
 
-    opens fridgemanager.springboot to spring.beans, spring.context, spring.web;
-
+    opens fridgemanager.springboot;
 }

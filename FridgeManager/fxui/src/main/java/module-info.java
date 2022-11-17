@@ -6,7 +6,6 @@ module fridgemanager.ui {
   requires transitive javafx.graphics;
   requires com.fasterxml.jackson.core;
   requires com.fasterxml.jackson.databind;
-  requires transitive fridgemanager.springboot;
 
   opens fridgemanager.ui to
       javafx.graphics,

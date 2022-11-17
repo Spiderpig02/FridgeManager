@@ -1,15 +1,20 @@
 // package fridgemanager.ui;
 
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.scene.control.ListView;
-// import javafx.scene.input.KeyCode;
-// import javafx.stage.Stage;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotNull;
-// import java.time.LocalDate;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.time.LocalDate;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
+import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
 
 // import org.junit.jupiter.api.AfterEach;
 // import org.junit.jupiter.api.BeforeEach;

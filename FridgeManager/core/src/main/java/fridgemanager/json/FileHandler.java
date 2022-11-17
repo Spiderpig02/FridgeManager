@@ -2,7 +2,6 @@ package fridgemanager.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import java.io.FileReader;
@@ -67,16 +66,6 @@ public class FileHandler implements InterfaceFileHandler {
       System.out.println("The file did not load, missing file?");
     }
     return null;
-  }
-
-  public static void main(String[] args) {
-    FileHandler filehandler = new FileHandler();
-    FridgeManager fridgemanager = new FridgeManager(3, 3);
-
-    fridgemanager.addFreezerContent(new Food("Eple","stk",3,LocalDate.now(),"Halvor"));
-    filehandler.saveObject(fridgemanager);
-
-    System.out.println(filehandler.loadFridgeManager().getFreezerContents().get(0));
   }
 }
 

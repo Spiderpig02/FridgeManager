@@ -32,7 +32,7 @@ public class FridgeManagerController {
   /**
    * Returns a fridgemanager-object.
    * 
-   * @return FridgeManager.
+   * @return FridgeManager
    */
   @GetMapping
   public FridgeManager getFridgeManager() {

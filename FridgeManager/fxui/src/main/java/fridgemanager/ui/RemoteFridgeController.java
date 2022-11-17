@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import fridgemanager.core.Food;
+import fridgemanager.core.FridgeManager;
 import fridgemanager.core.FoodComparator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -321,8 +322,17 @@ public class RemoteFridgeController {
     }
   }
 
+  // /**
+  //  * Registers what the user has selected in the dropdown-menu.
+  //  *
+  //  * @param event from ActionEvent (mouse click).
+  //  */
+  // public void getChoice(ActionEvent event) {
+  //   this.choice = dropDownMenu.getValue();
+  // }
+
   /**
-   * Removes specific amount of food from either fridge or freezer
+   * Removes specific amount of food from either fridge or freezer,
    * depending on input given by user.
    */
   @FXML
@@ -332,11 +342,11 @@ public class RemoteFridgeController {
       Integer quantity = Integer.parseInt(textFieldQuantityRemove.getText());
       if (validateRemovalInput(foodname, quantity) == true) {
         if (choice == "fridge") {
-          if (remoteFridgeAccess.getFridgeManager().getFridgeContents().size() == 0) {
+          if (remoteFridgeAccess.getFrigdeContent().size() == 0) {
             throw new IllegalArgumentException();
           }
   
-          for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
+          for (Food food : remoteFridgeAccess.getFrigdeContent()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
                 remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
@@ -350,10 +360,10 @@ public class RemoteFridgeController {
             }
           }
         } else if (choice == "freezer") {
-          if (remoteFridgeAccess.getFridgeManager().getFreezerContents().size() == 0) {
+          if (remoteFridgeAccess.getFreezerContent().size() == 0) {
             throw new IllegalArgumentException();
           }
-          for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
+          for (Food food : remoteFridgeAccess.getFreezerContent()) {
             if (food.getName().toLowerCase().equals(foodname.toLowerCase())) {
               if (food.getQuantity() >= quantity) {
                 remoteFridgeAccess.setQuantity(food.getQuantity() - quantity, food);
@@ -385,7 +395,7 @@ public class RemoteFridgeController {
   @FXML
   private void updateContent() {
     fridgeContent.getItems().clear();
-    for (Food food : remoteFridgeAccess.getFridgeManager().getFridgeContents()) {
+    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
       System.out.println(food.toString());
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFridgeContent(food);
@@ -397,7 +407,7 @@ public class RemoteFridgeController {
 
 
     freezerContent.getItems().clear();
-    for (Food food : remoteFridgeAccess.getFridgeManager().getFreezerContents()) {
+    for (Food food : remoteFridgeAccess.getFreezerContent()) {
       if (food.getQuantity() == 0) {
         remoteFridgeAccess.removeFreezerContent(food);
       } else {
@@ -537,5 +547,18 @@ public class RemoteFridgeController {
       showErrorMessage("Ugyldig input!");
     }
     return true;
+  }
+
+  public void emptyTheServer(){
+    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
+      remoteFridgeAccess.removeFridgeContent(food);
+    }
+    for (Food food : remoteFridgeAccess.getFreezerContent()) {
+      remoteFridgeAccess.removeFreezerContent(food);
+    }
+  }
+
+  public FridgeManager getFridgeManager() {
+    return remoteFridgeAccess.getFridgeManager();
   }
 }

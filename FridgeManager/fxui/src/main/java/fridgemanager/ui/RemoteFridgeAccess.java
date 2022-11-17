@@ -2,19 +2,16 @@ package fridgemanager.ui;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.databind.type.CollectionType;
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import fridgemanager.json.FileHandler;
-
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -120,11 +117,12 @@ public class RemoteFridgeAccess {
       String responseString = response.body();
       System.out.println(function + " response: " + responseString);
 
-      List<Food> freezerContent = new ArrayList<Food>();
-      for (Object object : objectMapper.readValue(response.body(), List.class)) {
-        freezerContent.add((Food) object);
-      }
-      return freezerContent;
+      CollectionType javaType = objectMapper.getTypeFactory()
+          .constructCollectionType(List.class, Food.class);
+
+      List<Food> content = objectMapper.readValue(responseString, javaType);
+      return content;
+
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
@@ -258,7 +256,8 @@ public class RemoteFridgeAccess {
   public void setQuantity(int quantity, Food food) {
     try {
       String json = objectMapper.writeValueAsString(food);
-      HttpRequest request = HttpRequest.newBuilder(makeUri("/setQuantity/" + String.valueOf(quantity)))
+      HttpRequest request = HttpRequest
+          .newBuilder(makeUri("/setQuantity/" + String.valueOf(quantity)))
           .header(ACCEPT_HEADER, APPLICATION_JSON)
           .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
           .PUT(BodyPublishers.ofString(json))
@@ -272,10 +271,5 @@ public class RemoteFridgeAccess {
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static void main(String[] args) throws URISyntaxException {
-    RemoteFridgeAccess remoteFridgeAccess = new RemoteFridgeAccess(new URI("http://localhost:8080/fridgemanager"));
-    System.out.println(remoteFridgeAccess.getFrigdeContent());
   }
 }

@@ -2,7 +2,6 @@ package fridgemanager.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
 import fridgemanager.core.Food;
 import fridgemanager.core.FridgeManager;
 import java.io.FileReader;

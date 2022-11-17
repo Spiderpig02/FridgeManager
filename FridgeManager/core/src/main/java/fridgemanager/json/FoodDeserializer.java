@@ -37,17 +37,17 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
   }
 
   /**
-   * Converts content of JSON-text into a Food-object.
-   * @param jsonNode
-   * @return Food if it exists, null otherwise.
-   */
+  * Converts content of JSON-text into a Food-object.
+  * @param jsonNode
+  * @return Food if it exists, null otherwise.
+  */
   public Food deserializer(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       String name = null;
       int quantity = 0;
       String owner = null;
       String expirationDate = null;
-      String uUID = null;
+      String Uuid = null;
       String unit = null;
       JsonNode nameNode = jsonNode.get("Name");
       if (nameNode instanceof TextNode) {
@@ -69,12 +69,12 @@ public class FoodDeserializer extends JsonDeserializer<Food> {
       if (expirationDateNode instanceof TextNode) {
         expirationDate = expirationDateNode.asText();
       }
-      JsonNode uUIDNode = jsonNode.get("UUID");
-      if (uUIDNode instanceof TextNode) {
-        uUID = uUIDNode.asText();
+      JsonNode UuidNode = jsonNode.get("UUID");
+      if (UuidNode instanceof TextNode) {
+        Uuid = UuidNode.asText();
       }
 
-      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner, uUID);
+      return new Food(name, unit, quantity, LocalDate.parse(expirationDate), owner, Uuid);
     }
     return null;
   }

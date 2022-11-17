@@ -76,6 +76,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
     //Verifying added element.
     Food lastItem = controller.getFridgeManager().getFridgeContents().get(0);
     checkItem(lastItem, eple);
+
+    //Add to many objects
+    clickOn("#dropDownMenuAdd").clickOn("fridge");
+    addFoodItem("Pære",3,"stk",LocalDate.now().toString(),"Halvor");
   }
 
   /**
@@ -91,6 +95,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
     //Verifying added element.
     Food lastItem = controller.getFridgeManager().getFreezerContents().get(0);
     checkItem(lastItem, eple);
+
+    //Add to many objects
+    clickOn("#dropDownMenuAdd").clickOn("freezer");
+    addFoodItem("Pære",3,"stk",LocalDate.now().toString(),"Halvor");
   }
 
   /**
@@ -189,11 +197,11 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   @Test
   public void testHandleRemoveToMuchAmountFridge() {
 
-    //Add "Ostepopp" to the fridge. It is placed last.
+    //Add "Eple" to the fridge. It is placed last.
     clickOn("#dropDownMenuAdd").clickOn("fridge");
     addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
     
-    //Remove 4 of 3 "ostepopp".
+    //Remove 4 of 3 "Eple".
     clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("4");
     clickOn("#dropDownMenuRemove").clickOn("fridge").
@@ -207,7 +215,7 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   @Test
   public void testHandleRemoveToMuchAmountFreezer() {
 
-    //Add "Ostepopp" to the freezer. It is placed last.
+    //Add "Eple" to the freezer. It is placed last.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
     addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
     
@@ -244,7 +252,7 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   @Test
   public void testValidateRemovalInputName() {
 
-    //Add "Pære" to the freezer.
+    //Add "Eple" to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
     addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halvor");
     
@@ -261,7 +269,7 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   @Test
   public void testValidateRemovalInputQuantity() {
 
-    //Add "Pære" to the freezer.
+    //Add "Eple" to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
     addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halvor");
 

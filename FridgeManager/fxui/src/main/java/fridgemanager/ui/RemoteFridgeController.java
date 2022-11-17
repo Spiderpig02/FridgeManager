@@ -317,17 +317,8 @@ public class RemoteFridgeController {
     }
   }
 
-  // /**
-  //  * Registers what the user has selected in the dropdown-menu.
-  //  *
-  //  * @param event from ActionEvent (mouse click).
-  //  */
-  // public void getChoice(ActionEvent event) {
-  //   this.choice = dropDownMenu.getValue();
-  // }
-
   /**
-   * Removes specific amount of food from either fridge or freezer
+   * Removes specific amount of food from either fridge or freezer,
    * depending on input given by user.
    */
   @FXML

@@ -538,7 +538,16 @@ public class RemoteFridgeController {
     return true;
   }
 
-  public FridgeManager getFridgeManager(){
+  public void emptyTheServer(){
+    for (Food food : remoteFridgeAccess.getFrigdeContent()) {
+      remoteFridgeAccess.removeFridgeContent(food);
+    }
+    for (Food food : remoteFridgeAccess.getFreezerContent()) {
+      remoteFridgeAccess.removeFreezerContent(food);
+    }
+  }
+
+  public FridgeManager getFridgeManager() {
     return remoteFridgeAccess.getFridgeManager();
   }
 }

@@ -9,9 +9,12 @@ import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -41,16 +44,17 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
     stage.centerOnScreen();
     stage.show();
   }
-  
+
   /**
   * Initialize a food element.
   */
   @BeforeEach
-  public void init() {
-    eple=new Food("Banan", "stk",3, LocalDate.now(), "Halvor");
-    
+  public void emptyTheServerBefore(){
+    this.controller.emptyTheServer();
+
+    eple=new Food("Eple", "stk",3, LocalDate.now(), "Halvor");
   }
-  
+
   /**
   * Test the controller and its contents.
   */
@@ -67,10 +71,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   public void testAddToFridge() {
     //Add "Eple" to the fridge.
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Banan",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifying added element.
-    Food lastItem = fridgemanager.getFridgeContents().get(fridgemanager.getFridgeContents().size()-1);
+    Food lastItem = controller.getFridgeManager().getFridgeContents().get(0);
     checkItem(lastItem, eple);
   }
 
@@ -82,12 +86,11 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
 
     //Add "Eple" to the fridge.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Banan",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Verifying added element.
-    Food lastItem = fridgemanager.getFreezerContents().get(fridgemanager.getFreezerContents().size()-1);
+    Food lastItem = controller.getFridgeManager().getFreezerContents().get(0);
     checkItem(lastItem, eple);
-
   }
 
   /**
@@ -95,18 +98,22 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   */
   @Test
   public void testHandleRemoveFridge() {
-    ListView<Food> listview = lookup("#fridgeContent").query();
-    int lastItemInFridgeInteger = listview.getItems().size()-1;
+
+    //Add "Eple" to the fridge.
+    clickOn("#dropDownMenuAdd").clickOn("fridge");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Select the last element.
-    listview.getSelectionModel().select(lastItemInFridgeInteger);
+    ListView<Food> listview = lookup("#fridgeContent").query();
+    listview.getSelectionModel().select(0);
     clickOn("#fridgeContent");
+    assertTrue(listview.getItems().size() == 1);
 
     //Remove last element.
     clickOn("#trashcanFridge");
 
     //Verify that element was removed.
-    assertNotEquals(listview.getItems().size()-1, lastItemInFridgeInteger);
+    assertTrue(listview.getItems().size() == 0);
   }
 
   /**
@@ -114,18 +121,21 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
   */
   @Test
   public void testHandleRemoveFreezer() {
-    ListView<Food> listview = lookup("#freezerContent").queryListView();
-    int lastItemInFreezerInteger = listview.getItems().size()-1;
+    //Add "Eple" to the freezer.
+    clickOn("#dropDownMenuAdd").clickOn("freezer");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Select the last element.
-    listview.getSelectionModel().select(lastItemInFreezerInteger);
+    ListView<Food> listview = lookup("#freezerContent").query();
+    listview.getSelectionModel().select(0);
     clickOn("#freezerContent");
+    assertTrue(listview.getItems().size() == 1);
 
     //Remove last element.
     clickOn("#trashcanFreezer");
 
     //Verify that element was removed.
-    assertNotEquals(listview.getItems().size()-1, lastItemInFreezerInteger);
+    assertTrue(listview.getItems().size() == 0);
   }
 
   /**
@@ -136,10 +146,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
       
     //Add Eple to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Popcorn",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Remove 2 out of 3 "Eple".
-    clickOn("#textFieldFoodRemove").write("Popcorn");
+    clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("2");
     clickOn("#dropDownMenuRemove").clickOn("fridge");
     clickOn("#removeButton");
@@ -158,10 +168,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
       
     //Add Eple to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Storfe",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
 
     //Remove 2 out of 3 "Eple".
-    clickOn("#textFieldFoodRemove").write("Storfe");
+    clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("2");
     clickOn("#dropDownMenuRemove").clickOn("freezer");
     clickOn("#removeButton");
@@ -181,10 +191,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
 
     //Add "Ostepopp" to the fridge. It is placed last.
     clickOn("#dropDownMenuAdd").clickOn("fridge");
-    addFoodItem("Ostepopp",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
     
     //Remove 4 of 3 "ostepopp".
-    clickOn("#textFieldFoodRemove").write("Ostepopp");
+    clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("4");
     clickOn("#dropDownMenuRemove").clickOn("fridge").
     clickOn("#removeButton");
@@ -199,10 +209,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
 
     //Add "Ostepopp" to the freezer. It is placed last.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Ostepopp",3,"stk",LocalDate.now().toString(),"Halvor");
+    addFoodItem("Eple",3,"stk",LocalDate.now().toString(),"Halvor");
     
     //Remove 4 of 3 "ostepopp".
-    clickOn("#textFieldFoodRemove").write("Ostepopp");
+    clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("4");
     clickOn("#dropDownMenuRemove").clickOn("freezer").
     clickOn("#removeButton");
@@ -227,26 +237,38 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
     addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halv9r");
   }
 
+
   /**
   * Validate input in textfield for edge-cases.
   */
   @Test
-  public void testValidateRemovalInput() {
+  public void testValidateRemovalInputName() {
 
     //Add "Pære" to the freezer.
     clickOn("#dropDownMenuAdd").clickOn("freezer");
-    addFoodItem("Pære", 3, "stk", LocalDate.now().toString(), "Halvor");
+    addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halvor");
     
     //Fail to remove object as it has not been added due to invalid input.
     clickOn("#textFieldFoodRemove").write("Pp24");
     clickOn("#textFieldQuantityRemove").write("3");
-    clickOn("#dropDownMenuRemove").clickOn("freezer").
+    clickOn("#dropDownMenuRemove").clickOn("freezer");
     clickOn("#removeButton");
+  }
+
+  /**
+  * Validate input in textfield for edge-cases.
+  */
+  @Test
+  public void testValidateRemovalInputQuantity() {
+
+    //Add "Pære" to the freezer.
+    clickOn("#dropDownMenuAdd").clickOn("freezer");
+    addFoodItem("Eple", 3, "stk", LocalDate.now().toString(), "Halvor");
 
     //Fail to remove object as it has not been added due to invalid input.
-    clickOn("#textFieldFoodRemove").write("Pære");
+    clickOn("#textFieldFoodRemove").write("Eple");
     clickOn("#textFieldQuantityRemove").write("-3");
-    clickOn("#dropDownMenuRemove").clickOn("freezer").
+    clickOn("#dropDownMenuRemove").clickOn("freezer");
     clickOn("#removeButton");
   }
 
@@ -280,5 +302,10 @@ public class RemoteFridgeControllerTest extends ApplicationTest {
     clickOn("#dropDownMenuQuantity").clickOn(unit);
     clickOn("#datePickerExpiration").write(expirationdate);
     clickOn("#textfieldOwner").write(owner).type(KeyCode.ENTER);
+  }
+
+  @AfterEach
+  public void emptyTheServerAfter(){
+    this.controller.emptyTheServer();
   }
 }

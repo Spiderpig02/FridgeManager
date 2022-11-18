@@ -23,23 +23,25 @@ FridgeManager bygges og kjøres ved hjelp av Maven.
 
 For å kjøre prosjektet trengs det en server. Ettersom vi ikke har en server tilgjengelig bruker vi denne pcen som en "localhost", altså at den hoster sin egen server. For å få til dette bruker vi disse fire kommandoene
 ```
-cd FridgeManager/
-mvn install
-cd springboot
+cd FridgeManager/springboot/
 mvn spring-boot:run
 ```
-Legg merke til at `mvn install` både konfigurerer Maven og kjører alle tester og kvalitetssjekker. 
+
 
 Videre for å kjøre prosjektet har man to muligheter. Åpne en *ny* terminal og skriv følgende kommandoer:
 ```
 cd FridgeManager/
+mvn install
 mvn javafx:run -f fxui/pom.xml
 ```
 Alternativt kan man benytte seg av:
 ```
-cd FridgeManager/fxui/
+cd FridgeManager/
+mvn install
+cd fxui/
 mvn javafx:run
 ```
+Legg merke til at `mvn install` både konfigurerer Maven og kjører alle tester og kvalitetssjekker. 
 
 
 

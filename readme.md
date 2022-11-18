@@ -21,7 +21,7 @@ Bildet som er blitt brukt i <u>programmet</u> ligger under "fxui/src/main/resour
 
 FridgeManager bygges og kjøres ved hjelp av Maven. 
 
-For å kjøre prosjektet trengs det en server. Ettersom vi ikke har en server tilgjengelig bruker vi denne pcen som en "localhost", altså at den hoster sin egen server. For å få til dette bruker vi disse fire kommandoene
+For å kjøre prosjektet trengs det en server. Ettersom vi ikke har en server tilgjengelig bruker vi denne pcen som en "localhost", altså at den hoster sin egen server. For å få til dette bruker vi disse to kommandoene:
 ```
 cd FridgeManager/springboot/
 mvn spring-boot:run

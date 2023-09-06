@@ -1,7 +1,6 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2239/gr2239)
+## FridgeManager
 
-Gruppe 39 ITP - FridgeManager
-=
+Gruppe prosjekt for faget IT1901 på NTNU
 
 <u><font size="3"> **Beskrivelse av prosjektets struktur**</font></u>    
 
